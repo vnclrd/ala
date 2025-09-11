@@ -488,7 +488,7 @@ export default function Home() {
       <div
         className='
         pointer-events-none absolute left-0 w-full h-full
-        bg-black/50 z-20
+        bg-black/60 z-20
 
         lg:hidden
         '
