@@ -3,8 +3,10 @@ export default function Header() {
     <div
       className='
       hidden
+      
       md:block md:absolute md:bg-[#fff] md:shadow-lg
       md:w-full md:h-20
+
       lg:block lg:absolute lg:bg-[#fff] lg:shadow-lg
       lg:w-full lg:h-20
       '
