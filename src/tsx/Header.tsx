@@ -2,7 +2,7 @@ export default function Header() {
   return (
     <div
       className='
-      hidden
+      hidden z-1000
       
       md:block md:absolute md:bg-[#fff] md:shadow-lg
       md:w-full md:h-20
