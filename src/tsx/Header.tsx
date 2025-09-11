@@ -33,6 +33,13 @@ export default function Header() {
         >
           <button
             className='
+            text-[#000] text-sm font-medium cursor-pointer m-4
+            '
+          >
+            Contact
+          </button>
+          <button
+            className='
             bg-[#ff6b6b] text-[#fff] text-sm font-medium p-4
             rounded-[20px] cursor-pointer
             '
