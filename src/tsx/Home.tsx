@@ -251,7 +251,7 @@ export default function Home() {
             '
           />
           <img
-            src="1.jpg"
+            src="21.jpg"
             alt=""
             className='
             w-[250px] h-[300px] border-0 rounded-xl opacity-50
@@ -262,7 +262,7 @@ export default function Home() {
             '
           />
           <img
-            src="1.jpg"
+            src="22.jpg"
             alt=""
             className='
             w-[250px] h-[300px] border-0 rounded-xl opacity-50
@@ -344,7 +344,7 @@ export default function Home() {
             '
           />
           <img
-            src="1.jpg"
+            src="23.jpg"
             alt=""
             className='
             w-[250px] h-[300px] border-0 rounded-xl opacity-50
@@ -355,7 +355,7 @@ export default function Home() {
             '
           />
           <img
-            src="1.jpg"
+            src="24.jpg"
             alt=""
             className='
             w-[250px] h-[300px] border-0 rounded-xl opacity-50
