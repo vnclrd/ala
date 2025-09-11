@@ -52,11 +52,11 @@ export default function Home() {
 
           <div
             className='
-            gap-2 mt-4
+            flex gap-2 mt-4
 
-            md:flex        /* show on tablets (≥768px) */
-            lg:hidden       /* hide on small desktops (≥1024px) */
-            [@media(min-width:1440px)]:flex /* show again on ≥1440px */
+            md:flex
+            lg:hidden
+            [@media(min-width:1440px)]:flex
             '
           >
             <button 
