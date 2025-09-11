@@ -224,7 +224,7 @@ export default function Home() {
             src="3.jpg"
             alt="Image 3"
             className='
-            hidden w-[250px] h-[350px]
+            hidden min-w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
             
             sm:block sm:opacity-50
@@ -296,7 +296,7 @@ export default function Home() {
             src="4.jpg"
             alt="Image 4"
             className='
-            w-[250px] h-[300px] border-0 rounded-xl opacity-50
+            min-w-[250px] h-[300px] border-0 rounded-xl opacity-50
 
             sm:w-[250px] sm:h-[350px] sm:rounded-4xl
             md:w-[250px] md:h-[350px] md:rounded-4xl
@@ -328,7 +328,7 @@ export default function Home() {
           {/* sm-md Top Image */}
           <img
             src="13.jpg"
-            alt="Image 3"
+            alt=""
             className='
             
             hidden w-[250px] h-[350px]
@@ -342,7 +342,7 @@ export default function Home() {
           {/* sm-md Bottom Image */}
           <img
             src="14.jpg"
-            alt="Image 3"
+            alt=""
             className='
             hidden w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
@@ -389,7 +389,7 @@ export default function Home() {
             src="5.jpg"
             alt="Image 5"
             className='
-            w-[250px] h-[300px] border-0 rounded-xl opacity-50
+            min-w-[250px] h-[300px] border-0 rounded-xl opacity-50
 
             sm:w-[250px] sm:h-[350px] sm:rounded-4xl
             md:w-[250px] md:h-[350px] md:rounded-4xl
@@ -421,9 +421,8 @@ export default function Home() {
           {/* sm-md Top Image */}
           <img
             src="15.jpg"
-            alt="Image 3"
+            alt=""
             className='
-            
             hidden w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
             
@@ -435,7 +434,7 @@ export default function Home() {
           {/* sm-md Bottom Image */}
           <img
             src="16.jpg"
-            alt="Image 3"
+            alt=""
             className='
             hidden w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
