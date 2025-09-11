@@ -94,9 +94,6 @@ export default function Home() {
         lg:p-8 lg:gap-4 lg:bottom-[-250px]
         '
       >
-
-
-
         {/* Column 1 */}
         <div className='flex flex-col gap-4'>
           {/* Filler Block */}
@@ -140,6 +137,17 @@ export default function Home() {
 
         {/* Column 2 */}
         <div className='flex flex-col gap-4'>
+          {/* Filler Block */}
+          <div
+            className='
+            hidden w-[250px] h-[350px] border-0 rounded-4xl
+            opacity-50 bg-[#ff6b6b]/15
+            
+            sm:hidden
+            md:hidden
+            lg:block lg:opacity-100
+            '
+          ></div>
           {/* Filler Block */}
           <div
             className='
@@ -485,6 +493,17 @@ export default function Home() {
 
         {/* Column 7 */}
         <div className='flex flex-col gap-4'>
+          {/* Filler Block */}
+          <div
+            className='
+            hidden w-[250px] h-[350px] border-0 rounded-4xl
+            opacity-50 bg-[#ff6b6b]/15
+            
+            sm:hidden
+            md:hidden
+            lg:block lg:opacity-100
+            '
+          ></div>
           {/* Filler Block */}
           <div
             className='
