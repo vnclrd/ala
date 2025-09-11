@@ -28,7 +28,7 @@ export default function Home() {
         >
           <h1
             className='
-            text-[#ff6b6b] italic font-bold text-[10rem] drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]
+            text-[#ff6b6b] italic font-bold text-[10rem] drop-shadow-[0_0_20px_rgba(255,255,255,0.25)]
 
             md:text-[10rem] md:text-[#ff6b6b]
             lg:text-[10rem] lg:text-[#ff6b6b]
@@ -78,7 +78,7 @@ export default function Home() {
       <div 
         className='
         flex flex-nowrap items-end justify-center w-full
-        p-2 absolute linear-gradient
+        absolute linear-gradient
 
         sm:p-8 sm:gap-4 sm:bottom-[-225px]
         md:p-8 md:gap-4 md:bottom-[-225px]
@@ -102,7 +102,7 @@ export default function Home() {
           />
           {/* Bottom Image */}
           <img
-            src="1.jpg"
+            src="2.jpg"
             alt="Image 2"
             className='
             hidden w-[250px] h-[350px]
@@ -119,6 +119,7 @@ export default function Home() {
         <div 
           className='
           flex flex-col gap-4
+
           sm:mb-25
           md:mb-25
           lg:mb-50
@@ -126,7 +127,7 @@ export default function Home() {
         >
           {/* Top Image */}
           <img
-            src="1.jpg"
+            src="3.jpg"
             alt="Image 3"
             className='
             hidden w-[250px] h-[350px]
@@ -140,8 +141,8 @@ export default function Home() {
 
           {/* sm-md Top Image */}
           <img
-            src="1.jpg"
-            alt="Image 3"
+            src="11.jpg"
+            alt="sm-md Top Image"
             className='
             hidden w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
@@ -153,8 +154,8 @@ export default function Home() {
           />
           {/* sm-md Bottom Image */}
           <img
-            src="1.jpg"
-            alt="Image 3"
+            src="12.jpg"
+            alt="sm-md Bottom Image"
             className='
             hidden w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
@@ -178,7 +179,7 @@ export default function Home() {
           '
         >
           <img
-            src="1.jpg"
+            src="4.jpg"
             alt="Image 4"
             className='
             w-[250px] h-[300px] border-0 rounded-xl opacity-50
@@ -212,7 +213,7 @@ export default function Home() {
           />
           {/* sm-md Top Image */}
           <img
-            src="1.jpg"
+            src="13.jpg"
             alt="Image 3"
             className='
             
@@ -226,7 +227,7 @@ export default function Home() {
           />
           {/* sm-md Bottom Image */}
           <img
-            src="1.jpg"
+            src="14.jpg"
             alt="Image 3"
             className='
             hidden w-[250px] h-[350px]
@@ -251,7 +252,7 @@ export default function Home() {
           '
         >
           <img
-            src="1.jpg"
+            src="5.jpg"
             alt="Image 5"
             className='
             w-[250px] h-[300px] border-0 rounded-xl opacity-50
@@ -285,7 +286,7 @@ export default function Home() {
           />
           {/* sm-md Top Image */}
           <img
-            src="1.jpg"
+            src="15.jpg"
             alt="Image 3"
             className='
             
@@ -299,7 +300,7 @@ export default function Home() {
           />
           {/* sm-md Bottom Image */}
           <img
-            src="1.jpg"
+            src="16.jpg"
             alt="Image 3"
             className='
             hidden w-[250px] h-[350px]
@@ -315,7 +316,7 @@ export default function Home() {
         {/* Column 5 */}
         <div className='mb-50'>
           <img
-            src="1.jpg"
+            src="6.jpg"
             alt="Image 6"
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
@@ -328,8 +329,9 @@ export default function Home() {
 
         {/* Column 6 */}
         <div className='flex flex-col gap-4'>
+          {/* Top Image */}
           <img
-            src="1.jpg"
+            src="7.jpg"
             alt="Image 7"
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
@@ -338,8 +340,9 @@ export default function Home() {
             lg:block lg:opacity-100
             '
           />
+          {/* Bottom Image */}
           <img
-            src="1.jpg"
+            src="8.jpg"
             alt="Image 8"
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
