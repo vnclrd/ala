@@ -82,6 +82,7 @@ export default function Home() {
         
       </div>
 
+
       {/* Images */}
       <div 
         className='
@@ -93,7 +94,51 @@ export default function Home() {
         lg:p-8 lg:gap-4 lg:bottom-[-250px]
         '
       >
+
+
+
         {/* Column 1 */}
+        <div className='flex flex-col gap-4'>
+          {/* Filler Block */}
+          <div
+            className='
+            hidden w-[250px] h-[350px] border-0 rounded-4xl
+            opacity-50 bg-[#ff6b6b]/40
+            
+            sm:hidden
+            md:hidden
+            lg:block lg:opacity-100
+            '
+          ></div>
+          {/* Top Image */}
+          <img
+            src="1.jpg"
+            alt="Image 1"
+            className='
+            hidden w-[250px] h-[350px]
+            border-0 rounded-4xl opacity-50
+            
+            sm:hidden
+            md:hidden
+            lg:block lg:opacity-100
+            '
+          />
+          {/* Bottom Image */}
+          <img
+            src="2.jpg"
+            alt="Image 2"
+            className='
+            hidden w-[250px] h-[350px]
+            border-0 rounded-4xl opacity-50
+            
+            sm:hidden
+            md:hidden
+            lg:block lg:opacity-100 lg:mb-50
+            '
+          />
+        </div>
+
+        {/* Column 2 */}
         <div className='flex flex-col gap-4'>
           {/* Filler Block */}
           <div
@@ -134,7 +179,7 @@ export default function Home() {
           />
         </div>
         
-        {/* Column 2 */}
+        {/* Column 3 */}
         <div 
           className='
           flex flex-col gap-4
@@ -208,7 +253,7 @@ export default function Home() {
           />
         </div>
         
-        {/* Column 3 */}
+        {/* Column 4 */}
         {/* With Mobile View */}
         <div 
           className='
@@ -301,7 +346,7 @@ export default function Home() {
           />
         </div>
         
-        {/* Column 4 */}
+        {/* Column 5 */}
         {/* With Mobile View */}
         <div 
           className='
@@ -394,7 +439,7 @@ export default function Home() {
           />
         </div>
 
-        {/* Column 5 */}
+        {/* Column 6 */}
         <div 
           className='
           flex flex-col gap-4
@@ -438,7 +483,7 @@ export default function Home() {
           />
         </div>
 
-        {/* Column 6 */}
+        {/* Column 7 */}
         <div className='flex flex-col gap-4'>
           {/* Filler Block */}
           <div
@@ -471,6 +516,47 @@ export default function Home() {
             opacity-50
             
             lg:block lg:opacity-100
+            '
+          />
+        </div>
+
+        {/* Column 8 */}
+        <div className='flex flex-col gap-4'>
+          {/* Filler Block */}
+          <div
+            className='
+            hidden w-[250px] h-[350px] border-0 rounded-4xl
+            opacity-50 bg-[#ff6b6b]/40
+            
+            sm:hidden
+            md:hidden
+            lg:block lg:opacity-100
+            '
+          ></div>
+          {/* Top Image */}
+          <img
+            src="1.jpg"
+            alt="Image 1"
+            className='
+            hidden w-[250px] h-[350px]
+            border-0 rounded-4xl opacity-50
+            
+            sm:hidden
+            md:hidden
+            lg:block lg:opacity-100
+            '
+          />
+          {/* Bottom Image */}
+          <img
+            src="2.jpg"
+            alt="Image 2"
+            className='
+            hidden w-[250px] h-[350px]
+            border-0 rounded-4xl opacity-50
+            
+            sm:hidden
+            md:hidden
+            lg:block lg:opacity-100 lg:mb-50
             '
           />
         </div>
