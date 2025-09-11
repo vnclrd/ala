@@ -3,25 +3,21 @@ export default function Home() {
     <div 
       className='
       flex flex-col w-full h-screen bg-[#fff]
-
       lg:pt-30
       '
     >
-      {/* Ala – Capture. Share. Relive. */}
       <div
         className='
         flex flex-col items-center justify-center w-full
         h-full z-30
-
         lg:flex lg:flex-col lg:items-center
         lg:justify-center lg:w-full lg:h-full 
         '
       >
-
+        {/* Title */}
         <div 
           className='
           flex flex-col w-full items-center justify-center
-
           lg:flex lg:flex-col lg:items-center lg:justify-center lg:w-[50%]
           lg:h-full lg:pb-80
           '
@@ -37,10 +33,10 @@ export default function Home() {
             Ala
           </h1>
 
+          {/* Tagline */}
           <div
             className='
             flex font-normal text-2xl mt-[-50px] text-[#fff]
-
             md:mt-[-50px] md:text-2xl md:text-[#fff]
             lg:mt-[-50px] lg:text-2xl lg:text-[#000]
             '
@@ -50,10 +46,10 @@ export default function Home() {
             <h1>Relive.</h1>
           </div>
 
+          {/* Buttons */}
           <div
             className='
             flex gap-2 mt-4
-
             md:flex
             lg:hidden
             [@media(min-width:1440px)]:flex
@@ -88,7 +84,6 @@ export default function Home() {
         className='
         flex flex-nowrap items-end justify-center w-full
         absolute linear-gradient
-
         sm:p-8 sm:gap-4 sm:bottom-[-225px]
         md:p-8 md:gap-4 md:bottom-[-225px]
         lg:p-8 lg:gap-4 lg:bottom-[-250px]
@@ -101,7 +96,6 @@ export default function Home() {
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
             opacity-50 bg-[#ff6b6b]/40
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100
@@ -109,12 +103,11 @@ export default function Home() {
           ></div>
           {/* Top Image */}
           <img
-            src="1.jpg"
-            alt="Image 1"
+            src='1.jpg'
+            alt='Image 1'
             className='
             hidden w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100
@@ -122,12 +115,11 @@ export default function Home() {
           />
           {/* Bottom Image */}
           <img
-            src="2.jpg"
-            alt="Image 2"
+            src='2.jpg'
+            alt='Image 2'
             className='
             hidden w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100 lg:mb-50
@@ -142,7 +134,6 @@ export default function Home() {
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
             opacity-50 bg-[#ff6b6b]/15
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100
@@ -153,7 +144,6 @@ export default function Home() {
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
             opacity-50 bg-[#ff6b6b]/30
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100
@@ -161,12 +151,11 @@ export default function Home() {
           ></div>
           {/* Top Image */}
           <img
-            src="1.jpg"
-            alt="Image 1"
+            src='1.jpg'
+            alt='Image 1'
             className='
             hidden w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100
@@ -174,12 +163,11 @@ export default function Home() {
           />
           {/* Bottom Image */}
           <img
-            src="2.jpg"
-            alt="Image 2"
+            src='2.jpg'
+            alt='Image 2'
             className='
             hidden w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100
@@ -191,7 +179,6 @@ export default function Home() {
         <div 
           className='
           flex flex-col gap-4
-
           sm:mb-25
           md:mb-25
           lg:mb-50
@@ -202,7 +189,6 @@ export default function Home() {
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
             opacity-50 bg-[#ff6b6b]/10
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100
@@ -213,7 +199,6 @@ export default function Home() {
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
             opacity-50 bg-[#ff6b6b]/20
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100
@@ -221,12 +206,11 @@ export default function Home() {
           ></div>
           {/* Top Image */}
           <img
-            src="3.jpg"
-            alt="Image 3"
+            src='3.jpg'
+            alt='Image 3'
             className='
             hidden min-w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
-            
             sm:block sm:opacity-50
             md:block md:opacity-50
             lg:block lg:opacity-100
@@ -235,12 +219,11 @@ export default function Home() {
 
           {/* sm-md Top Image */}
           <img
-            src="11.jpg"
-            alt="sm-md Top Image"
+            src='11.jpg'
+            alt='sm-md Top Image'
             className='
             hidden w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
-            
             sm:block
             md:block
             lg:hidden
@@ -248,12 +231,11 @@ export default function Home() {
           />
           {/* sm-md Bottom Image */}
           <img
-            src="12.jpg"
-            alt="sm-md Bottom Image"
+            src='12.jpg'
+            alt='sm-md Bottom Image'
             className='
             hidden w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
-            
             sm:block
             md:block
             lg:hidden
@@ -262,11 +244,9 @@ export default function Home() {
         </div>
         
         {/* Column 4 */}
-        {/* With Mobile View */}
         <div 
           className='
           flex flex-col mb-25 mr-2 gap-2
-
           sm:gap-4
           md:gap-4
           lg:mr-0
@@ -276,7 +256,6 @@ export default function Home() {
           <div
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100
@@ -286,40 +265,36 @@ export default function Home() {
           <div
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100
             '
           ></div>
           <img
-            src="4.jpg"
-            alt="Image 4"
+            src='4.jpg'
+            alt='Image 4'
             className='
             min-w-[250px] h-[300px] border-0 rounded-xl opacity-50
-
             sm:w-[250px] sm:h-[350px] sm:rounded-4xl
             md:w-[250px] md:h-[350px] md:rounded-4xl
             lg:w-[250px] lg:h-[350px] lg:opacity-100 lg:rounded-4xl
             '
           />
           <img
-            src="21.jpg"
-            alt=""
+            src='21.jpg'
+            alt=''
             className='
             w-[250px] h-[300px] border-0 rounded-xl opacity-50
-
             sm:hidden sm:w-[250px] sm:h-[350px] sm:opacity-100
             md:hidden md:w-[250px] md:h-[350px] md:opacity-100
             lg:hidden lg:w-[250px] lg:h-[350px] lg:opacity-100
             '
           />
           <img
-            src="22.jpg"
-            alt=""
+            src='22.jpg'
+            alt=''
             className='
             w-[250px] h-[300px] border-0 rounded-xl opacity-50
-
             sm:hidden sm:w-[250px] sm:h-[350px] sm:opacity-100
             md:hidden md:w-[250px] md:h-[350px] md:opacity-100
             lg:hidden lg:w-[250px] lg:h-[350px] lg:opacity-100
@@ -327,13 +302,11 @@ export default function Home() {
           />
           {/* sm-md Top Image */}
           <img
-            src="13.jpg"
-            alt=""
+            src='13.jpg'
+            alt=''
             className='
-            
             hidden w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
-            
             sm:block
             md:block
             lg:hidden
@@ -341,12 +314,11 @@ export default function Home() {
           />
           {/* sm-md Bottom Image */}
           <img
-            src="14.jpg"
-            alt=""
+            src='14.jpg'
+            alt=''
             className='
             hidden w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
-            
             sm:block
             md:block
             lg:hidden
@@ -359,7 +331,6 @@ export default function Home() {
         <div 
           className='
           flex flex-col mb-25 gap-2 
-
           sm:gap-4
           md:gap-4
           lg:mr-0
@@ -369,7 +340,6 @@ export default function Home() {
           <div
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100
@@ -379,40 +349,36 @@ export default function Home() {
           <div
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100
             '
           ></div>
           <img
-            src="5.jpg"
-            alt="Image 5"
+            src='5.jpg'
+            alt='Image 5'
             className='
             min-w-[250px] h-[300px] border-0 rounded-xl opacity-50
-
             sm:w-[250px] sm:h-[350px] sm:rounded-4xl
             md:w-[250px] md:h-[350px] md:rounded-4xl
             lg:w-[250px] lg:h-[350px] lg:opacity-100 lg:rounded-4xl
             '
           />
           <img
-            src="23.jpg"
-            alt=""
+            src='23.jpg'
+            alt=''
             className='
             w-[250px] h-[300px] border-0 rounded-xl opacity-50
-
             sm:hidden sm:w-[250px] sm:h-[350px] sm:opacity-100
             md:hidden md:w-[250px] md:h-[350px] md:opacity-100
             lg:hidden lg:w-[250px] lg:h-[350px] lg:opacity-100
             '
           />
           <img
-            src="24.jpg"
-            alt=""
+            src='24.jpg'
+            alt=''
             className='
             w-[250px] h-[300px] border-0 rounded-xl opacity-50
-            
             sm:hidden sm:w-[250px] sm:h-[350px] sm:opacity-100
             md:hidden md:w-[250px] md:h-[350px] md:opacity-100
             lg:hidden lg:w-[250px] lg:h-[350px] lg:opacity-100
@@ -420,12 +386,11 @@ export default function Home() {
           />
           {/* sm-md Top Image */}
           <img
-            src="15.jpg"
-            alt=""
+            src='15.jpg'
+            alt=''
             className='
             hidden w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
-            
             sm:block
             md:block
             lg:hidden
@@ -433,12 +398,11 @@ export default function Home() {
           />
           {/* sm-md Bottom Image */}
           <img
-            src="16.jpg"
-            alt=""
+            src='16.jpg'
+            alt=''
             className='
             hidden w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
-            
             sm:block
             md:block
             lg:hidden
@@ -450,7 +414,6 @@ export default function Home() {
         <div 
           className='
           flex flex-col gap-4
-
           sm:mb-25
           md:mb-25
           lg:mb-50
@@ -461,7 +424,6 @@ export default function Home() {
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
             opacity-50 bg-[#ff6b6b]/10
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100
@@ -472,19 +434,17 @@ export default function Home() {
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
             opacity-50 bg-[#ff6b6b]/20
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100
             '
           ></div>
           <img
-            src="6.jpg"
-            alt="Image 6"
+            src='6.jpg'
+            alt='Image 6'
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
             opacity-50
-            
             lg:block lg:opacity-100
             '
           />
@@ -497,7 +457,6 @@ export default function Home() {
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
             opacity-50 bg-[#ff6b6b]/15
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100
@@ -508,7 +467,6 @@ export default function Home() {
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
             opacity-50 bg-[#ff6b6b]/30
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100
@@ -516,23 +474,21 @@ export default function Home() {
           ></div>
           {/* Top Image */}
           <img
-            src="7.jpg"
-            alt="Image 7"
+            src='7.jpg'
+            alt='Image 7'
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
             opacity-50
-            
             lg:block lg:opacity-100
             '
           />
           {/* Bottom Image */}
           <img
-            src="8.jpg"
-            alt="Image 8"
+            src='8.jpg'
+            alt='Image 8'
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
             opacity-50
-            
             lg:block lg:opacity-100
             '
           />
@@ -545,7 +501,6 @@ export default function Home() {
             className='
             hidden w-[250px] h-[350px] border-0 rounded-4xl
             opacity-50 bg-[#ff6b6b]/40
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100
@@ -553,12 +508,11 @@ export default function Home() {
           ></div>
           {/* Top Image */}
           <img
-            src="1.jpg"
-            alt="Image 1"
+            src='1.jpg'
+            alt='Image 1'
             className='
             hidden w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100
@@ -566,12 +520,11 @@ export default function Home() {
           />
           {/* Bottom Image */}
           <img
-            src="2.jpg"
-            alt="Image 2"
+            src='2.jpg'
+            alt='Image 2'
             className='
             hidden w-[250px] h-[350px]
             border-0 rounded-4xl opacity-50
-            
             sm:hidden
             md:hidden
             lg:block lg:opacity-100 lg:mb-50
@@ -591,9 +544,8 @@ export default function Home() {
       {/* Cover for sm/Mobile */}
       <div
         className='
-        pointer-events-none absolute left-0 w-full h-full
-        bg-black/60 z-20
-
+        bg-black/60 z-20 pointer-events-none absolute left-0
+        w-full h-full
         lg:hidden
         '
       >
