@@ -10,7 +10,8 @@ export default function Home() {
       {/* Ala – Capture. Share. Relive. */}
       <div
         className='
-        flex flex-col items-center justify-center w-full h-full z-30
+        flex flex-col items-center justify-center w-full
+        h-full z-30
 
         lg:flex lg:flex-col lg:items-center
         lg:justify-center lg:w-full lg:h-full 
@@ -19,8 +20,7 @@ export default function Home() {
 
         <div 
           className='
-          flex flex-col w-full
-          items-center justify-center
+          flex flex-col w-full items-center justify-center
 
           lg:flex lg:flex-col lg:items-center lg:justify-center lg:w-[50%]
           lg:h-full lg:pb-80
@@ -50,11 +50,19 @@ export default function Home() {
             <h1>Relive.</h1>
           </div>
 
-          <div className='flex gap-2 mt-4'>
+          <div
+            className='
+            gap-2 mt-4
+
+            md:flex        /* show on tablets (≥768px) */
+            lg:hidden       /* hide on small desktops (≥1024px) */
+            [@media(min-width:1440px)]:flex /* show again on ≥1440px */
+            '
+          >
             <button 
               className='
-              bg-[#ff6b6b] text-[#fff] text-sm
-              font-medium p-4 rounded-[20px] cursor-pointer
+              bg-[#ff6b6b] text-[#fff] text-sm font-medium p-4
+              rounded-[20px] cursor-pointer
               '
             >
               Organizer
@@ -87,6 +95,17 @@ export default function Home() {
       >
         {/* Column 1 */}
         <div className='flex flex-col gap-4'>
+          {/* Filler Block */}
+          <div
+            className='
+            hidden w-[250px] h-[350px] border-0 rounded-4xl
+            opacity-50 bg-[#ff6b6b]/30
+            
+            sm:hidden
+            md:hidden
+            lg:block lg:opacity-100
+            '
+          ></div>
           {/* Top Image */}
           <img
             src="1.jpg"
@@ -125,6 +144,28 @@ export default function Home() {
           lg:mb-50
           '
         >
+          {/* Filler Block */}
+          <div
+            className='
+            hidden w-[250px] h-[350px] border-0 rounded-4xl
+            opacity-50 bg-[#ff6b6b]/10
+            
+            sm:hidden
+            md:hidden
+            lg:block lg:opacity-100
+            '
+          ></div>
+          {/* Filler Block */}
+          <div
+            className='
+            hidden w-[250px] h-[350px] border-0 rounded-4xl
+            opacity-50 bg-[#ff6b6b]/20
+            
+            sm:hidden
+            md:hidden
+            lg:block lg:opacity-100
+            '
+          ></div>
           {/* Top Image */}
           <img
             src="3.jpg"
@@ -178,6 +219,26 @@ export default function Home() {
           lg:mr-0
           '
         >
+          {/* Filler Block */}
+          <div
+            className='
+            hidden w-[250px] h-[350px] border-0 rounded-4xl
+            
+            sm:hidden
+            md:hidden
+            lg:block lg:opacity-100
+            '
+          ></div>
+          {/* Filler Block */}
+          <div
+            className='
+            hidden w-[250px] h-[350px] border-0 rounded-4xl
+            
+            sm:hidden
+            md:hidden
+            lg:block lg:opacity-100
+            '
+          ></div>
           <img
             src="4.jpg"
             alt="Image 4"
@@ -251,6 +312,26 @@ export default function Home() {
           lg:mr-0
           '
         >
+          {/* Filler Block */}
+          <div
+            className='
+            hidden w-[250px] h-[350px] border-0 rounded-4xl
+            
+            sm:hidden
+            md:hidden
+            lg:block lg:opacity-100
+            '
+          ></div>
+          {/* Filler Block */}
+          <div
+            className='
+            hidden w-[250px] h-[350px] border-0 rounded-4xl
+            
+            sm:hidden
+            md:hidden
+            lg:block lg:opacity-100
+            '
+          ></div>
           <img
             src="5.jpg"
             alt="Image 5"
@@ -314,7 +395,37 @@ export default function Home() {
         </div>
 
         {/* Column 5 */}
-        <div className='mb-50'>
+        <div 
+          className='
+          flex flex-col gap-4
+
+          sm:mb-25
+          md:mb-25
+          lg:mb-50
+          '
+        >
+          {/* Filler Block */}
+          <div
+            className='
+            hidden w-[250px] h-[350px] border-0 rounded-4xl
+            opacity-50 bg-[#ff6b6b]/10
+            
+            sm:hidden
+            md:hidden
+            lg:block lg:opacity-100
+            '
+          ></div>
+          {/* Filler Block */}
+          <div
+            className='
+            hidden w-[250px] h-[350px] border-0 rounded-4xl
+            opacity-50 bg-[#ff6b6b]/20
+            
+            sm:hidden
+            md:hidden
+            lg:block lg:opacity-100
+            '
+          ></div>
           <img
             src="6.jpg"
             alt="Image 6"
@@ -329,6 +440,17 @@ export default function Home() {
 
         {/* Column 6 */}
         <div className='flex flex-col gap-4'>
+          {/* Filler Block */}
+          <div
+            className='
+            hidden w-[250px] h-[350px] border-0 rounded-4xl
+            opacity-50 bg-[#ff6b6b]/30
+            
+            sm:hidden
+            md:hidden
+            lg:block lg:opacity-100
+            '
+          ></div>
           {/* Top Image */}
           <img
             src="7.jpg"
