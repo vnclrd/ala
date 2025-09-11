@@ -28,7 +28,7 @@ export default function Home() {
         >
           <h1
             className='
-            text-[#ff6b6b] italic font-bold text-[10rem]
+            text-[#ff6b6b] italic font-bold text-[10rem] drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]
 
             md:text-[10rem] md:text-[#ff6b6b]
             lg:text-[10rem] lg:text-[#ff6b6b]
@@ -354,18 +354,15 @@ export default function Home() {
       {/* Gradient Fade */}
       <div
         className='
-          pointer-events-none
-          absolute bottom-0 left-0 w-full h-40 
-          bg-gradient-to-t from-white to-transparent
-          z-10
+          pointer-events-none absolute bottom-0 left-0 w-full
+          h-40 bg-gradient-to-t from-white to-transparent z-10
         '
       ></div>
 
       {/* Cover for sm/Mobile */}
       <div
         className='
-        pointer-events-none
-        absolute left-0 w-full h-full
+        pointer-events-none absolute left-0 w-full h-full
         bg-black/50 z-20
 
         lg:hidden
