@@ -1,4 +1,32 @@
+import { useState } from 'react'
+import { SiGmail } from 'react-icons/si'
+import { FaFacebookMessenger, FaInstagram } from 'react-icons/fa'
+import ModalButtons from './ModalButtons.tsx'
+
 export default function Home() {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
+
+  const handleOpenContactModal = () => setIsContactModalOpen(true)
+  const handleCloseContactModal = () => setIsContactModalOpen(false)
+
+  const handleShowDetail = (id: string) => {
+    const gmail = document.getElementById('gmail')
+    const instagram = document.getElementById('instagram')
+    const messenger = document.getElementById('messenger')
+
+    if (gmail) gmail.style.display = 'none'
+    if (instagram) instagram.style.display = 'none'
+    if (messenger) messenger.style.display = 'none'
+
+    const detail = document.getElementById(id)
+    if (detail) {
+      detail.style.display = 'block'
+      setTimeout(() => {
+        detail.style.display = 'none'
+      }, 10000)
+    }
+  }
+
   return (
     <div 
       className='
@@ -11,11 +39,11 @@ export default function Home() {
         flex flex-col items-center justify-center w-full
         h-full
         lg:flex lg:flex-col lg:items-center
-        lg:justify-center lg:w-full lg:h-full 
+        lg:justify-center lg:w-full lg:h-full
         '
       >
         {/* Title */}
-        <div 
+        <div
           className='
           flex flex-col w-full items-center justify-center
           lg:flex lg:flex-col lg:items-center lg:justify-center lg:w-[50%]
@@ -45,26 +73,23 @@ export default function Home() {
             <h1>Capture. &nbsp;</h1>
             <h1>Share. &nbsp;</h1>
             <h1>Relive.</h1>
-          </div>         
+          </div>
 
-          {/* Buttons */}
-          <div
+          <button
             className='
-            flex gap-2 mt-4
-            md:flex
-            lg:flex
-            [@media(min-width:1440px)]:flex
+            bg-[#ff6b6b] text-[#fff] text-lg font-normal p-2
+            rounded-2xl cursor-pointer mt-4 w-[200px] z-10
+            hidden
+            lg:block
             '
           >
-            <button
-              className='
-              bg-[#e0e0e0] text-[#000] text-sm font-medium pl-4 pr-4 pt-3 pb-3
-              rounded-[20px] cursor-pointer z-1000
-              '
-            >
-              See Plans
-            </button>
+            See Plans
+          </button>
+
+          <div className='lg:hidden flex z-10 mt-4 gap-2'>
+            <ModalButtons />
           </div>
+          
         </div>
       </div>
 
@@ -167,7 +192,7 @@ export default function Home() {
         {/* Column 3 */}
         <div 
           className='
-          flex flex-col gap-4
+          flex flex-col gap-4 mr-2
           sm:mb-25
           md:mb-25
           lg:mb-50
@@ -235,7 +260,7 @@ export default function Home() {
         {/* Column 4 */}
         <div 
           className='
-          flex flex-col mb-25 gap-2
+          flex flex-col mb-25 gap-2 mr-2
           sm:gap-4
           md:gap-4
           lg:mr-0
@@ -539,6 +564,73 @@ export default function Home() {
         '
       >
       </div>
+
+      <div
+        className='
+          fixed bottom-4 left-4
+          flex items-center justify-center
+          w-[100px] h-[40px]
+          bg-white z-50 text-md rounded-2xl
+          shadow-md
+          lg:hidden
+        '
+      >
+        <button
+          onClick={handleOpenContactModal}
+          className="w-full h-full">
+          Contact
+        </button>
+      </div>
+
+      {isContactModalOpen && (
+        <div
+          className='
+            flex items-center justify-center bg-[#000]/80
+            fixed top-0 left-0 w-screen h-screen z-10
+          '
+        >
+          <div
+            className='
+              flex flex-col items-center justify-center w-[350px]
+              h-[300px] bg-[#ff6b6b] border-0 rounded-2xl gap-6
+              relative
+            '
+          >
+            <h1 className='font-bold text-4xl text-[#fff]'>Contact Us</h1>
+            <p className='text-xs mb-[-20px] text-[#fff]'>click any of the icons below</p>
+            <div className='flex gap-4'>
+              <button onClick={() => handleShowDetail('gmail')}>
+                <SiGmail size={40} color='#fff' className='cursor-pointer' />
+              </button>
+              <button onClick={() => handleShowDetail('instagram')}>
+                <FaInstagram size={40} color='#fff' className='cursor-pointer' />
+              </button>
+              <button onClick={() => handleShowDetail('messenger')}>
+                <FaFacebookMessenger size={40} color='#fff' className='cursor-pointer' />
+              </button>
+            </div>
+            <div
+              className='
+                flex items-center justify-center w-[250px] h-[25px]
+                border-0 rounded-2xl text-[#fff] italic
+              '
+            >
+              <p id='gmail' className='hidden'>miguel.calarde@gmail.com</p>
+              <p id='instagram' className='hidden'>@vn.clrd</p>
+              <p id='messenger' className='hidden'>ivan.calarde</p>
+            </div>
+            <button
+              onClick={handleCloseContactModal}
+              className='
+                text-[#000] text-sm font-medium p-4 rounded-[20px]
+                bg-[#e0e0e0] cursor-pointer
+              '
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
