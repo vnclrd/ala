@@ -1,6 +1,4 @@
 import { useState } from 'react'
-// import { SiGmail } from 'react-icons/si'
-// import { FaFacebookMessenger, FaInstagram } from 'react-icons/fa'
 
 export default function Home() {
   const [isOrganizerModalOpen, setIsOrganizerModalOpen] = useState(false)
@@ -11,27 +9,6 @@ export default function Home() {
 
   const handleOpenGuestModal = () => setIsGuestModalOpen(true)
   const handleCloseGuestModal = () => setIsGuestModalOpen(false)
-
-  // ========== Show icon details when pressed ==========
-  /*
-  const handleShowDetail = (id: string) => {
-    const gmail = document.getElementById('gmail')
-    const instagram = document.getElementById('instagram')
-    const messenger = document.getElementById('messenger')
-
-    if (gmail) gmail.style.display = 'none'
-    if (instagram) instagram.style.display = 'none'
-    if (messenger) messenger.style.display = 'none'
-    
-    const detail = document.getElementById(id)
-    if (detail) {
-      detail.style.display = 'block'
-      setTimeout(() => {
-        detail.style.display = 'none'
-      }, 5000)
-    }
-  }
-  */
 
   // Show proceed button if code is entered
   const handleShowProceedBtn = () => {

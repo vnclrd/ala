@@ -1,14 +1,39 @@
 import { useState } from 'react'
+import { SiGmail } from 'react-icons/si'
+import { FaFacebookMessenger, FaInstagram } from 'react-icons/fa'
 
 export default function Header() {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
   const [isOrganizerModalOpen, setIsOrganizerModalOpen] = useState(false)
   const [isGuestModalOpen, setIsGuestModalOpen] = useState(false)
+
+  const handleOpenContactModal = () => setIsContactModalOpen(true)
+  const handleCloseContactModal = () => setIsContactModalOpen(false)
 
   const handleOpenOrganizerModal = () => setIsOrganizerModalOpen(true)
   const handleCloseOrganizerModal = () => setIsOrganizerModalOpen(false)
 
   const handleOpenGuestModal = () => setIsGuestModalOpen(true)
   const handleCloseGuestModal = () => setIsGuestModalOpen(false)
+
+  // ========== Show icon details when pressed ==========
+  const handleShowDetail = (id: string) => {
+    const gmail = document.getElementById('gmail')
+    const instagram = document.getElementById('instagram')
+    const messenger = document.getElementById('messenger')
+
+    if (gmail) gmail.style.display = 'none'
+    if (instagram) instagram.style.display = 'none'
+    if (messenger) messenger.style.display = 'none'
+    
+    const detail = document.getElementById(id)
+    if (detail) {
+      detail.style.display = 'block'
+      setTimeout(() => {
+        detail.style.display = 'none'
+      }, 10000)
+    }
+  }
 
   // Show proceed button if code is entered
   const handleShowProceedBtn = () => {
@@ -68,6 +93,7 @@ export default function Header() {
           '
         >
           <button
+            onClick={handleOpenContactModal}
             className='
             text-[#000] text-sm font-medium
             cursor-pointer m-4 hover:underline
@@ -103,6 +129,77 @@ export default function Header() {
           </button>
         </div>
 
+        {/* Contact Modal */}
+        {isContactModalOpen && (
+          <div
+            className='
+              flex items-center justify-center bg-[#000]/80 z-2000 
+              fixed top-0 left-0 w-screen h-screen
+            '
+          >
+            <div
+              className='
+              flex flex-col items-center justify-center w-[350px]
+              h-[300px] bg-[#ff6b6b] border-0 rounded-2xl gap-6
+              relative
+              '
+            >
+              <h1 className='font-bold text-4xl text-[#fff]'>Contact Us</h1>
+
+              <p className='text-xs mb-[-20px] text-[#fff]'>click any of the icons below</p>
+
+              <div className='flex gap-4'>
+                <button
+                  onClick={() => handleShowDetail('gmail')}
+                >
+                  <SiGmail
+                    size={40}
+                    color='#fff'
+                    className='cursor-pointer'
+                  />
+                </button>
+                <button
+                  onClick={() => handleShowDetail('instagram')}
+                >
+                  <FaInstagram
+                    size={40}
+                    color='#fff'
+                    className='cursor-pointer'
+                  />
+                </button>
+                <button
+                  onClick={() => handleShowDetail('messenger')}
+                >
+                  <FaFacebookMessenger
+                    size={40}
+                    color='#fff'
+                    className='cursor-pointer'
+                  />
+                </button>
+              </div>
+              <div
+                className='
+                flex items-center justify-center w-[250px] h-[25px]
+                border-0 rounded-2xl text-[#fff] italic
+                '
+              >
+                <p id='gmail' className='hidden'>miguel.calarde@gmail.com</p>
+                <p id='instagram' className='hidden'>@vn.clrd</p>
+                <p id='messenger' className='hidden'>ivan.calarde</p>
+              </div>
+              <button
+                onClick={handleCloseContactModal}
+                className='
+                text-[#000] text-sm font-medium p-4 rounded-[20px]
+                bg-[#e0e0e0] cursor-pointer
+                '
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Organizer Modal */}
         {isOrganizerModalOpen && (
           <div
@@ -116,7 +213,6 @@ export default function Header() {
               flex w-[800px] h-[400px] bg-[#fff] border-0 rounded-2xl
               '
             >
-
               {/* Left Part */}
               <div
                 className='
@@ -162,52 +258,6 @@ export default function Header() {
                   </button>
                   .
                 </p>
-
-                {/* 
-                <p>Contact us.</p>
-                <p className='text-xs mt-[-4px]'>click any of the icons below</p>
-
-                <div className='flex gap-4 mt-4'>
-                  <button
-                    onClick={() => handleShowDetail('gmail')}
-                  >
-                    <SiGmail
-                      size={40}
-                      color='#fff'
-                      className='cursor-pointer'
-                    />
-                  </button>
-                  <button
-                    onClick={() => handleShowDetail('instagram')}
-                  >
-                    <FaInstagram
-                      size={40}
-                      color='#fff'
-                      className='cursor-pointer'
-                    />
-                  </button>
-                  <button
-                    onClick={() => handleShowDetail('messenger')}
-                  >
-                    <FaFacebookMessenger
-                      size={40}
-                      color='#fff'
-                      className='cursor-pointer'
-                    />
-                  </button>
-                </div>
-
-                <div
-                  className='
-                  flex items-center justify-center w-[250px] h-[25px]
-                  mt-4 border-0 rounded-2xl text-[#fff] italic
-                  '
-                >
-                  <p id='gmail' className='hidden'>miguel.calarde@gmail.com</p>
-                  <p id='instagram' className='hidden'>@vn.clrd</p>
-                  <p id='messenger' className='hidden'>ivan.calarde</p>
-                </div>
-                */}
 
                 {/* Close Organizer Modal Button */}
                 <button
