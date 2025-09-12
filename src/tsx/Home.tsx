@@ -22,32 +22,20 @@ export default function Home() {
     setIsGuestModalOpen(false)
   }
 
-  const handleShowGmail = () => {
+  const handleShowDetail = (id: string) => {
     const gmail = document.getElementById('gmail')
-    if (gmail) {
-      gmail.style.display = 'block'
-      setTimeout(() => {
-        gmail.style.display = 'none'
-      }, 3000)
-    }
-  }
-
-  const handleShowInstagram = () => {
     const instagram = document.getElementById('instagram')
-    if (instagram) {
-      instagram.style.display = 'block'
-      setTimeout(() => {
-        instagram.style.display = 'none'
-      }, 3000)
-    }
-  }
-
-  const handleShowMessenger = () => {
     const messenger = document.getElementById('messenger')
-    if (messenger) {
-      messenger.style.display = 'block'
+
+    if (gmail) gmail.style.display = 'none'
+    if (instagram) instagram.style.display = 'none'
+    if (messenger) messenger.style.display = 'none'
+    
+    const detail = document.getElementById(id)
+    if (detail) {
+      detail.style.display = 'block'
       setTimeout(() => {
-        messenger.style.display = 'none'
+        detail.style.display = 'none'
       }, 3000)
     }
   }
@@ -176,7 +164,7 @@ export default function Home() {
                   {/* Social Icons */}
                   <div className='flex gap-4'>
                     <button
-                      onClick={handleShowGmail}
+                      onClick={() => handleShowDetail('gmail')}
                     >
                       <SiGmail
                         size={40}
@@ -185,7 +173,7 @@ export default function Home() {
                       />
                     </button>
                     <button
-                      onClick={handleShowInstagram}
+                      onClick={() => handleShowDetail('instagram')}
                     >
                       <FaInstagram
                         size={40}
@@ -194,7 +182,7 @@ export default function Home() {
                       />
                     </button>
                     <button
-                      onClick={handleShowMessenger}
+                      onClick={() => handleShowDetail('messenger')}
                     >
                       <FaFacebookMessenger
                         size={40}
