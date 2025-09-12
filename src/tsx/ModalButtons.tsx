@@ -11,20 +11,20 @@ export default function ModalButtons() {
   const handleOpenGuestModal = () => setIsGuestModalOpen(true)
   const handleCloseGuestModal = () => setIsGuestModalOpen(false)
 
-  const handleShowProceedBtn = () => {
+  const handleEnableOrganizerProceedBtn = () => {
     const organizerInput = document.getElementById('organizerInput') as HTMLInputElement | null
     const organizerProceed = document.getElementById('organizerProceed') as HTMLButtonElement | null
 
     if (organizerInput && organizerProceed) {
       if (organizerInput.value.trim() === '') {
-        organizerProceed.style.display = 'none'
+        organizerProceed.disabled = true
       } else {
-        organizerProceed.style.display = 'block'
+        organizerProceed.disabled = false
       }
     }
   }
 
-  const handleEnableProceedBtn = () => {
+  const handleEnableGuestProceedBtn = () => {
     const guestInput = document.getElementById('guestInput') as HTMLInputElement | null
     const guestProceed = document.getElementById('guestProceed') as HTMLInputElement | null
 
@@ -93,7 +93,7 @@ export default function ModalButtons() {
                 <span className='font-bold'>your event?</span>
               </h1>
               <input
-                onInput={handleShowProceedBtn}
+                onInput={handleEnableOrganizerProceedBtn}
                 id='organizerInput'
                 type='text'
                 placeholder='Enter your code here'
@@ -106,11 +106,13 @@ export default function ModalButtons() {
               />
               <button
                 id='organizerProceed'
+                disabled
                 className='
                   absolute bg-[#ff6b6b] text-[#fff] text-sm font-medium
-                  rounded-xl cursor-pointer bottom-8 p-2 hidden
+                  rounded-xl cursor-pointer bottom-8 p-2
                   md:p-4 md:rounded-2xl md:bottom-10
                   lg:p-4 lg:rounded-2xl lg:bottom-10
+                  disabled:cursor-not-allowed disabled:bg-gray-400
                 '
               >
                 Proceed
@@ -173,7 +175,7 @@ export default function ModalButtons() {
               <span className='font-bold'>organizer.</span>
             </h1>
             <input
-              onInput={handleEnableProceedBtn}
+              onInput={handleEnableGuestProceedBtn}
               id='guestInput'
               type='text'
               placeholder='Enter code here'
