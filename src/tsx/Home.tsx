@@ -22,6 +22,7 @@ export default function Home() {
     setIsGuestModalOpen(false)
   }
 
+  // ========== Show icon details when pressed ==========
   const handleShowDetail = (id: string) => {
     const gmail = document.getElementById('gmail')
     const instagram = document.getElementById('instagram')
@@ -36,7 +37,20 @@ export default function Home() {
       detail.style.display = 'block'
       setTimeout(() => {
         detail.style.display = 'none'
-      }, 3000)
+      }, 5000)
+    }
+  }
+
+  const handleShowProceedBtn = () => {
+    const input = document.getElementById('input') as HTMLInputElement | null
+    const proceed = document.getElementById('proceed') as HTMLButtonElement | null
+
+    if (input && proceed) {
+      if (input.value.trim() === '') {
+        proceed.style.display = 'none'
+      } else {
+        proceed.style.display = 'block'
+      }
     }
   }
 
@@ -121,7 +135,7 @@ export default function Home() {
           {isOrganizerModalOpen && (
             <div
               className='
-                fixed top-0 left-0 w-screen h-screen bg-[#000]/50 z-2000
+                fixed top-0 left-0 w-screen h-screen bg-[#000]/80 z-2000
                 flex items-center justify-center
               '
             >
@@ -143,11 +157,22 @@ export default function Home() {
                     <span className='font-bold'>your event?</span>
                   </h1>
                   <input
+                    onInput={handleShowProceedBtn}
+                    id='input'
                     type="text"
                     className='w-[300px] h-[40px] border-
                     rounded-2xl bg-[#e0e0e0] p-4
                     '
                   />
+                  <button
+                    id='proceed'
+                    className='
+                    absolute bg-[#ff6b6b] text-[#fff] text-sm font-medium
+                    p-4 rounded-[20px] cursor-pointer bottom-70 hidden
+                    '
+                  >
+                    Proceed
+                  </button>
                 </div>
 
                 {/* Right Part */}
@@ -160,9 +185,10 @@ export default function Home() {
                 >
                   <h1 className='text-4xl'>Not yet?</h1>
                   <p>Contact us.</p>
+                  <p className='text-xs mt-[-4px]'>click any of the icons below</p>
 
                   {/* Social Icons */}
-                  <div className='flex gap-4'>
+                  <div className='flex gap-4 mt-4'>
                     <button
                       onClick={() => handleShowDetail('gmail')}
                     >
@@ -192,26 +218,30 @@ export default function Home() {
                     </button>
                   </div>
 
-                  <div className='flex items-center justify-center w-[300px] h-[40px]'>
-                    <p id='gmail' className='hidden mt-4'>miguel.calarde@gmail.com</p>
-                    <p id='instagram' className='hidden mt-4'>@vn.clrd</p>
-                    <p id='messenger' className='hidden mt-4'>ivan.calarde</p>
+                  {/* Details to Socials Container */}
+                  <div
+                    className='
+                    flex items-center justify-center w-[250px] h-[25px]
+                    mt-4 border-0 rounded-2xl text-[#fff] italic
+                    '
+                  >
+                    <p id='gmail' className='hidden'>miguel.calarde@gmail.com</p>
+                    <p id='instagram' className='hidden'>@vn.clrd</p>
+                    <p id='messenger' className='hidden'>ivan.calarde</p>
                   </div>
 
+                  {/* Close Organizer Modal Button */}
+                  <button
+                    onClick={handleCloseOrganizerModal}
+                    className='
+                    absolute bottom-70 text-[#fff] text-sm font-medium
+                    rounded-[20px] cursor-pointer p-4 hover:underline
+                    '  
+                  >
+                    Close
+                  </button>
                 </div>
-                
-                {/* 
-                <button
-                  onClick={handleCloseOrganizerModal}
-                  className='
-                  bg-[#ff6b6b] text-[#fff] text-sm font-medium p-4
-                  rounded-[20px] cursor-pointer
-                  '  
-                >
-                  Close
-                </button>
-                */}
-                
+
               </div>
               
             </div>
