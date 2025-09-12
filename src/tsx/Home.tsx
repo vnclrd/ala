@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { SiGmail } from 'react-icons/si'
+import { FaFacebookMessenger, FaInstagram } from 'react-icons/fa'
 
 export default function Home() {
   const [isOrganizerModalOpen, setIsOrganizerModalOpen] = useState(false)
@@ -18,6 +20,36 @@ export default function Home() {
 
   const handleCloseGuestModal = () => {
     setIsGuestModalOpen(false)
+  }
+
+  const handleShowGmail = () => {
+    const gmail = document.getElementById('gmail')
+    if (gmail) {
+      gmail.style.display = 'block'
+      setTimeout(() => {
+        gmail.style.display = 'none'
+      }, 3000)
+    }
+  }
+
+  const handleShowInstagram = () => {
+    const instagram = document.getElementById('instagram')
+    if (instagram) {
+      instagram.style.display = 'block'
+      setTimeout(() => {
+        instagram.style.display = 'none'
+      }, 3000)
+    }
+  }
+
+  const handleShowMessenger = () => {
+    const messenger = document.getElementById('messenger')
+    if (messenger) {
+      messenger.style.display = 'block'
+      setTimeout(() => {
+        messenger.style.display = 'none'
+      }, 3000)
+    }
   }
 
   return (
@@ -101,16 +133,99 @@ export default function Home() {
           {isOrganizerModalOpen && (
             <div
               className='
-              absolute w-[400px] h-[400px] bg-amber-300 border-0
-              rounded-[25px]
+                fixed top-0 left-0 w-screen h-screen bg-[#000]/50 z-2000
+                flex items-center justify-center
               '
             >
-              This is the Oraganizer Modal.
-              <button
-                onClick={handleCloseOrganizerModal}  
+              <div
+                className='
+                flex w-[800px] h-[400px] bg-[#fff] border-0 rounded-2xl
+                '
               >
-                Close
-              </button>
+
+                {/* Left Part */}
+                <div
+                  className='
+                  flex flex-col items-center justify-center w-[50%]
+                  h-full p-4 gap-4
+                  '
+                >
+                  <h1 className='text-4xl'>
+                    Have you gotten <br /> your code for <br />
+                    <span className='font-bold'>your event?</span>
+                  </h1>
+                  <input
+                    type="text"
+                    className='w-[300px] h-[40px] border-
+                    rounded-2xl bg-[#e0e0e0] p-4
+                    '
+                  />
+                </div>
+
+                {/* Right Part */}
+                <div
+                  className='
+                  flex flex-col items-center justify-center w-[50%]
+                  h-full p-4 bg-[#ff6b6b] border-0 rounded-r-2xl
+                  gap-2 text-[#fff] ,
+                  '
+                >
+                  <h1 className='text-4xl'>Not yet?</h1>
+                  <p>Contact us.</p>
+
+                  {/* Social Icons */}
+                  <div className='flex gap-4'>
+                    <button
+                      onClick={handleShowGmail}
+                    >
+                      <SiGmail
+                        size={40}
+                        color='#fff'
+                        className='cursor-pointer'
+                      />
+                    </button>
+                    <button
+                      onClick={handleShowInstagram}
+                    >
+                      <FaInstagram
+                        size={40}
+                        color='#fff'
+                        className='cursor-pointer'
+                      />
+                    </button>
+                    <button
+                      onClick={handleShowMessenger}
+                    >
+                      <FaFacebookMessenger
+                        size={40}
+                        color='#fff'
+                        className='cursor-pointer'
+                      />
+                    </button>
+                  </div>
+
+                  <div className='flex items-center justify-center w-[300px] h-[40px]'>
+                    <p id='gmail' className='hidden mt-4'>miguel.calarde@gmail.com</p>
+                    <p id='instagram' className='hidden mt-4'>@vn.clrd</p>
+                    <p id='messenger' className='hidden mt-4'>ivan.calarde</p>
+                  </div>
+
+                </div>
+                
+                {/* 
+                <button
+                  onClick={handleCloseOrganizerModal}
+                  className='
+                  bg-[#ff6b6b] text-[#fff] text-sm font-medium p-4
+                  rounded-[20px] cursor-pointer
+                  '  
+                >
+                  Close
+                </button>
+                */}
+                
+              </div>
+              
             </div>
           )}
 
