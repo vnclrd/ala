@@ -45,14 +45,27 @@ export default function Home() {
 
   // Show proceed button if code is entered
   const handleShowProceedBtn = () => {
-    const input = document.getElementById('input') as HTMLInputElement | null
-    const proceed = document.getElementById('proceed') as HTMLButtonElement | null
+    const organizerInput = document.getElementById('organizerInput') as HTMLInputElement | null
+    const organizerProceed = document.getElementById('organizerProceed') as HTMLButtonElement | null
 
-    if (input && proceed) {
-      if (input.value.trim() === '') {
-        proceed.style.display = 'none'
+    if (organizerInput && organizerProceed) {
+      if (organizerInput.value.trim() === '') {
+        organizerProceed.style.display = 'none'
       } else {
-        proceed.style.display = 'block'
+        organizerProceed.style.display = 'block'
+      }
+    }
+  }
+
+  const handleEnableProceedBtn = () => {
+    const guestInput = document.getElementById('guestInput') as HTMLInputElement | null
+    const guestProceed = document.getElementById('guestProceed') as HTMLInputElement | null
+
+    if (guestInput && guestProceed) {
+      if (guestInput.value.trim() === '') {
+        guestProceed.disabled = true
+      } else {
+        guestProceed.disabled = false
       }
     }
   }
@@ -138,8 +151,8 @@ export default function Home() {
           {isOrganizerModalOpen && (
             <div
               className='
-                fixed top-0 left-0 w-screen h-screen bg-[#000]/80 z-2000
-                flex items-center justify-center
+                bg-[#000]/80 z-2000 flex items-center justify-center
+                fixed top-0 left-0 w-screen h-screen
               '
             >
               <div
@@ -161,15 +174,13 @@ export default function Home() {
                   </h1>
                   <input
                     onInput={handleShowProceedBtn}
-                    id='input'
+                    id='organizerInput'
                     type="text"
                     placeholder='Enter your code here'
-                    className='w-[300px] h-[40px] border-
-                    rounded-2xl bg-[#e0e0e0] p-4
-                    '
+                    className='w-[300px] h-[40px] rounded-2xl bg-[#e0e0e0] p-4'
                   />
                   <button
-                    id='proceed'
+                    id='organizerProceed'
                     className='
                     absolute bg-[#ff6b6b] text-[#fff] text-sm font-medium
                     p-4 rounded-[20px] cursor-pointer bottom-8 hidden
@@ -246,7 +257,7 @@ export default function Home() {
                   <button
                     onClick={handleCloseOrganizerModal}
                     className='
-                    absolute bottom-4 text-[#fff] text-sm font-medium
+                    absolute bottom-6 text-[#fff] text-sm font-medium
                     rounded-[20px] cursor-pointer p-4 hover:underline
                     '  
                   >
@@ -263,23 +274,59 @@ export default function Home() {
           {isGuestModalOpen && (
             <div
               className='
-              absolute w-[400px] h-[400px] bg-amber-300 border-0
-              rounded-[25px]
+                bg-[#000]/80 z-2000 flex items-center justify-center
+                fixed top-0 left-0 w-screen h-screen
               '
             >
-              This is the Guest Modal.
-              <button
-                onClick={handleCloseGuestModal}  
+              <div
+                className='
+                flex flex-col items-center justify-center w-[350px]
+                h-[325px] bg-[#fff] border-0 rounded-2xl gap-6
+                relative
+                '
               >
-                Close
-              </button>
+                <h1 className='text-4xl'>
+                  Enter the code <br /> given by the <br />
+                  <span className='font-bold'>organizer.</span>
+                </h1>
+                <input
+                  onInput={handleEnableProceedBtn}
+                  id='guestInput'
+                  type="text"
+                  placeholder='Enter code here'
+                  className='w-[275px] h-[40px] rounded-2xl bg-[#e0e0e0] p-4'
+                />
+                <div className='flex gap-4'>
+                  <button
+                    onClick={handleCloseGuestModal}
+                    className='
+                    bg-[#e0e0e0] text-[#000] text-sm font-medium
+                    p-4 rounded-[20px] cursor-pointer
+                    '
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    id='guestProceed'
+                    disabled
+                    className='
+                    bg-[#ff6b6b] text-[#fff] text-sm font-medium p-4
+                    rounded-[20px]
+                    disabled:cursor-not-allowed disabled:bg-gray-400
+                    '
+                  >
+                    Proceed
+                  </button>
+                </div>
+                
+              </div>
+
             </div>
           )}
              
         </div>
         
       </div>
-
 
       {/* Images */}
       <div 
