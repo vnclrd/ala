@@ -1,37 +1,22 @@
+import { Link } from 'react-router-dom'
+
 export default function Plans() {
   return (
-    <div
-      className='
-        flex items-center justify-center w-screen h-screen
-        lg:pt-30
-      '
-    >
+    <div className='flex items-center justify-center w-screen h-screen'>
       <div
         className='
-            flex flex-col items-center justify-center w-screen h-screen
-            bg-[#000]/60 gap-12 z-20
-          '
+          flex flex-col items-center justify-center w-screen
+          h-screen bg-[#000]/60 gap-8 z-99999
+          lg:pt-40
+        '
       >
         <div className='flex flex-col items-center mt-[-100px]'>
           {/* Title */}
-          <h1
-            className='
-              text-[#ff6b6b] italic font-bold
-              md:text-[10rem] md:text-[#ff6b6b]
-              lg:text-8xl lg:text-[#ff6b6b]
-            '
-          >
+          <h1 className='text-[#fff] italic font-bold text-8xl'>
             Ala
           </h1>
           {/* Tagline */}
-          <div
-            className='
-              flex text-sm
-              text-[#fff] mt-[-4px]
-              md:text-sm md:text-[#fff]
-              lg:text-sm lg:text-[#fff]
-            '
-          >
+          <div className='flex text-sm text-[#fff] mt-[-6px]'>
             <h1>Capture. &nbsp;</h1>
             <h1>Share. &nbsp;</h1>
             <h1>Relive.</h1>
@@ -43,7 +28,8 @@ export default function Plans() {
           {/* Plan 1 */}
           <div
             className='
-              flex flex-col items-left w-[350px] h-[450px] bg-[#fff] rounded-2xl p-8 gap-2 z-30
+              flex flex-col items-left w-[350px] h-[450px]
+              bg-[#fff] rounded-2xl p-8 gap-2 z-30
             '
           >
             <h1 className='font-bold text-2xl'>Standard</h1>
@@ -77,14 +63,20 @@ export default function Plans() {
                 <br />
               </span>
             </p>
-            <button className='bg-[#ff6b6b] text-[#fff] p-2 rounded-2xl mt-4 cursor-pointer'>
+            <button
+              className='
+                bg-[#ff6b6b] text-[#fff] p-2
+                rounded-2xl mt-4 cursor-pointer
+              '
+            >
               Get Standard
             </button>
           </div>
           {/* Plan 2 */}
           <div
             className='
-              flex flex-col items-left w-[350px] h-[450px] bg-[#ff6b6b] rounded-2xl p-8 gap-2 z-30
+              flex flex-col items-left w-[350px] h-[450px]
+              bg-[#ff6b6b] rounded-2xl p-8 gap-2 z-30
             '
           >
             <h1 className='font-bold text-2xl text-[#fff]'>Plus</h1>
@@ -119,6 +111,17 @@ export default function Plans() {
             </button>
           </div>
         </div>
+        <Link to='/'>
+          <button
+            className='
+              bg-[#fff] text-[#000] text-sm font-medium cursor-pointer
+              p-4 rounded-2xl
+            '
+          >
+            Close Plans
+          </button>
+        </Link>
+        
       </div>
     </div>
   );
