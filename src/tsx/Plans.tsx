@@ -19,7 +19,7 @@ export default function Plans() {
           <div className='flex text-sm text-[#fff] mt-[-6px]'>
             <h1>Capture. &nbsp;</h1>
             <h1>Share. &nbsp;</h1>
-            <h1>Relive.</h1>
+            <h1>Gather.</h1>
           </div>
         </div>
 
@@ -28,7 +28,7 @@ export default function Plans() {
           {/* Plan 1 */}
           <div
             className='
-              flex flex-col items-left w-[350px] h-[450px]
+              flex flex-col items-left w-[350px] h-[500px]
               bg-[#fff] rounded-2xl p-8 gap-2 z-30
             '
           >
@@ -62,6 +62,16 @@ export default function Plans() {
                 Up to 1 GB of photo uploads {'(approx. 1,000* photos)'}
                 <br />
               </span>
+              ✔{' '}
+              <span className='text-sm pl-1'>
+                Compress and download photos
+                <br />
+              </span>
+              ✔{' '}
+              <span className='text-sm pl-1'>
+                Gallery expires after 15 days
+                <br />
+              </span>
             </p>
             <button
               className='
@@ -75,7 +85,7 @@ export default function Plans() {
           {/* Plan 2 */}
           <div
             className='
-              flex flex-col items-left w-[350px] h-[450px]
+              flex flex-col items-left w-[350px] h-[500px]
               bg-[#ff6b6b] rounded-2xl p-8 gap-2 z-30
             '
           >
@@ -103,6 +113,12 @@ export default function Plans() {
                 {'(approx. 2,500* photos)'}
                 <br />
               </span>
+              ✔{' '}
+              <span className='text-sm pl-1'>
+                Gallery expires after <span className='font-bold'>30 days</span>
+                <br />
+              </span>
+              <br />
               <br />
               <br />
             </p>

@@ -73,7 +73,7 @@ export default function Home() {
           >
             <h1>Capture. &nbsp;</h1>
             <h1>Share. &nbsp;</h1>
-            <h1>Relive.</h1>
+            <h1>Gather.</h1>
           </div>
 
           <Link
