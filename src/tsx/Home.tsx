@@ -149,7 +149,7 @@ export default function Home() {
                 <div
                   className='
                   flex flex-col items-center justify-center w-[50%]
-                  h-full p-4 gap-4
+                  h-full p-4 gap-4 relative
                   '
                 >
                   <h1 className='text-4xl'>
@@ -168,7 +168,7 @@ export default function Home() {
                     id='proceed'
                     className='
                     absolute bg-[#ff6b6b] text-[#fff] text-sm font-medium
-                    p-4 rounded-[20px] cursor-pointer bottom-70 hidden
+                    p-4 rounded-[20px] cursor-pointer bottom-6 hidden
                     '
                   >
                     Proceed
@@ -180,7 +180,7 @@ export default function Home() {
                   className='
                   flex flex-col items-center justify-center w-[50%]
                   h-full p-4 bg-[#ff6b6b] border-0 rounded-r-2xl
-                  gap-2 text-[#fff] ,
+                  gap-2 text-[#fff] relative
                   '
                 >
                   <h1 className='text-4xl'>Not yet?</h1>
@@ -234,7 +234,7 @@ export default function Home() {
                   <button
                     onClick={handleCloseOrganizerModal}
                     className='
-                    absolute bottom-70 text-[#fff] text-sm font-medium
+                    absolute bottom-4 text-[#fff] text-sm font-medium
                     rounded-[20px] cursor-pointer p-4 hover:underline
                     '  
                   >
