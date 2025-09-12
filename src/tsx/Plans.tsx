@@ -10,7 +10,7 @@ export default function Plans() {
           lg:pt-40
         '
       >
-        <div className='flex flex-col items-center mt-[-100px]'>
+        <div className='flex flex-col items-center mt-[-125px]'>
           {/* Title */}
           <h1 className='text-[#fff] italic font-bold text-8xl'>
             Ala
@@ -114,8 +114,8 @@ export default function Plans() {
         <Link to='/'>
           <button
             className='
-              bg-[#fff] text-[#000] text-sm font-medium cursor-pointer
-              p-4 rounded-2xl
+              text-[#fff] text-sm font-medium cursor-pointer
+              p-4 rounded-2xl hover:underline
             '
           >
             Close Plans

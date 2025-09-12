@@ -1,14 +1,18 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { SiGmail } from 'react-icons/si'
 import { FaFacebookMessenger, FaInstagram } from 'react-icons/fa'
 import ModalButtons from './ModalButtons.tsx'
 
 export default function Header() {
+  const location = useLocation()
+
   const [isContactModalOpen, setIsContactModalOpen] = useState(false)
 
   const handleOpenContactModal = () => setIsContactModalOpen(true)
   const handleCloseContactModal = () => setIsContactModalOpen(false)
+
+  const isPlansPage = location.pathname === '/plans'
 
   const handleShowDetail = (id: string) => {
     const gmail = document.getElementById('gmail')
@@ -30,11 +34,12 @@ export default function Header() {
 
   return (
     <div
-      className='
+      className={`
         hidden z-9999
         lg:block lg:absolute lg:bg-[#fff] lg:shadow-lg
         lg:w-full lg:h-20
-      '
+        ${isPlansPage ? 'lg:hidden' : 'lg:block'}
+      `}
     >
       {/* Header Content */}
       <div className='flex items-center w-full h-20'>
