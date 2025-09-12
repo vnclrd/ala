@@ -30,10 +30,19 @@ export default function Header() {
         >
           <button
             className='
-            text-[#000] text-sm font-medium cursor-pointer m-4
+            text-[#000] text-sm font-medium
+            cursor-pointer m-4 hover:underline
             '
           >
             Contact
+          </button>
+          <button
+            className='
+            bg-[#ffc30b] text-[#fff] text-sm font-medium p-4
+            rounded-[20px] cursor-pointer
+            '
+          >
+            Plans
           </button>
           <button
             className='

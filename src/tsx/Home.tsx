@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { SiGmail } from 'react-icons/si'
-import { FaFacebookMessenger, FaInstagram } from 'react-icons/fa'
+// import { SiGmail } from 'react-icons/si'
+// import { FaFacebookMessenger, FaInstagram } from 'react-icons/fa'
 
 export default function Home() {
   const [isOrganizerModalOpen, setIsOrganizerModalOpen] = useState(false)
@@ -23,6 +23,7 @@ export default function Home() {
   }
 
   // ========== Show icon details when pressed ==========
+  /*
   const handleShowDetail = (id: string) => {
     const gmail = document.getElementById('gmail')
     const instagram = document.getElementById('instagram')
@@ -40,7 +41,9 @@ export default function Home() {
       }, 5000)
     }
   }
+  */
 
+  // Show proceed button if code is entered
   const handleShowProceedBtn = () => {
     const input = document.getElementById('input') as HTMLInputElement | null
     const proceed = document.getElementById('proceed') as HTMLButtonElement | null
@@ -160,6 +163,7 @@ export default function Home() {
                     onInput={handleShowProceedBtn}
                     id='input'
                     type="text"
+                    placeholder='Enter your code here'
                     className='w-[300px] h-[40px] border-
                     rounded-2xl bg-[#e0e0e0] p-4
                     '
@@ -168,7 +172,7 @@ export default function Home() {
                     id='proceed'
                     className='
                     absolute bg-[#ff6b6b] text-[#fff] text-sm font-medium
-                    p-4 rounded-[20px] cursor-pointer bottom-6 hidden
+                    p-4 rounded-[20px] cursor-pointer bottom-8 hidden
                     '
                   >
                     Proceed
@@ -183,11 +187,19 @@ export default function Home() {
                   gap-2 text-[#fff] relative
                   '
                 >
-                  <h1 className='text-4xl'>Not yet?</h1>
+                  <h1 className='text-4xl font-bold'>Not yet?</h1>
+                  <p className='text-xl'>
+                    Check out our&nbsp;
+                    <button className='font-bold cursor-pointer hover:underline text-[#ffc30b]'>
+                      plans
+                    </button>
+                    .
+                  </p>
+
+                  {/* 
                   <p>Contact us.</p>
                   <p className='text-xs mt-[-4px]'>click any of the icons below</p>
 
-                  {/* Social Icons */}
                   <div className='flex gap-4 mt-4'>
                     <button
                       onClick={() => handleShowDetail('gmail')}
@@ -218,7 +230,6 @@ export default function Home() {
                     </button>
                   </div>
 
-                  {/* Details to Socials Container */}
                   <div
                     className='
                     flex items-center justify-center w-[250px] h-[25px]
@@ -229,6 +240,7 @@ export default function Home() {
                     <p id='instagram' className='hidden'>@vn.clrd</p>
                     <p id='messenger' className='hidden'>ivan.calarde</p>
                   </div>
+                  */}
 
                   {/* Close Organizer Modal Button */}
                   <button
