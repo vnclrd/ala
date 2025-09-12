@@ -63,10 +63,10 @@ export default function Home() {
         >
           <h1
             className='
-            text-[#ff6b6b] italic font-bold text-[10rem] drop-shadow-[0_0_20px_rgba(255,255,255,0.25)]
-
+            text-[#ff6b6b] italic font-bold
+            text-[10rem] drop-shadow-[0_0_20px_rgba(255,255,255,0.25)] z-10
             md:text-[10rem] md:text-[#ff6b6b]
-            lg:text-[10rem] lg:text-[#ff6b6b]
+            lg:text-[10rem] lg:text-[#ff6b6b] lg:z-0
             '
           >
             Ala
@@ -75,9 +75,10 @@ export default function Home() {
           {/* Tagline */}
           <div
             className='
-            flex font-normal text-2xl mt-[-50px] text-[#fff]
+            flex font-normal text-2xl
+            mt-[-50px] text-[#fff] z-10
             md:mt-[-50px] md:text-2xl md:text-[#fff]
-            lg:mt-[-50px] lg:text-2xl lg:text-[#000]
+            lg:mt-[-50px] lg:text-2xl lg:text-[#000] lg:z-0
             '
           >
             <h1>Capture. &nbsp;</h1>
