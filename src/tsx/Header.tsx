@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { SiGmail } from 'react-icons/si'
 import { FaFacebookMessenger, FaInstagram } from 'react-icons/fa'
 import ModalButtons from './ModalButtons.tsx'
@@ -45,9 +46,12 @@ export default function Header() {
             lg:w-[50%] lg:h-full
           '
         >
-          <h1 className='text-4xl font-bold italic text-[#ff6b6b]'>
-            Ala
-          </h1>
+          <Link to='/'>
+            <button className='text-4xl font-bold italic text-[#ff6b6b] cursor-pointer'>
+              Ala
+            </button>
+          </Link>
+          
         </div>
         {/* Right Part */}
         <div

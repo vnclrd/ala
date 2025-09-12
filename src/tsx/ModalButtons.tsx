@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function ModalButtons() {
   const [isOrganizerModalOpen, setIsOrganizerModalOpen] = useState(false)
@@ -126,14 +127,17 @@ export default function ModalButtons() {
             >
               <h1 className='text-4xl font-bold'>Not yet?</h1>
               <p className='flex flex-col text-xl'>Check out our</p>
-              <button
-                className='
-                  font-bold text-sm cursor-pointer text-[#ff6b6b] p-2
-                  w-[150px] bg-[#fff] border-0 rounded-2xl italic
-                '
-              >
-                Plans
-              </button>
+              <Link to='/plans'>
+                <button
+                  onClick={handleCloseOrganizerModal}
+                  className='
+                    font-bold text-sm cursor-pointer text-[#ff6b6b] p-2
+                    w-[150px] bg-[#fff] border-0 rounded-2xl italic
+                  '
+                >
+                  Plans
+                </button>
+              </Link>
               <button
                 onClick={handleCloseOrganizerModal}
                 className='

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { SiGmail } from 'react-icons/si'
 import { FaFacebookMessenger, FaInstagram } from 'react-icons/fa'
 import ModalButtons from './ModalButtons.tsx'
@@ -75,17 +76,22 @@ export default function Home() {
             <h1>Relive.</h1>
           </div>
 
-          <button
-            className='
-            bg-[#ff6b6b] text-[#fff] text-lg font-normal p-2
-            rounded-2xl cursor-pointer mt-4 w-[200px] z-10
-            hidden
-            lg:block
-            '
+          <Link
+            to='/plans'
+            className='z-10'
           >
-            See Plans
-          </button>
-
+            <button
+              className='
+              bg-[#ff6b6b] text-[#fff] text-lg font-normal p-2
+              rounded-2xl cursor-pointer mt-4 w-[200px]
+              hidden
+              lg:block
+              '
+            >
+              See Our Plans
+            </button>
+          </Link>
+      
           <div className='lg:hidden flex z-10 mt-4 gap-2'>
             <ModalButtons />
           </div>
