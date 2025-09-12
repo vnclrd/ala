@@ -1,4 +1,25 @@
+import { useState } from 'react'
+
 export default function Home() {
+  const [isOrganizerModalOpen, setIsOrganizerModalOpen] = useState(false)
+  const [isGuestModalOpen, setIsGuestModalOpen] = useState(false)
+
+  const handleOpenOrganizerModal = () => {
+    setIsOrganizerModalOpen(true)
+  }
+
+  const handleCloseOrganizerModal = () => {
+    setIsOrganizerModalOpen(false)
+  }
+
+  const handleOpenGuestModal = () => {
+    setIsGuestModalOpen(true)
+  }
+
+  const handleCloseGuestModal = () => {
+    setIsGuestModalOpen(false)
+  }
+
   return (
     <div 
       className='
@@ -44,7 +65,7 @@ export default function Home() {
             <h1>Capture. &nbsp;</h1>
             <h1>Share. &nbsp;</h1>
             <h1>Relive.</h1>
-          </div>
+          </div>         
 
           {/* Buttons */}
           <div
@@ -56,6 +77,7 @@ export default function Home() {
             '
           >
             <button 
+              onClick={handleOpenOrganizerModal}
               className='
               bg-[#ff6b6b] text-[#fff] text-sm font-medium p-4
               rounded-[20px] cursor-pointer
@@ -65,6 +87,7 @@ export default function Home() {
             </button>
 
             <button
+              onClick={handleOpenGuestModal}
               className='
               bg-[#e0e0e0] text-[#000] text-sm font-medium p-4
               rounded-[20px] cursor-pointer
@@ -73,7 +96,41 @@ export default function Home() {
               Guest
             </button>
           </div>
-          
+
+          {/* Organizer Modal */}
+          {isOrganizerModalOpen && (
+            <div
+              className='
+              absolute w-[400px] h-[400px] bg-amber-300 border-0
+              rounded-[25px]
+              '
+            >
+              This is the Oraganizer Modal.
+              <button
+                onClick={handleCloseOrganizerModal}  
+              >
+                Close
+              </button>
+            </div>
+          )}
+
+          {/* Guest Modal */}
+          {isGuestModalOpen && (
+            <div
+              className='
+              absolute w-[400px] h-[400px] bg-amber-300 border-0
+              rounded-[25px]
+              '
+            >
+              This is the Guest Modal.
+              <button
+                onClick={handleCloseGuestModal}  
+              >
+                Close
+              </button>
+            </div>
+          )}
+             
         </div>
         
       </div>
