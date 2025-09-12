@@ -6,21 +6,11 @@ export default function Home() {
   const [isOrganizerModalOpen, setIsOrganizerModalOpen] = useState(false)
   const [isGuestModalOpen, setIsGuestModalOpen] = useState(false)
 
-  const handleOpenOrganizerModal = () => {
-    setIsOrganizerModalOpen(true)
-  }
+  const handleOpenOrganizerModal = () => setIsOrganizerModalOpen(true)
+  const handleCloseOrganizerModal = () => setIsOrganizerModalOpen(false)
 
-  const handleCloseOrganizerModal = () => {
-    setIsOrganizerModalOpen(false)
-  }
-
-  const handleOpenGuestModal = () => {
-    setIsGuestModalOpen(true)
-  }
-
-  const handleCloseGuestModal = () => {
-    setIsGuestModalOpen(false)
-  }
+  const handleOpenGuestModal = () => setIsGuestModalOpen(true)
+  const handleCloseGuestModal = () => setIsGuestModalOpen(false)
 
   // ========== Show icon details when pressed ==========
   /*
@@ -57,6 +47,7 @@ export default function Home() {
     }
   }
 
+  // Enable proceed button if code is entered
   const handleEnableProceedBtn = () => {
     const guestInput = document.getElementById('guestInput') as HTMLInputElement | null
     const guestProceed = document.getElementById('guestProceed') as HTMLInputElement | null
@@ -206,52 +197,6 @@ export default function Home() {
                     </button>
                     .
                   </p>
-
-                  {/* 
-                  <p>Contact us.</p>
-                  <p className='text-xs mt-[-4px]'>click any of the icons below</p>
-
-                  <div className='flex gap-4 mt-4'>
-                    <button
-                      onClick={() => handleShowDetail('gmail')}
-                    >
-                      <SiGmail
-                        size={40}
-                        color='#fff'
-                        className='cursor-pointer'
-                      />
-                    </button>
-                    <button
-                      onClick={() => handleShowDetail('instagram')}
-                    >
-                      <FaInstagram
-                        size={40}
-                        color='#fff'
-                        className='cursor-pointer'
-                      />
-                    </button>
-                    <button
-                      onClick={() => handleShowDetail('messenger')}
-                    >
-                      <FaFacebookMessenger
-                        size={40}
-                        color='#fff'
-                        className='cursor-pointer'
-                      />
-                    </button>
-                  </div>
-
-                  <div
-                    className='
-                    flex items-center justify-center w-[250px] h-[25px]
-                    mt-4 border-0 rounded-2xl text-[#fff] italic
-                    '
-                  >
-                    <p id='gmail' className='hidden'>miguel.calarde@gmail.com</p>
-                    <p id='instagram' className='hidden'>@vn.clrd</p>
-                    <p id='messenger' className='hidden'>ivan.calarde</p>
-                  </div>
-                  */}
 
                   {/* Close Organizer Modal Button */}
                   <button
