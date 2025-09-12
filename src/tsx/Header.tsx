@@ -3,7 +3,6 @@ export default function Header() {
     <div
       className='
       hidden z-1000
-
       lg:block lg:absolute lg:bg-[#fff] lg:shadow-lg
       lg:w-full lg:h-20
       '
@@ -14,7 +13,6 @@ export default function Header() {
         <div
           className='
           flex items-center justify-start md:w-[50%] pl-8
-          
           md:h-full
           lg:w-[50%] lg:h-full
           '
@@ -23,7 +21,6 @@ export default function Header() {
             Ala
           </h1>
         </div>
-
         {/* Right Part */}
         <div
           className='
@@ -46,7 +43,6 @@ export default function Header() {
           >
             Organizer
           </button>
-
           <button
             className='
             bg-[#e0e0e0] text-[#000] text-sm font-medium p-4
