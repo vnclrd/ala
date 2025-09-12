@@ -177,36 +177,35 @@ export default function Home() {
                     Proceed
                   </button>
                 </div>
-
                 {/* Right Part */}
                 <div
                   className='
                   flex flex-col bg-[#ff6b6b] items-center justify-center
-                  w-full h-[50%] p-4 gap-4 relative
-                  text-[#fff] border-0 rounded-b-2xl
-                  md:w-[50%] md:h-full md:rounded-r-2xl md:rounded-l-none
-                  lg:w-[50%] lg:h-full lg:rounded-r-2xl lg:rounded-l-none
+                  w-full h-[50%] relative text-[#fff] border-0
+                  rounded-b-2xl gap-2
+                  md:w-[50%] md:h-full md:rounded-r-2xl md:rounded-l-none md:pb-0
+                  lg:w-[50%] lg:h-full lg:rounded-r-2xl lg:rounded-l-none lg:pb-0
                   '
                 >
                   <h1 className='text-4xl font-bold'>Not yet?</h1>
-                  <p className='flex flex-col text-xl gap-2'>
-                    Check out our&nbsp;<br />
-                    <button
-                      className='
-                      font-bold text-sm cursor-pointer text-[#ff6b6b] p-2
-                      bg-[#fff] border-0 rounded-2xl italic
-                      '
-                    >
-                      Plans
-                    </button>
-                  </p>
+                  <p className='flex flex-col text-xl'>Check out our</p>
+                  <button
+                    className='
+                    font-bold text-sm cursor-pointer text-[#ff6b6b] p-2
+                    w-[150px] bg-[#fff] border-0 rounded-2xl italic
+                    '
+                  >
+                    Plans
+                  </button>
 
                   {/* Close Organizer Modal Button */}
                   <button
                     onClick={handleCloseOrganizerModal}
                     className='
-                    absolute bottom-6 text-[#fff] text-sm font-medium
+                    absolute bottom-4 text-[#fff] text-sm font-medium
                     rounded-[20px] cursor-pointer p-4 hover:underline
+                    md:bottom-6
+                    lg:bottom-6
                     '  
                   >
                     Close
