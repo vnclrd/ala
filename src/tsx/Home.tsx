@@ -48,7 +48,7 @@ export default function Home() {
       <div
         className='
         flex flex-col items-center justify-center w-full
-        h-full z-30
+        h-full
         lg:flex lg:flex-col lg:items-center
         lg:justify-center lg:w-full lg:h-full 
         '
@@ -98,7 +98,7 @@ export default function Home() {
               onClick={handleOpenOrganizerModal}
               className='
               bg-[#ff6b6b] text-[#fff] text-sm font-medium p-4
-              rounded-[20px] cursor-pointer
+              rounded-[20px] cursor-pointer z-1000
               '
             >
               Organizer
@@ -108,7 +108,7 @@ export default function Home() {
               onClick={handleOpenGuestModal}
               className='
               bg-[#e0e0e0] text-[#000] text-sm font-medium p-4
-              rounded-[20px] cursor-pointer
+              rounded-[20px] cursor-pointer z-1000
               '
             >
               Guest
@@ -119,8 +119,8 @@ export default function Home() {
           {isOrganizerModalOpen && (
             <div
               className='
-                bg-[#000]/80 z-2000 flex items-center justify-center
-                fixed top-0 left-0 w-screen h-screen
+                bg-[#000]/80 flex items-center justify-center fixed
+                top-0 left-0 w-screen h-screen z-99999
               '
             >
               <div
@@ -196,8 +196,8 @@ export default function Home() {
           {isGuestModalOpen && (
             <div
               className='
-                bg-[#000]/80 z-2000 flex items-center justify-center
-                fixed top-0 left-0 w-screen h-screen
+                bg-[#000]/80 flex items-center justify-center fixed
+                top-0 left-0 w-screen h-screen z-99999
               '
             >
               <div
@@ -708,14 +708,14 @@ export default function Home() {
       <div
         className='
           pointer-events-none absolute bottom-0 left-0 w-full
-          h-40 bg-gradient-to-t from-white to-transparent z-10
+          h-40 bg-gradient-to-t from-white to-transparent
         '
       ></div>
 
       {/* Cover for sm/Mobile */}
       <div
         className='
-        bg-black/60 z-20 pointer-events-none absolute left-0
+        bg-black/60 pointer-events-none absolute left-0
         w-full h-full
         lg:hidden
         '

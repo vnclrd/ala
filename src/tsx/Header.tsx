@@ -66,7 +66,7 @@ export default function Header() {
   return (
     <div
       className='
-      hidden z-1000
+      hidden z-9999
       lg:block lg:absolute lg:bg-[#fff] lg:shadow-lg
       lg:w-full lg:h-20
       '
@@ -133,8 +133,8 @@ export default function Header() {
         {isContactModalOpen && (
           <div
             className='
-              flex items-center justify-center bg-[#000]/80 z-2000 
-              fixed top-0 left-0 w-screen h-screen
+            flex items-center justify-center bg-[#000]/80
+            fixed top-0 left-0 w-screen h-screen
             '
           >
             <div
@@ -204,8 +204,8 @@ export default function Header() {
         {isOrganizerModalOpen && (
           <div
             className='
-              bg-[#000]/80 z-2000 flex items-center justify-center
-              fixed top-0 left-0 w-screen h-screen
+              bg-[#000]/80 flex items-center justify-center fixed
+              top-0 left-0 w-screen h-screen
             '
           >
             <div
@@ -280,8 +280,8 @@ export default function Header() {
         {isGuestModalOpen && (
           <div
             className='
-              bg-[#000]/80 z-2000 flex items-center justify-center
-              fixed top-0 left-0 w-screen h-screen
+              bg-[#000]/80 flex items-center justify-center fixed
+              top-0 left-0 w-screen h-screen
             '
           >
             <div
