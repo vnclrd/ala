@@ -59,7 +59,7 @@ export default function Plans() {
               </span>
               ✔{' '}
               <span className='text-sm pl-1'>
-                Up to 1 GB of photo uploads {'(approx. 1,000* photos)'}
+                Up to 500 MB of photo uploads {'(approx. 500* photos)'}
                 <br />
               </span>
               ✔{' '}
@@ -69,7 +69,7 @@ export default function Plans() {
               </span>
               ✔{' '}
               <span className='text-sm pl-1'>
-                Gallery expires after 15 days
+                Gallery expires after 7 days
                 <br />
               </span>
             </p>
@@ -109,13 +109,13 @@ export default function Plans() {
               </span>
               ✔{' '}
               <span className='text-sm pl-1'>
-                Up to <span className='font-bold'>5 GB</span> of photo uploads{' '}
-                {'(approx. 2,500* photos)'}
+                Up to <span className='font-bold'>1 GB</span> of photo uploads{' '}
+                {'(approx. 1,000* photos)'}
                 <br />
               </span>
               ✔{' '}
               <span className='text-sm pl-1'>
-                Gallery expires after <span className='font-bold'>30 days</span>
+                Gallery expires after <span className='font-bold'>14 days</span>
                 <br />
               </span>
               <br />
