@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export default function Plans() {
   return (
@@ -12,9 +12,7 @@ export default function Plans() {
       >
         <div className='flex flex-col items-center mt-[-125px]'>
           {/* Title */}
-          <h1 className='text-[#fff] italic font-bold text-8xl'>
-            Ala
-          </h1>
+          <h1 className='text-[#fff] italic font-bold text-8xl'>Ala</h1>
           {/* Tagline */}
           <div className='flex text-sm text-[#fff] mt-[-6px]'>
             <h1>Capture. &nbsp;</h1>
@@ -25,6 +23,61 @@ export default function Plans() {
 
         {/* Plans */}
         <div className='flex gap-4'>
+          {/* Development Plan */}
+          <div
+            className='
+              flex flex-col items-left w-[350px] h-[500px]
+              bg-gray-400 rounded-2xl p-8 gap-2 z-30
+            '
+          >
+            <h1 className='font-bold text-2xl'>Development</h1>
+            <h1 className='text-4xl'>Free</h1>
+            <p className='text-sm'>
+              This plan is for development testing and is not for sale. Only
+              developers will have access to this plan.
+            </p>
+            <p className='mt-4'>
+              ✔{' '}
+              <span className='text-sm pl-1'>
+                Special QR Code <br />
+              </span>
+              ✔{' '}
+              <span className='text-sm pl-1'>
+                Dedicated photo gallery <br />
+              </span>
+              ✔{' '}
+              <span className='text-sm pl-1'>
+                Real-time photo display <br />
+              </span>
+              ✔{' '}
+              <span className='text-sm pl-1'>
+                Standard quality photo uploads <br />
+              </span>
+              ✔{' '}
+              <span className='text-sm pl-1'>
+                Up to 500 MB of photo uploads {'(approx. 500* photos)'}
+                <br />
+              </span>
+              ✔{' '}
+              <span className='text-sm pl-1'>
+                Compress and download photos
+                <br />
+              </span>
+              ✔{' '}
+              <span className='text-sm pl-1'>
+                Gallery expires after 7 days
+                <br />
+              </span>
+            </p>
+            <button
+              className='
+                bg-gray-500 text-[#fff] p-2
+                rounded-2xl mt-4 cursor-pointer
+              '
+            >
+              Get Free
+            </button>
+          </div>
           {/* Plan 1 */}
           <div
             className='
@@ -137,7 +190,6 @@ export default function Plans() {
             Close Plans
           </button>
         </Link>
-        
       </div>
     </div>
   );
