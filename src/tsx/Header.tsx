@@ -101,14 +101,6 @@ export default function Header() {
           >
             Contact
           </button>
-          <button
-            className='
-            bg-[#ffc30b] text-[#fff] text-sm font-medium p-4
-            rounded-[20px] cursor-pointer
-            '
-          >
-            Plans
-          </button>
           <button 
             onClick={handleOpenOrganizerModal}
             className='
