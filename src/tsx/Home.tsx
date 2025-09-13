@@ -44,7 +44,7 @@ export default function Home() {
         lg:justify-center lg:w-full lg:h-full
         '
       >
-        {/* Title */}
+        {/* Title and Tagline */}
         <div
           className='
           flex flex-col w-full items-center justify-center
@@ -54,16 +54,13 @@ export default function Home() {
         >
           <h1
             className='
-            text-[#ff6b6b] italic font-bold
-            text-[10rem] drop-shadow-[0_0_20px_rgba(255,255,255,0.25)] z-10
+            text-[#ff6b6b] italic font-bold text-[10rem] z-10
             md:text-[10rem] md:text-[#ff6b6b]
             lg:text-[10rem] lg:text-[#ff6b6b] lg:z-0
             '
           >
             Ala
           </h1>
-
-          {/* Tagline */}
           <div
             className='
             flex font-normal text-2xl

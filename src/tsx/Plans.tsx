@@ -31,63 +31,6 @@ export default function Plans() {
             lg:flex lg:flex-row
           '
         >
-          {/* Trial Plan 
-          <div
-            className='
-              flex flex-col items-left w-[350px] h-[500px]
-              bg-[#fff]/80 rounded-2xl p-8 gap-2 z-30
-            '
-          >
-            <h1 className='font-bold text-2xl'>Trial</h1>
-            <p className='text-xs mt-[-12px]'>Test our service for free!</p>
-            <h1 className='text-4xl'>Free</h1>
-            <p className='text-sm'>
-              This is a trial plan for organizers to test the service and is
-              only valid for 3 hours. No fees to be paid.
-            </p>
-            <p className='mt-4'>
-              ✔{' '}
-              <span className='text-sm pl-1'>
-                Special QR Code <br />
-              </span>
-              ✔{' '}
-              <span className='text-sm pl-1'>
-                Dedicated photo gallery <br />
-              </span>
-              ✔{' '}
-              <span className='text-sm pl-1'>
-                Real-time photo display <br />
-              </span>
-              ✔{' '}
-              <span className='text-sm pl-1'>
-                Minimal quality photo uploads <br />
-              </span>
-              ✔{' '}
-              <span className='text-sm pl-1'>
-                Up to 50 MB of photo uploads {'(approx. 100* photos)'}
-                <br />
-              </span>
-              ✔{' '}
-              <span className='text-sm pl-1'>
-                Compress and download photos
-                <br />
-              </span>
-              ✔{' '}
-              <span className='text-sm pl-1'>
-                Gallery expires after 3 hours
-                <br />
-              </span>
-            </p>
-            <button
-              className='
-                bg-gray-500 text-[#fff] p-2
-                rounded-2xl mt-4 cursor-pointer
-              '
-            >
-              Get Trial
-            </button>
-          </div>
-          */}
           {/* Plan 1 */}
           <div
             className='
@@ -202,7 +145,8 @@ export default function Plans() {
           <button
             className='
               text-[#fff] text-sm font-medium cursor-pointer
-              p-4 rounded-2xl hover:underline
+              p-4 rounded-2xl hover:underline mb-6
+              lg:mb-0
             '
           >
             Close Plans
