@@ -1,6 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Plans() {
+  const navigate = useNavigate()
+
+  function handleCheckout(plan: 'standard' | 'plus') {
+    sessionStorage.setItem('checkoutAllowed', 'true')
+    navigate(`/checkout/${plan}`, { state: { allowed: true } })
+  }
+
   return (
     <div className='flex items-center justify-center w-screen h-screen'>
       <div
@@ -80,8 +87,8 @@ export default function Plans() {
                 <br />
               </span>
             </p>
-            <Link to='/checkout'>
               <button
+                onClick={() => handleCheckout('standard')}
                 className='
                   bg-[#ff6b6b] text-[#fff] p-2 rounded-2xl mt-4
                   cursor-pointer w-full
@@ -89,7 +96,6 @@ export default function Plans() {
               >
                 Get Standard
               </button>
-            </Link>
           </div>
           {/* Plan 2 */}
           <div
@@ -134,6 +140,7 @@ export default function Plans() {
               <br />
             </p>
             <button
+              onClick={() => handleCheckout('plus')}
               className='
                 bg-[#fff] p-2 rounded-2xl
                 mt-4 cursor-pointer text-[#000]
