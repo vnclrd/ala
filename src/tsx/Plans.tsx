@@ -57,19 +57,19 @@ export default function Plans() {
             <p className='mt-4'>
               ✔{' '}
               <span className='text-sm pl-1'>
-                Special QR Code <br />
+                Special QR Code<br />
               </span>
               ✔{' '}
               <span className='text-sm pl-1'>
-                Dedicated photo gallery <br />
+                Dedicated photo gallery<br />
               </span>
               ✔{' '}
               <span className='text-sm pl-1'>
-                Real-time photo display <br />
+                Real-time photo display<br />
               </span>
               ✔{' '}
               <span className='text-sm pl-1'>
-                Standard quality photo uploads <br />
+                Standard quality photo uploads<br />
               </span>
               ✔{' '}
               <span className='text-sm pl-1'>
@@ -117,7 +117,7 @@ export default function Plans() {
             <p className='mt-4'>
               ✔{' '}
               <span className='text-sm pl-1'>
-                Everything in Standard <br />
+                Everything in Standard<br />
               </span>
               ✔{' '}
               <span className='text-sm pl-1'>
