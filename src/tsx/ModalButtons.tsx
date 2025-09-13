@@ -181,12 +181,13 @@ export default function ModalButtons() {
               placeholder='Enter code here'
               className='w-[275px] h-[40px] rounded-2xl bg-[#e0e0e0] p-4'
             />
-            <div className='flex gap-4'>
+
+            <div className='flex w-[275px] gap-4'>
               <button
                 onClick={handleCloseGuestModal}
-                className='
+                className='w-[50%] h-[50px]
                   bg-[#e0e0e0] text-[#000] text-sm font-medium
-                  p-4 rounded-[20px] cursor-pointer
+                  rounded-[20px] cursor-pointer
                 '
               >
                 Cancel
@@ -194,8 +195,8 @@ export default function ModalButtons() {
               <button
                 id='guestProceed'
                 disabled
-                className='
-                  bg-[#ff6b6b] text-[#fff] text-sm font-medium p-4
+                className='w-[50%]
+                  bg-[#ff6b6b] text-[#fff] text-sm font-medium
                   rounded-[20px]
                   disabled:cursor-not-allowed disabled:bg-gray-400
                 '
@@ -203,6 +204,7 @@ export default function ModalButtons() {
                 Proceed
               </button>
             </div>
+
           </div>
         </div>
       )}

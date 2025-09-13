@@ -8,15 +8,15 @@ export default function Checkout() {
 
   useEffect(() => {
     if (!location.state?.allowed) {
-      navigate("/plans");
+      navigate('/plans');
     }
   }, [location.state, navigate]);
 
   return (
     <div>
       <h1>Checkout Page</h1>
-      {plan === "standard" && <p>You selected the Standard Plan</p>}
-      {plan === "plus" && <p>You selected the Plus Plan</p>}
+      {plan === 'standard' && <p>You selected the Standard Plan</p>}
+      {plan === 'plus' && <p>You selected the Plus Plan</p>}
       <p>Payment details here...</p>
     </div>
   )
