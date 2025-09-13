@@ -13,7 +13,8 @@ export default function Header() {
   const handleCloseContactModal = () => setIsContactModalOpen(false)
 
   const isPlansPage = location.pathname === '/plans'
-  const isCheckoutPage = location.pathname === '/checkout/standard' && '/checkout/plus'
+  const isCheckoutStandardPage = location.pathname === '/checkout/standard'
+  const isCheckoutPlusPage = location.pathname === '/checkout/plus'
 
   const handleShowDetail = (id: string) => {
     const gmail = document.getElementById('gmail')
@@ -40,7 +41,8 @@ export default function Header() {
         lg:block lg:absolute lg:bg-[#fff] lg:shadow-lg
         lg:w-full lg:h-20
         ${isPlansPage ? 'lg:hidden' : 'lg:block'}
-        ${isCheckoutPage ? 'lg:hidden' : 'lg:block'}
+        ${isCheckoutStandardPage ? 'lg:hidden' : 'lg:block'}
+        ${isCheckoutPlusPage ? 'lg:hidden' : 'lg:block'}
       `}
     >
       {/* Header Content */}
