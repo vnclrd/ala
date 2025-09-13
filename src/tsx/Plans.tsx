@@ -23,14 +23,14 @@ export default function Plans() {
 
         {/* Plans */}
         <div className='flex gap-4'>
-          {/* Development Plan */}
+          {/* Trial Plan */}
           <div
             className='
               flex flex-col items-left w-[350px] h-[500px]
-              bg-gray-400 rounded-2xl p-8 gap-2 z-30
+              bg-[#fff]/80 rounded-2xl p-8 gap-2 z-30
             '
           >
-            <h1 className='font-bold text-2xl'>Development</h1>
+            <h1 className='font-bold text-2xl'>Trial</h1>
             <h1 className='text-4xl'>Free</h1>
             <p className='text-sm'>
               This plan is for development testing and is not for sale. Only
@@ -55,7 +55,7 @@ export default function Plans() {
               </span>
               ✔{' '}
               <span className='text-sm pl-1'>
-                Up to 500 MB of photo uploads {'(approx. 500* photos)'}
+                Up to 100 MB of photo uploads {'(approx. 100* photos)'}
                 <br />
               </span>
               ✔{' '}
@@ -65,7 +65,7 @@ export default function Plans() {
               </span>
               ✔{' '}
               <span className='text-sm pl-1'>
-                Gallery expires after 7 days
+                Gallery expires after a day
                 <br />
               </span>
             </p>
@@ -75,7 +75,7 @@ export default function Plans() {
                 rounded-2xl mt-4 cursor-pointer
               '
             >
-              Get Free
+              Get Trial
             </button>
           </div>
           {/* Plan 1 */}

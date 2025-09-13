@@ -67,8 +67,8 @@ export default function ModalButtons() {
         >
           <div
             className='
-              flex flex-col bg-[#fff] w-[300px] h-[600px]
-              border-0 rounded-2xl
+              flex flex-col bg-[#fff]
+              w-[300px] h-[600px] rounded-2xl
               md:flex md:flex-row md:w-[800px] md:h-[400px]
               lg:flex lg:flex-row lg:w-[800px] lg:h-[400px]
             '
@@ -121,7 +121,7 @@ export default function ModalButtons() {
             <div
               className='
                 flex flex-col bg-[#ff6b6b] items-center justify-center
-                w-full h-[50%] relative text-[#fff] border-0
+                w-full h-[50%] relative text-[#fff]
                 rounded-b-2xl gap-2
                 md:w-[50%] md:h-full md:rounded-r-2xl md:rounded-l-none md:pb-0
                 lg:w-[50%] lg:h-full lg:rounded-r-2xl lg:rounded-l-none lg:pb-0
@@ -134,7 +134,7 @@ export default function ModalButtons() {
                   onClick={handleCloseOrganizerModal}
                   className='
                     font-bold text-sm cursor-pointer text-[#ff6b6b] p-2
-                    w-[150px] bg-[#fff] border-0 rounded-2xl italic
+                    w-[150px] bg-[#fff] rounded-2xl italic
                   '
                 >
                   Plans
@@ -166,7 +166,7 @@ export default function ModalButtons() {
           <div
             className='
               flex flex-col items-center justify-center w-[350px]
-              h-[325px] bg-[#fff] border-0 rounded-2xl gap-6
+              h-[325px] bg-[#fff] rounded-2xl gap-6
               relative
             '
           >
