@@ -32,7 +32,8 @@ export default function Home() {
     <div 
       className='
       flex flex-col w-full h-screen bg-[#fff]
-      lg:pt-30
+      overflow-hidden overscroll-none fixed
+      lg:pt-30 
       '
     >
       <div

@@ -3,10 +3,6 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
-  overflow: hidden;
-  overscroll-behavior: none;
-  position: fixed;
-  width: 100%;
 }
 
 .source-sans-text {

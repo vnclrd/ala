@@ -5,25 +5,33 @@ export default function Plans() {
     <div className='flex items-center justify-center w-screen h-screen'>
       <div
         className='
-          flex flex-col items-center justify-center w-screen
-          h-screen bg-[#000]/60 gap-8 z-99999
-          lg:pt-40
+          flex flex-col items-center justify-start w-screen
+          h-screen bg-[#000]/60 gap-8 z-99999 overflow-auto
+          lg:pt-40 lg:overflow-hidden
         '
       >
-        <div className='flex flex-col items-center mt-[-125px]'>
-          {/* Title */}
+        {/* Title and Tagline */}
+        <div
+          className='
+            flex flex-col items-center mt-12
+            lg:mt-[-50px]
+          '
+        >
           <h1 className='text-[#fff] italic font-bold text-8xl'>Ala</h1>
-          {/* Tagline */}
           <div className='flex text-sm text-[#fff] mt-[-6px]'>
             <h1>Capture. &nbsp;</h1>
             <h1>Share. &nbsp;</h1>
             <h1>Gather.</h1>
           </div>
         </div>
-
         {/* Plans */}
-        <div className='flex gap-4'>
-          {/* Trial Plan */}
+        <div 
+          className='
+            flex flex-col gap-4
+            lg:flex lg:flex-row
+          '
+        >
+          {/* Trial Plan 
           <div
             className='
               flex flex-col items-left w-[350px] h-[500px]
@@ -31,10 +39,11 @@ export default function Plans() {
             '
           >
             <h1 className='font-bold text-2xl'>Trial</h1>
+            <p className='text-xs mt-[-12px]'>Test our service for free!</p>
             <h1 className='text-4xl'>Free</h1>
             <p className='text-sm'>
-              This plan is for development testing and is not for sale. Only
-              developers will have access to this plan.
+              This is a trial plan for organizers to test the service and is
+              only valid for 3 hours. No fees to be paid.
             </p>
             <p className='mt-4'>
               ✔{' '}
@@ -51,11 +60,11 @@ export default function Plans() {
               </span>
               ✔{' '}
               <span className='text-sm pl-1'>
-                Standard quality photo uploads <br />
+                Minimal quality photo uploads <br />
               </span>
               ✔{' '}
               <span className='text-sm pl-1'>
-                Up to 100 MB of photo uploads {'(approx. 100* photos)'}
+                Up to 50 MB of photo uploads {'(approx. 100* photos)'}
                 <br />
               </span>
               ✔{' '}
@@ -65,7 +74,7 @@ export default function Plans() {
               </span>
               ✔{' '}
               <span className='text-sm pl-1'>
-                Gallery expires after a day
+                Gallery expires after 3 hours
                 <br />
               </span>
             </p>
@@ -78,6 +87,7 @@ export default function Plans() {
               Get Trial
             </button>
           </div>
+          */}
           {/* Plan 1 */}
           <div
             className='
@@ -86,6 +96,7 @@ export default function Plans() {
             '
           >
             <h1 className='font-bold text-2xl'>Standard</h1>
+            <p className='text-xs mt-[-12px]'>Recommended for Small Events</p>
             <h1 className='text-xl'>
               ₱<span className='text-4xl'>1,000.00</span>/ event
             </h1>
@@ -140,17 +151,19 @@ export default function Plans() {
             className='
               flex flex-col items-left w-[350px] h-[500px]
               bg-[#ff6b6b] rounded-2xl p-8 gap-2 z-30
+              text-[#fff]
             '
           >
-            <h1 className='font-bold text-2xl text-[#fff]'>Plus</h1>
-            <h1 className='text-xl text-[#fff]'>
+            <h1 className='font-bold text-2xl'>Plus</h1>
+            <p className='text-xs mt-[-12px]'>Recommended for Big Events</p>
+            <h1 className='text-xl'>
               ₱<span className='text-4xl '>1,500.00</span>/ event
             </h1>
-            <p className='text-sm text-[#fff]'>
+            <p className='text-sm'>
               Upgrade to Plus to get high quality photo uploads while having
               more storage.
             </p>
-            <p className='mt-4 text-[#fff]'>
+            <p className='mt-4'>
               ✔{' '}
               <span className='text-sm pl-1'>
                 Everything in Standard <br />
@@ -175,7 +188,12 @@ export default function Plans() {
               <br />
               <br />
             </p>
-            <button className='bg-[#fff] p-2 rounded-2xl mt-4 cursor-pointer'>
+            <button
+              className='
+                bg-[#fff] p-2 rounded-2xl
+                mt-4 cursor-pointer text-[#000]
+              '
+            >
               Get Plus
             </button>
           </div>
