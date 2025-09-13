@@ -80,14 +80,16 @@ export default function Plans() {
                 <br />
               </span>
             </p>
-            <button
-              className='
-                bg-[#ff6b6b] text-[#fff] p-2
-                rounded-2xl mt-4 cursor-pointer
-              '
-            >
-              Get Standard
-            </button>
+            <Link to='/checkout'>
+              <button
+                className='
+                  bg-[#ff6b6b] text-[#fff] p-2 rounded-2xl mt-4
+                  cursor-pointer w-full
+                '
+              >
+                Get Standard
+              </button>
+            </Link>
           </div>
           {/* Plan 2 */}
           <div
