@@ -17,6 +17,9 @@ export default function Checkout() {
   const handlePay = async () => {
     const payButton = document.getElementById('payButton') as HTMLInputElement | null;
     const returnHomeButton = document.getElementById('returnHomeButton') as HTMLInputElement | null
+    const qrCode = document.getElementById('qrCode') as HTMLInputElement | null
+    const code = document.getElementById('code') as HTMLInputElement | null
+    const codesDescription = document.getElementById('codesDescription') as HTMLInputElement | null
 
     const enablePayButton = () => {
       if (payButton) {
@@ -37,6 +40,14 @@ export default function Checkout() {
     const enableReturnHomeButon = () => {
       if (returnHomeButton) {
         returnHomeButton.disabled = false
+      }
+    }
+
+    const showCodes = () => {
+      if (qrCode && code && codesDescription) {
+        qrCode.hidden = false
+        code.hidden = false
+        codesDescription.hidden = false
       }
     }
 
@@ -70,6 +81,7 @@ export default function Checkout() {
               setPaymentComplete(true);
               disablePayButton();
               enableReturnHomeButon()
+              showCodes()
             } else if (
               statusData.status === 'EXPIRED' ||
               statusData.status === 'CANCELLED'
@@ -190,11 +202,26 @@ export default function Checkout() {
 
               {/* Codes House */}
               <div className='flex flex-col items-center justify-start w-[250px] h-[275px] border-1 border-black rounded-2xl'>
-                <div className='w-[225px] h-[225px] mt-4 bg-black rounded-2xl'></div>
-                <p className='text-black p-2'>123456</p>
+                <div
+                  id='qrCode'
+                  hidden
+                  className='w-[225px] h-[225px] mt-4 bg-black rounded-2xl'
+                ></div>
+                <p
+                  id='code'
+                  hidden
+                  className='text-black p-2'>123456
+                </p>
               </div>
 
-              <div className='flex flex-col items-center justify-center text-center text-xs w-[250px] h-[100px] gap-2 bg-'>
+              <div
+                id='codesDescription'
+                hidden
+                className='
+                flex flex-col items-center justify-center text-center
+                text-xs w-[250px] h-[100px] gap-2
+                '
+              >
                 Save the codes and share it to your guests on the day of your
                 event.
                 <p>
