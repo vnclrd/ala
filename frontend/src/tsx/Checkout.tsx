@@ -38,20 +38,6 @@ export default function Checkout() {
       }
     }
 
-    const enableReturnHomeButon = () => {
-      if (returnHomeButton) {
-        returnHomeButton.disabled = false
-      }
-    }
-
-    const showCodes = () => {
-      if (qrCode && code && codesDescription) {
-        qrCode.hidden = false
-        code.hidden = false
-        codesDescription.hidden = false
-      }
-    }
-
     const successfulTransaction = () => {
       if (returnHomeButton && qrCode && code && codesDescription && cancelTransaction) {
         returnHomeButton.disabled = false
@@ -123,11 +109,11 @@ export default function Checkout() {
       {plan === 'standard' && (
         <div className='flex flex-col relative items-center justify-center w-screen h-screen'>
           {paymentComplete && (
-            <div className='absolute bottom-4 right-4 p-4 bg-green-100 border border-green-400 rounded-lg text-center'>
+            <div className='w-[350px] absolute bottom-4 right-4 p-4 bg-green-100 border border-green-400 rounded-lg text-center'>
               <h2 className='text-lg font-bold text-green-700'>
                 Payment Successful 🎉
               </h2>
-              <p>Thank you! Your payment has been confirmed.</p>
+              <p>Your payment has been confirmed.</p>
             </div>
           )}
 
@@ -142,7 +128,7 @@ export default function Checkout() {
           </div>
 
           {/* Panels Container */}
-          <div className='flex gap-24 mt-12'>
+          <div className='flex gap-24 mt-6'>
             {/* Left Panel */}
             <div className='flex relative w-[300px] h-[500px]'>
               <div className='flex flex-col'>
@@ -259,8 +245,8 @@ export default function Checkout() {
             </div>
           </div>
           {/* Cancel Button */}
-          <div className='flex items-center justify-center h-[40px] mt-12'>
-            <Link to='/'>
+          <div className='flex items-center justify-center h-[40px] mt-6'>
+            <Link to='/plans'>
               <button
                 id='cancelTransaction'
                 className='

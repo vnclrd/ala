@@ -9,159 +9,149 @@ export default function Plans() {
   }
 
   return (
-    <div className='flex items-center justify-center w-screen h-screen'>
-      <div
-        className='
-          flex flex-col items-center justify-start w-screen
-          h-screen bg-[#000]/60 gap-8 z-99999 overflow-auto
-          lg:pt-40 lg:overflow-hidden
-        '
-      >
-        {/* Title and Tagline */}
-        <div
-          className='
-            flex flex-col items-center mt-12
-            lg:mt-[-50px]
-          '
-        >
-          <h1 className='text-[#fff] italic font-bold text-8xl'>Ala</h1>
-          <div className='flex text-sm text-[#fff] mt-[-6px]'>
+    <div
+      className='
+        flex flex-col items-center justify-center w-screen
+        h-screen bg-[#000]/60 gap-6 z-99999 overflow-hidden
+      '
+    >
+      {/* Title and Tagline */}
+        <div className='flex flex-col items-center'>
+          <h1 className='text-[#fff] italic font-bold text-[4rem]'>Ala</h1>
+          <div className='flex text-[0.6rem] text-[#fff] mt-[-20px]'>
             <h1>Capture. &nbsp;</h1>
             <h1>Share. &nbsp;</h1>
             <h1>Gather.</h1>
           </div>
         </div>
-        {/* Plans */}
-        <div 
+      {/* Plans */}
+      <div 
+        className='
+          flex flex-col gap-4
+          lg:flex lg:flex-row
+        '
+      >
+        {/* Plan 1 */}
+        <div
           className='
-            flex flex-col gap-4
-            lg:flex lg:flex-row
+            flex flex-col items-left w-[350px] h-[500px]
+            bg-[#fff] rounded-2xl p-8 gap-2 z-30
           '
         >
-          {/* Plan 1 */}
-          <div
-            className='
-              flex flex-col items-left w-[350px] h-[500px]
-              bg-[#fff] rounded-2xl p-8 gap-2 z-30
-            '
-          >
-            <h1 className='font-bold text-2xl'>Standard</h1>
-            <p className='text-xs mt-[-12px]'>Recommended for Small Events</p>
-            <h1 className='text-xl'>
-              ₱<span className='text-4xl'>1,000.00</span>/ event
-            </h1>
-            <p className='text-sm'>
-              Avail the Standard Plan to let guests capture and share photos
-              during your event.
-            </p>
-            <p className='mt-4'>
-              ✔{' '}
-              <span className='text-sm pl-1'>
-                Special QR Code<br />
-              </span>
-              ✔{' '}
-              <span className='text-sm pl-1'>
-                Dedicated photo gallery<br />
-              </span>
-              ✔{' '}
-              <span className='text-sm pl-1'>
-                Real-time photo display<br />
-              </span>
-              ✔{' '}
-              <span className='text-sm pl-1'>
-                Standard quality photo uploads<br />
-              </span>
-              ✔{' '}
-              <span className='text-sm pl-1'>
-                Up to 500 MB of photo uploads {'(approx. 500* photos)'}
-                <br />
-              </span>
-              ✔{' '}
-              <span className='text-sm pl-1'>
-                Compress and download photos
-                <br />
-              </span>
-              ✔{' '}
-              <span className='text-sm pl-1'>
-                Gallery expires after 7 days
-                <br />
-              </span>
-            </p>
-              <button
-                onClick={() => handleCheckout('standard')}
-                className='
-                  bg-[#ff6b6b] text-[#fff] p-2 rounded-2xl mt-4
-                  cursor-pointer w-full
-                '
-              >
-                Get Standard
-              </button>
-          </div>
-          {/* Plan 2 */}
-          <div
-            className='
-              flex flex-col items-left w-[350px] h-[500px]
-              bg-[#ff6b6b] rounded-2xl p-8 gap-2 z-30
-              text-[#fff]
-            '
-          >
-            <h1 className='font-bold text-2xl'>Plus</h1>
-            <p className='text-xs mt-[-12px]'>Recommended for Big Events</p>
-            <h1 className='text-xl'>
-              ₱<span className='text-4xl '>1,500.00</span>/ event
-            </h1>
-            <p className='text-sm'>
-              Upgrade to Plus to get high quality photo uploads while having
-              more storage.
-            </p>
-            <p className='mt-4'>
-              ✔{' '}
-              <span className='text-sm pl-1'>
-                Everything in Standard<br />
-              </span>
-              ✔{' '}
-              <span className='text-sm pl-1'>
-                <span className='font-bold'>High quality</span> photo uploads{' '}
-                <br />
-              </span>
-              ✔{' '}
-              <span className='text-sm pl-1'>
-                Up to <span className='font-bold'>1 GB</span> of photo uploads{' '}
-                {'(approx. 1,000* photos)'}
-                <br />
-              </span>
-              ✔{' '}
-              <span className='text-sm pl-1'>
-                Gallery expires after <span className='font-bold'>14 days</span>
-                <br />
-              </span>
+          <h1 className='font-bold text-2xl'>Standard</h1>
+          <p className='text-xs mt-[-12px]'>Recommended for Small Events</p>
+          <h1 className='text-xl'>
+            ₱<span className='text-4xl'>1,000.00</span>/ event
+          </h1>
+          <p className='text-sm'>
+            Avail the Standard Plan to let guests capture and share photos
+            during your event.
+          </p>
+          <p className='mt-4'>
+            ✔{' '}
+            <span className='text-sm pl-1'>
+              Special QR Code<br />
+            </span>
+            ✔{' '}
+            <span className='text-sm pl-1'>
+              Dedicated photo gallery<br />
+            </span>
+            ✔{' '}
+            <span className='text-sm pl-1'>
+              Real-time photo display<br />
+            </span>
+            ✔{' '}
+            <span className='text-sm pl-1'>
+              Standard quality photo uploads<br />
+            </span>
+            ✔{' '}
+            <span className='text-sm pl-1'>
+              Up to 500 MB of photo uploads {'(approx. 500* photos)'}
               <br />
+            </span>
+            ✔{' '}
+            <span className='text-sm pl-1'>
+              Compress and download photos
               <br />
+            </span>
+            ✔{' '}
+            <span className='text-sm pl-1'>
+              Gallery expires after 7 days
               <br />
-            </p>
+            </span>
+          </p>
             <button
-              onClick={() => handleCheckout('plus')}
+              onClick={() => handleCheckout('standard')}
               className='
-                bg-[#fff] p-2 rounded-2xl
-                mt-4 cursor-pointer text-[#000]
+                bg-[#ff6b6b] text-[#fff] p-2 rounded-2xl mt-4
+                cursor-pointer w-full
               '
             >
-              Get Plus
+              Get Standard
             </button>
-          </div>
         </div>
-        <Link to='/'>
+        {/* Plan 2 */}
+        <div
+          className='
+            flex flex-col items-left w-[350px] h-[500px]
+            bg-[#ff6b6b] rounded-2xl p-8 gap-2 z-30
+            text-[#fff]
+          '
+        >
+          <h1 className='font-bold text-2xl'>Plus</h1>
+          <p className='text-xs mt-[-12px]'>Recommended for Big Events</p>
+          <h1 className='text-xl'>
+            ₱<span className='text-4xl '>1,500.00</span>/ event
+          </h1>
+          <p className='text-sm'>
+            Upgrade to Plus to get high quality photo uploads while having
+            more storage.
+          </p>
+          <p className='mt-4'>
+            ✔{' '}
+            <span className='text-sm pl-1'>
+              Everything in Standard<br />
+            </span>
+            ✔{' '}
+            <span className='text-sm pl-1'>
+              <span className='font-bold'>High quality</span> photo uploads{' '}
+              <br />
+            </span>
+            ✔{' '}
+            <span className='text-sm pl-1'>
+              Up to <span className='font-bold'>1 GB</span> of photo uploads{' '}
+              {'(approx. 1,000* photos)'}
+              <br />
+            </span>
+            ✔{' '}
+            <span className='text-sm pl-1'>
+              Gallery expires after <span className='font-bold'>14 days</span>
+              <br />
+            </span>
+            <br />
+            <br />
+            <br />
+          </p>
           <button
+            onClick={() => handleCheckout('plus')}
             className='
-              text-[#fff] text-sm font-medium cursor-pointer
-              p-4 rounded-2xl hover:underline mb-6
-              lg:mb-0
-            '
+              bg-[#fff] p-2 rounded-2xl
+              mt-4 cursor-pointer text-[#000]'
           >
-            Close Plans
+            Get Plus
           </button>
-        </Link>
+        </div>
       </div>
+      <Link to='/'>
+        <button
+          className='
+            text-[#fff] text-sm font-medium cursor-pointer
+            hover:underline
+          '
+        >
+          Close Plans
+        </button>
+      </Link>
     </div>
   );
 }
