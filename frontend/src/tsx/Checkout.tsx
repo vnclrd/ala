@@ -115,8 +115,7 @@ export default function Checkout() {
           {/* Title and Tagline */}
           <div
             className='
-              flex items-center justify-center m-4 gap-2
-              w-[300px]
+              flex items-center justify-center m-4 gap-2 w-[300px]
               lg:w-[700px] lg:justify-start
             '
           >
@@ -204,27 +203,37 @@ export default function Checkout() {
                 <button
                   onClick={handlePay}
                   id='payButton'
-                  className='absolute bottom-0 w-[300px] p-2 bg-[#ff6b6b] rounded-2xl cursor-pointer text-[#fff] mt-4'
+                  className='
+                    absolute bottom-0 w-[300px] p-2 bg-[#ff6b6b] rounded-2xl
+                    cursor-pointer text-[#fff] mt-4
+                  '
                 >
                   Click to pay
                 </button>
               </div>
             </div>
-
+            {/* Payment Success Popup */}
             {paymentComplete && (
               <div
                 className='
-                  lg:absolute lg:bottom-4 lg:right-4 w-[350px] p-4
-                  bg-green-100 border border-green-400 rounded-lg text-center'>
+                  w-[350px] p-4 bg-green-100 border
+                  border-green-400 rounded-lg text-center
+                  lg:absolute lg:bottom-4 lg:right-4
+                '
+              >
                 <h2 className='text-lg font-bold text-green-700'>
                   Payment Successful 🎉
                 </h2>
                 <p>Your payment has been confirmed.</p>
               </div>
             )}
-
             {/* Right Panel */}
-            <div className='flex flex-col relative items-center w-[300px] h-[500px] gap-4'>
+            <div 
+              className='
+                flex flex-col relative items-center
+                w-[300px] h-[500px] gap-4
+              '
+            >
               {/* Codes */}
               <h1 className='text-black text-center text-sm'>
                 Your codes for your event will appear here after the payment has
@@ -232,7 +241,10 @@ export default function Checkout() {
               </h1>
 
               {/* Codes House */}
-              <div className='flex flex-col items-center justify-start w-[250px] h-[275px] border-1 border-black rounded-2xl'>
+              <div
+                className='
+                  flex flex-col items-center justify-start w-[250px]
+                  h-[275px] border-1 border-black rounded-2xl'>
                 <div
                   id='qrCode'
                   hidden
@@ -242,13 +254,12 @@ export default function Checkout() {
                   123456
                 </p>
               </div>
-
               <div
                 id='codesDescription'
                 hidden
                 className='
-                flex flex-col items-center justify-center text-center
-                text-xs w-[250px] h-[100px] gap-2
+                  flex flex-col items-center justify-center text-center
+                  text-xs w-[250px] h-[100px] gap-2
                 '
               >
                 Save the codes and share it to your guests on the day of your
@@ -266,11 +277,7 @@ export default function Checkout() {
                 <button
                   id='returnHomeButton'
                   hidden
-                  className='
-                  w-[300px] p-2 bg-[#ff6b6b]
-                  rounded-2xl cursor-pointer text-[#fff]
-                  '
-                >
+                  className='w-[300px] p-2 bg-[#ff6b6b] rounded-2xl cursor-pointer text-[#fff]'>
                   Return to Home
                 </button>
               </Link>
@@ -292,8 +299,7 @@ export default function Checkout() {
           {/* Title and Tagline */}
           <div
             className='
-              flex items-center justify-center m-4 gap-4
-              w-[300px]
+              flex items-center justify-center m-4 gap-4 w-[300px]
               lg:w-[700px] lg:justify-start
             '
           >
@@ -377,17 +383,19 @@ export default function Checkout() {
                     </span>
                   </div>
                 </p>
-
                 <button
                   onClick={handlePay}
                   id='payButton'
-                  className='absolute bottom-0 w-[300px] p-2 bg-[#fff] rounded-2xl cursor-pointer text-[#000] mt-4'
+                  className='
+                    absolute bottom-0 w-[300px] p-2 bg-[#fff]
+                    rounded-2xl cursor-pointer text-[#000] mt-4
+                  '
                 >
                   Click to pay
                 </button>
               </div>
             </div>
-
+            {/* Payment Success Popup */}
             {paymentComplete && (
               <div
                 className='
@@ -402,9 +410,13 @@ export default function Checkout() {
                 <p>Your payment has been confirmed.</p>
               </div>
             )}
-
             {/* Right Panel */}
-            <div className='flex flex-col relative items-center w-[300px] h-[500px] gap-4 text-[#fff]'>
+            <div
+              className='
+                flex flex-col relative items-center
+                w-[300px] h-[500px] gap-4 text-[#fff]
+              '
+            >
               {/* Codes */}
               <h1 className='text-center text-sm'>
                 Your codes for your event will appear here after the payment has
@@ -412,7 +424,12 @@ export default function Checkout() {
               </h1>
 
               {/* Codes House */}
-              <div className='flex flex-col items-center justify-start w-[250px] h-[275px] border-1 border-[#fff] rounded-2xl'>
+              <div
+                className='
+                  flex flex-col items-center justify-start w-[250px]
+                  h-[275px] border-1 border-[#fff] rounded-2xl
+                '
+              >
                 <div
                   id='qrCode'
                   hidden
@@ -422,13 +439,12 @@ export default function Checkout() {
                   123456
                 </p>
               </div>
-
               <div
                 id='codesDescription'
                 hidden
                 className='
-                flex flex-col items-center justify-center text-center
-                text-xs w-[250px] h-[100px] gap-2
+                  flex flex-col items-center justify-center text-center
+                  text-xs w-[250px] h-[100px] gap-2
                 '
               >
                 Save the codes and share it to your guests on the day of your
@@ -447,10 +463,7 @@ export default function Checkout() {
                   id='returnHomeButton'
                   hidden
                   className='
-                  w-[300px] p-2 bg-[#fff]
-                  rounded-2xl cursor-pointer text-[#000]
-                  disabled:bg-[#808080] disabled:cursor-not-allowed
-                  '
+                    w-[300px] p-2 bg-[#fff] rounded-2xl cursor-pointer text-[#000]'
                 >
                   Return to Home
                 </button>
