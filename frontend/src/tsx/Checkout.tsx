@@ -96,8 +96,8 @@ export default function Checkout() {
           <div className='flex flex-col items-center'>
             <h1 className='text-[#000] italic font-bold text-[4rem]'>Ala</h1>
             <div className='flex text-[0.6rem] text-[#000] mt-[-24px]'>
-              <h1>Capture. &nbsp</h1>
-              <h1>Share. &nbsp</h1>
+              <h1>Capture. &nbsp;</h1>
+              <h1>Share. &nbsp;</h1>
               <h1>Gather.</h1>
             </div>
           </div>
