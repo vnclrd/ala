@@ -127,7 +127,7 @@ export default function Checkout() {
           <div
             className='
               flex flex-col items-center justify-center gap-6
-              lg:flex-row lg:gap-24 lg:mt-6
+              lg:flex-row lg:gap-24
             '
           >
             {/* Left Panel */}
@@ -264,6 +264,7 @@ export default function Checkout() {
                 id='cancelTransaction'
                 className='
                   text-[#000] text-sm font-medium cursor-pointer p-6
+                  lg:p-0
                   hover:underline
                 '
               >
@@ -275,7 +276,180 @@ export default function Checkout() {
         </div>
       )}
 
-      {plan === 'plus' && <p>You selected the Plus Plan</p>}
+      {plan === 'plus' && (
+        <div
+          className='
+            flex flex-col relative items-center justify-center bg-[#ff6b6b]
+            lg:w-screen lg:h-screen
+            '
+          >
+          {/* Title and Tagline */}
+          <div className='flex flex-col items-center p-4'>
+            <h1 className='text-[#fff] italic font-bold text-[4rem]'>Ala</h1>
+            <div className='flex text-[0.6rem] text-[#fff] mt-[-20px]'>
+              <h1>Capture. &nbsp;</h1>
+              <h1>Share. &nbsp;</h1>
+              <h1>Gather.</h1>
+            </div>
+          </div>
+
+          {/* Panels Container */}
+          <div
+            className='
+              flex flex-col items-center justify-center gap-6
+              lg:flex-row lg:gap-24
+            '
+          >
+            {/* Left Panel */}
+            <div className='flex relative w-[300px] h-[500px] text-[#fff]'>
+              <div className='flex flex-col'>
+                <p>Get</p>
+                <h1 className='text-2xl mt-[-4px]'>Plus Plan</h1>
+                <h1 className='text-sm'>
+                  <span className='text-4xl font-bold'>₱1,500.00</span> for 1
+                  event
+                </h1>
+                <div className='flex flex-col w-[275px] mt-4'>
+                  <p>
+                    <span className='font-bold'>1 GB</span> Photo Storage{' '}
+                    <span className='text-[0.6rem]'>
+                      {'(up to 1,000 photos)'}
+                    </span>
+                  </p>
+                  <p>
+                    <span className='font-bold'>High Quality</span> Photos
+                  </p>
+                </div>
+                <h1 className='mt-4'>What's next after availing?</h1>
+                <p>
+                  ✔{' '}
+                  <span className='text-sm pl-1'>
+                    Get your QR Code
+                    <br />
+                  </span>
+                  ✔{' '}
+                  <span className='text-sm pl-1'>
+                    Get your Photo Gallery Code
+                    <br />
+                  </span>
+                  ✔{' '}
+                  <span className='text-sm pl-1'>
+                    Share the codes to your guests on the day of your event
+                  </span>
+                  <br />
+                  <br />
+                  <span className='font-bold'>Note:</span> <br />
+                  <div className='flex flex-col w-[300px] gap-2'>
+                    <span className='text-xs'>
+                      Photo gallery will expire after 14 days so make sure to
+                      download the photos.
+                    </span>
+                    <span className='text-xs'>
+                      Photos will automatically be compressed and sent to your
+                      Google Drive if not downloaded before expiry.
+                    </span>
+                  </div>
+                </p>
+
+                <button
+                  onClick={handlePay}
+                  id='payButton'
+                  className='absolute bottom-0 w-[300px] p-2 bg-[#fff] rounded-2xl cursor-pointer text-[#000] mt-4'
+                >
+                  Click to pay
+                </button>
+              </div>
+            </div>
+
+            {paymentComplete && (
+              <div
+                className='
+                  lg:absolute lg:bottom-4 lg:right-4 w-[350px] p-4
+                  bg-green-100 border border-green-400 rounded-lg text-center'>
+                <h2 className='text-lg font-bold text-green-700'>
+                  Payment Successful 🎉
+                </h2>
+                <p>Your payment has been confirmed.</p>
+              </div>
+            )}
+
+            {/* Right Panel */}
+            <div
+              className='
+                flex flex-col relative items-center w-[300px]
+                h-[500px] gap-4 text-[#fff]
+              '
+            >
+              {/* Codes */}
+              <h1 className='text-center text-sm'>
+                Your codes for your event will appear here after the payment has
+                been successful.
+              </h1>
+
+              {/* Codes House */}
+              <div className='flex flex-col items-center justify-start w-[250px] h-[275px] border-1 border-[#fff] rounded-2xl'>
+                <div
+                  id='qrCode'
+                  hidden
+                  className='w-[225px] h-[225px] mt-4 bg-[#fff] rounded-2xl'
+                ></div>
+                <p id='code' hidden className='text-[#fff] p-2'>
+                  123456
+                </p>
+              </div>
+
+              <div
+                id='codesDescription'
+                hidden
+                className='
+                flex flex-col items-center justify-center text-center
+                text-xs w-[250px] h-[100px] gap-2
+                '
+              >
+                Save the codes and share it to your guests on the day of your
+                event.
+                <p>
+                  <button>
+                    <span className='underline cursor-pointer hover:italic'>
+                      Click here
+                    </span>
+                  </button>
+                  &nbsp;to save the QR code
+                </p>
+              </div>
+              <Link to='/' className='absolute bottom-0'>
+                <button
+                  id='returnHomeButton'
+                  disabled
+                  className='
+                  w-[300px] p-2 bg-[#fff]
+                  rounded-2xl cursor-pointer text-[#000]
+                  disabled:bg-[#808080] disabled:cursor-not-allowed
+                  '
+                >
+                  Return to Home
+                </button>
+              </Link>
+            </div>
+          </div>
+          {/* Cancel Button */}
+          <div className='flex items-center justify-center h-[40px] mt-6'>
+            <Link to='/plans'>
+              <button
+                id='cancelTransaction'
+                className='
+                  text-[#fff] text-sm font-medium cursor-pointer p-6
+                  lg:p-0
+                  hover:underline
+                '
+              >
+                Cancel Transaction
+              </button>
+            </Link>
+          </div>
+          
+        </div>
+      )}
     </>
   )
 }
