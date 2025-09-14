@@ -1,41 +1,42 @@
-import { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 
 export default function Checkout() {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { plan } = useParams();
+  const location = useLocation()
+  const navigate = useNavigate()
+  const { plan } = useParams()
 
-  const [paymentComplete, setPaymentComplete] = useState(false);
+  const [paymentComplete, setPaymentComplete] = useState(false)
 
   useEffect(() => {
     if (!location.state?.allowed) {
-      navigate('/plans');
+      navigate('/plans')
     }
-  }, [location.state, navigate]);
+  }, [location.state, navigate])
 
   const handlePay = async () => {
-    const payButton = document.getElementById('payButton') as HTMLInputElement | null;
+    const payButton = document.getElementById('payButton') as HTMLInputElement | null
     const returnHomeButton = document.getElementById('returnHomeButton') as HTMLInputElement | null
     const qrCode = document.getElementById('qrCode') as HTMLInputElement | null
     const code = document.getElementById('code') as HTMLInputElement | null
     const codesDescription = document.getElementById('codesDescription') as HTMLInputElement | null
+    const cancelTransaction = document.getElementById('cancelTransaction') as HTMLInputElement | null
 
     const enablePayButton = () => {
       if (payButton) {
-        payButton.disabled = false;
-        payButton.style.backgroundColor = '';
-        payButton.style.cursor = 'pointer';
+        payButton.disabled = false
+        payButton.style.backgroundColor = ''
+        payButton.style.cursor = 'pointer'
       }
-    };
+    }
 
     const disablePayButton = () => {
       if (payButton) {
-        payButton.disabled = true;
-        payButton.style.backgroundColor = 'gray';
-        payButton.style.cursor = 'not-allowed';
+        payButton.disabled = true
+        payButton.style.backgroundColor = 'gray'
+        payButton.style.cursor = 'not-allowed'
       }
-    };
+    }
 
     const enableReturnHomeButon = () => {
       if (returnHomeButton) {
@@ -51,62 +52,71 @@ export default function Checkout() {
       }
     }
 
-    disablePayButton();
+    const successfulTransaction = () => {
+      if (returnHomeButton && qrCode && code && codesDescription && cancelTransaction) {
+        returnHomeButton.disabled = false
+        qrCode.hidden = false
+        code.hidden = false
+        codesDescription.hidden = false
+        cancelTransaction.hidden = true
+      }
+    }
+
+    disablePayButton()
 
     try {
       const response = await fetch('http://localhost:4000/create-invoice', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ plan }),
-      });
-      const data = await response.json();
+      })
+      const data = await response.json()
 
-      const checkoutUrl = data.invoice_url || data.checkout_url || null;
+      const checkoutUrl = data.invoice_url || data.checkout_url || null
 
       if (checkoutUrl) {
         // Open checkout page
-        window.open(checkoutUrl, '_blank');
+        window.open(checkoutUrl, '_blank')
 
         // Start polling every 5s
         const poll = setInterval(async () => {
           try {
             const statusRes = await fetch(
               `http://localhost:4000/invoice/${data.id}`
-            );
-            const statusData = await statusRes.json();
-            console.log('Invoice status:', statusData.status);
+            )
+            const statusData = await statusRes.json()
+            console.log('Invoice status:', statusData.status)
 
             if (statusData.status === 'PAID') {
-              clearInterval(poll);
-              setPaymentComplete(true);
-              disablePayButton();
-              enableReturnHomeButon()
-              showCodes()
+              clearInterval(poll)
+              setPaymentComplete(true)
+              disablePayButton()
+              successfulTransaction()
             } else if (
               statusData.status === 'EXPIRED' ||
               statusData.status === 'CANCELLED'
             ) {
-              clearInterval(poll);
-              alert('Payment expired or was cancelled.');
-              enablePayButton();
+              clearInterval(poll)
+              alert('Payment expired or was cancelled.')
+              enablePayButton()
             }
           } catch (err) {
-            console.error('Polling error:', err);
-            clearInterval(poll);
-            alert('Something went wrong. Please try again.');
-            enablePayButton();
+            console.error('Polling error:', err)
+            clearInterval(poll)
+            alert('Something went wrong. Please try again.')
+            enablePayButton()
           }
-        }, 5000);
+        }, 5000)
       } else {
-        alert('No checkout link available. Please try again.');
-        enablePayButton();
+        alert('No checkout link available. Please try again.')
+        enablePayButton()
       }
     } catch (err) {
-      console.error('Payment error:', err);
-      alert('Something went wrong while creating invoice.');
-      enablePayButton();
+      console.error('Payment error:', err)
+      alert('Something went wrong while creating invoice.')
+      enablePayButton()
     }
-  };
+  }
 
   return (
     <>
@@ -131,8 +141,9 @@ export default function Checkout() {
             </div>
           </div>
 
+          {/* Panels Container */}
           <div className='flex gap-24 mt-12'>
-            {/* Standard Plan Contents */}
+            {/* Left Panel */}
             <div className='flex relative w-[300px] h-[500px]'>
               <div className='flex flex-col'>
                 <p>Get</p>
@@ -193,11 +204,12 @@ export default function Checkout() {
               </div>
             </div>
 
+            {/* Right Panel */}
             <div className='flex flex-col relative items-center w-[300px] h-[500px] gap-4'>
               {/* Codes */}
               <h1 className='text-black text-center text-sm'>
-                Your codes for your event will appear here after successful
-                payment.
+                Your codes for your event will appear here after the payment has
+                been successful.
               </h1>
 
               {/* Codes House */}
@@ -207,10 +219,8 @@ export default function Checkout() {
                   hidden
                   className='w-[225px] h-[225px] mt-4 bg-black rounded-2xl'
                 ></div>
-                <p
-                  id='code'
-                  hidden
-                  className='text-black p-2'>123456
+                <p id='code' hidden className='text-black p-2'>
+                  123456
                 </p>
               </div>
 
@@ -233,10 +243,7 @@ export default function Checkout() {
                   &nbsp;to save the QR code
                 </p>
               </div>
-              <Link
-                to='/'
-                className='absolute bottom-0'
-              >
+              <Link to='/' className='absolute bottom-0'>
                 <button
                   id='returnHomeButton'
                   disabled
@@ -251,10 +258,26 @@ export default function Checkout() {
               </Link>
             </div>
           </div>
+          {/* Cancel Button */}
+          <div className='flex items-center justify-center h-[40px] mt-12'>
+            <Link to='/'>
+              <button
+                id='cancelTransaction'
+                className='
+                  text-[#000] text-sm font-medium cursor-pointer
+                  rounded-2xl hover:underline
+                  lg:mb-0
+                '
+              >
+                Cancel Transaction
+              </button>
+            </Link>
+          </div>
+          
         </div>
       )}
 
       {plan === 'plus' && <p>You selected the Plus Plan</p>}
     </>
-  );
+  )
 }
