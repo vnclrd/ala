@@ -98,7 +98,7 @@ export default function ModalButtons() {
                 type='text'
                 placeholder='Enter your code here'
                 className='
-                  rounded-2xl bg-[#e0e0e0] p-4
+                  rounded-2xl bg-[#000]/10 p-4
                   w-[200px] h-[40px] text-sm text-center
                   md:w-[300px] md:h-[40px] md:text-md md:text-left
                   lg:w-[300px] lg:h-[40px] lg:text-md lg:text-left
@@ -127,7 +127,7 @@ export default function ModalButtons() {
                 lg:w-[50%] lg:h-full lg:rounded-r-2xl lg:rounded-l-none lg:pb-0
               '
             >
-              <h1 className='text-4xl font-bold'>Not yet?</h1>
+              <h1 className='text-4xl font-bold mt-4'>Not yet?</h1>
               <p className='flex flex-col text-xl'>Check out our</p>
               <Link to='/plans'>
                 <button
