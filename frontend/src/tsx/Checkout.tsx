@@ -21,7 +21,6 @@ export default function Checkout() {
     const qrCode = document.getElementById('qrCode') as HTMLInputElement | null
     const code = document.getElementById('code') as HTMLInputElement | null
     const codesDescription = document.getElementById('codesDescription') as HTMLInputElement | null
-    const cancelTransaction = document.getElementById('cancelTransaction') as HTMLInputElement | null
 
     const enablePayButton = () => {
       if (payButton) {
@@ -40,12 +39,11 @@ export default function Checkout() {
     }
 
     const successfulTransaction = () => {
-      if (returnHomeButton && qrCode && code && codesDescription && cancelTransaction) {
-        returnHomeButton.disabled = false
+      if (returnHomeButton && qrCode && code && codesDescription) {
+        returnHomeButton.hidden = false
         qrCode.hidden = false
         code.hidden = false
         codesDescription.hidden = false
-        cancelTransaction.hidden = true
       }
     }
 
@@ -117,24 +115,25 @@ export default function Checkout() {
           {/* Title and Tagline */}
           <div
             className='
-              flex items-center justify-center m-4 gap-4
+              flex items-center justify-center m-4 gap-2
               w-[300px]
               lg:w-[700px] lg:justify-start
             '
           >
-            <Link to='/plans'>
-              <button
-                id='cancelTransaction'
-                className='
-                  text-[#808080] text-sm font-medium cursor-pointer
-                  lg:p-0
-                  hover:underline
-                '
-              >
-                <FaArrowLeftLong className='w-6 h-6 mt-4' />
-              </button>
-            </Link>
-
+            <div className='w-[25px]'>
+              <Link to='/plans'>
+                <button
+                  id='cancelTransaction'
+                  className='
+                    text-[#808080] text-sm font-medium cursor-pointer
+                    lg:p-0
+                    hover:underline
+                  '
+                >
+                  <FaArrowLeftLong className='w-6 h-6 mt-4' />
+                </button>
+              </Link>
+            </div>
             <div className='flex flex-col mr-10'>
               <h1 className='text-[#000] italic font-bold text-[4rem]'>Ala</h1>
               <div className='flex text-[0.6rem] text-[#000] mt-[-20px]'>
@@ -266,11 +265,10 @@ export default function Checkout() {
               <Link to='/' className='absolute bottom-0'>
                 <button
                   id='returnHomeButton'
-                  disabled
+                  hidden
                   className='
                   w-[300px] p-2 bg-[#ff6b6b]
                   rounded-2xl cursor-pointer text-[#fff]
-                  disabled:bg-[#808080] disabled:cursor-not-allowed
                   '
                 >
                   Return to Home
@@ -281,6 +279,8 @@ export default function Checkout() {
           <br />
         </div>
       )}
+      
+      {/* ================================================== */}
 
       {plan === 'plus' && (
         <div
@@ -297,19 +297,20 @@ export default function Checkout() {
               lg:w-[700px] lg:justify-start
             '
           >
-            <Link to='/plans'>
-              <button
-                id='cancelTransaction'
-                className='
-                  text-[#fff]/60 text-sm font-medium cursor-pointer
-                  lg:p-0
-                  hover:underline
-                '
-              >
-                <FaArrowLeftLong className='w-6 h-6 mt-4' />
-              </button>
-            </Link>
-
+            <div className='w-[25px]'>
+              <Link to='/plans'>
+                <button
+                  id='cancelTransaction'
+                  className='
+                    text-[#fff]/60 text-sm font-medium cursor-pointer
+                    lg:p-0
+                    hover:underline
+                  '
+                >
+                  <FaArrowLeftLong className='w-6 h-6 mt-4' />
+                </button>
+              </Link>
+            </div>
             <div className='flex flex-col mr-10 text-[#fff]'>
               <h1 className='italic font-bold text-[4rem]'>Ala</h1>
               <div className='flex text-[0.6rem] mt-[-20px]'>
@@ -390,8 +391,11 @@ export default function Checkout() {
             {paymentComplete && (
               <div
                 className='
-                  lg:absolute lg:bottom-4 lg:right-4 w-[350px] p-4
-                  bg-green-100 border border-green-400 rounded-lg text-center'>
+                  w-[350px] p-4 bg-green-100 border border-green-400
+                  rounded-lg text-center text-[#000]
+                  lg:absolute lg:bottom-4 lg:right-4
+                '
+              >
                 <h2 className='text-lg font-bold text-green-700'>
                   Payment Successful 🎉
                 </h2>
@@ -441,7 +445,7 @@ export default function Checkout() {
               <Link to='/' className='absolute bottom-0'>
                 <button
                   id='returnHomeButton'
-                  disabled
+                  hidden
                   className='
                   w-[300px] p-2 bg-[#fff]
                   rounded-2xl cursor-pointer text-[#000]
