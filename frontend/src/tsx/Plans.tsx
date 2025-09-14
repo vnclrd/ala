@@ -17,14 +17,14 @@ export default function Plans() {
       '
     >
       {/* Title and Tagline */}
-        <div className='flex flex-col items-center p-4'>
-          <h1 className='text-[#fff] italic font-bold text-[4rem]'>Ala</h1>
-          <div className='flex text-[0.6rem] text-[#fff] mt-[-20px]'>
-            <h1>Capture. &nbsp;</h1>
-            <h1>Share. &nbsp;</h1>
-            <h1>Gather.</h1>
-          </div>
+      <div className='flex flex-col items-center p-4'>
+        <h1 className='text-[#fff] italic font-bold text-[4rem]'>Ala</h1>
+        <div className='flex text-[0.6rem] text-[#fff] mt-[-20px]'>
+          <h1>Capture. &nbsp;</h1>
+          <h1>Share. &nbsp;</h1>
+          <h1>Gather.</h1>
         </div>
+      </div>
       {/* Plans */}
       <div 
         className='

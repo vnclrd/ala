@@ -107,18 +107,14 @@ export default function Checkout() {
   return (
     <>
       {plan === 'standard' && (
-        <div className='flex flex-col relative items-center justify-center w-screen h-screen'>
-          {paymentComplete && (
-            <div className='w-[350px] absolute bottom-4 right-4 p-4 bg-green-100 border border-green-400 rounded-lg text-center'>
-              <h2 className='text-lg font-bold text-green-700'>
-                Payment Successful 🎉
-              </h2>
-              <p>Your payment has been confirmed.</p>
-            </div>
-          )}
-
+        <div
+          className='
+            flex flex-col relative items-center justify-center
+            lg:w-screen lg:h-screen
+            '
+          >
           {/* Title and Tagline */}
-          <div className='flex flex-col items-center'>
+          <div className='flex flex-col items-center p-4'>
             <h1 className='text-[#000] italic font-bold text-[4rem]'>Ala</h1>
             <div className='flex text-[0.6rem] text-[#000] mt-[-20px]'>
               <h1>Capture. &nbsp;</h1>
@@ -128,7 +124,12 @@ export default function Checkout() {
           </div>
 
           {/* Panels Container */}
-          <div className='flex gap-24 mt-6'>
+          <div
+            className='
+              flex flex-col items-center justify-center gap-6
+              lg:flex-row lg:gap-24 lg:mt-6
+            '
+          >
             {/* Left Panel */}
             <div className='flex relative w-[300px] h-[500px]'>
               <div className='flex flex-col'>
@@ -190,6 +191,18 @@ export default function Checkout() {
               </div>
             </div>
 
+            {paymentComplete && (
+              <div
+                className='
+                  lg:absolute lg:bottom-4 lg:right-4 w-[350px] p-4
+                  bg-green-100 border border-green-400 rounded-lg text-center'>
+                <h2 className='text-lg font-bold text-green-700'>
+                  Payment Successful 🎉
+                </h2>
+                <p>Your payment has been confirmed.</p>
+              </div>
+            )}
+
             {/* Right Panel */}
             <div className='flex flex-col relative items-center w-[300px] h-[500px] gap-4'>
               {/* Codes */}
@@ -250,9 +263,8 @@ export default function Checkout() {
               <button
                 id='cancelTransaction'
                 className='
-                  text-[#000] text-sm font-medium cursor-pointer
-                  rounded-2xl hover:underline
-                  lg:mb-0
+                  text-[#000] text-sm font-medium cursor-pointer p-6
+                  hover:underline
                 '
               >
                 Cancel Transaction
