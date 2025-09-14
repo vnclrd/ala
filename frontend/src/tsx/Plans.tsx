@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { FaArrowLeftLong } from 'react-icons/fa6'
 
 export default function Plans() {
   const navigate = useNavigate()
@@ -17,12 +18,40 @@ export default function Plans() {
       '
     >
       {/* Title and Tagline */}
-      <div className='flex flex-col items-center p-4'>
-        <h1 className='text-[#fff] italic font-bold text-[4rem]'>Ala</h1>
-        <div className='flex text-[0.6rem] text-[#fff] mt-[-20px]'>
-          <h1>Capture. &nbsp;</h1>
-          <h1>Share. &nbsp;</h1>
-          <h1>Gather.</h1>
+      <div
+        className='
+          flex items-center justify-center m-4 gap-4
+          w-[300px]
+          lg:w-[715px] lg:justify-center
+        '
+      >
+        <Link to='/'>
+          <button
+            id='cancelTransaction'
+            className='
+              text-[#fff]/60 text-sm font-medium cursor-pointer
+              lg:p-0
+              hover:underline
+            '
+          >
+            <FaArrowLeftLong className='w-6 h-6 mt-4' />
+          </button>
+        </Link>
+
+        <div className='flex flex-col mr-10 text-[#fff]'>
+          <h1
+            className='
+              italic font-bold text-[4rem]
+              lg:mt-[-20px]
+            '
+          >
+            Ala
+          </h1>
+          <div className='flex text-[0.6rem] mt-[-20px]'>
+            <h1>Capture. &nbsp;</h1>
+            <h1>Share. &nbsp;</h1>
+            <h1>Gather.</h1>
+          </div>
         </div>
       </div>
       {/* Plans */}
@@ -143,16 +172,6 @@ export default function Plans() {
           </button>
         </div>
       </div>
-      <Link to='/'>
-        <button
-          className='
-            text-[#fff] text-sm font-medium cursor-pointer p-6
-            hover:underline
-          '
-        >
-          Close Plans
-        </button>
-      </Link>
     </div>
   );
 }

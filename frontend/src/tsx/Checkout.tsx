@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { FaArrowLeftLong } from 'react-icons/fa6'
 
 export default function Checkout() {
   const location = useLocation()
@@ -111,18 +112,38 @@ export default function Checkout() {
           className='
             flex flex-col relative items-center justify-center
             lg:w-screen lg:h-screen
+          '
+        >
+          {/* Title and Tagline */}
+          <div
+            className='
+              flex items-center justify-center m-4 gap-4
+              w-[300px]
+              lg:w-[700px] lg:justify-start
             '
           >
-          {/* Title and Tagline */}
-          <div className='flex flex-col items-center p-4 mb-1'>
-            <h1 className='text-[#000] italic font-bold text-[4rem]'>Ala</h1>
-            <div className='flex text-[0.6rem] text-[#000] mt-[-20px]'>
-              <h1>Capture. &nbsp;</h1>
-              <h1>Share. &nbsp;</h1>
-              <h1>Gather.</h1>
+            <Link to='/plans'>
+              <button
+                id='cancelTransaction'
+                className='
+                  text-[#808080] text-sm font-medium cursor-pointer
+                  lg:p-0
+                  hover:underline
+                '
+              >
+                <FaArrowLeftLong className='w-6 h-6 mt-4' />
+              </button>
+            </Link>
+
+            <div className='flex flex-col mr-10'>
+              <h1 className='text-[#000] italic font-bold text-[4rem]'>Ala</h1>
+              <div className='flex text-[0.6rem] text-[#000] mt-[-20px]'>
+                <h1>Capture. &nbsp;</h1>
+                <h1>Share. &nbsp;</h1>
+                <h1>Gather.</h1>
+              </div>
             </div>
           </div>
-
           {/* Panels Container */}
           <div
             className='
@@ -258,19 +279,6 @@ export default function Checkout() {
             </div>
           </div>
           <br />
-          {/* Cancel Button */}
-          <Link to='/plans'>
-            <button
-              id='cancelTransaction'
-              className='
-                text-[#000] text-sm font-medium cursor-pointer p-6
-                lg:p-0
-                hover:underline
-              '
-            >
-              Cancel Transaction
-            </button>
-          </Link>
         </div>
       )}
 
@@ -278,29 +286,48 @@ export default function Checkout() {
         <div
           className='
             flex flex-col relative items-center justify-center bg-[#ff6b6b]
-            w-screen min-h-screen
             lg:w-screen lg:h-screen
+          '
+        >
+          {/* Title and Tagline */}
+          <div
+            className='
+              flex items-center justify-center m-4 gap-4
+              w-[300px]
+              lg:w-[700px] lg:justify-start
             '
           >
-          {/* Title and Tagline */}
-          <div className='flex flex-col items-center p-4'>
-            <h1 className='text-[#fff] italic font-bold text-[4rem]'>Ala</h1>
-            <div className='flex text-[0.6rem] text-[#fff] mt-[-20px]'>
-              <h1>Capture. &nbsp;</h1>
-              <h1>Share. &nbsp;</h1>
-              <h1>Gather.</h1>
+            <Link to='/plans'>
+              <button
+                id='cancelTransaction'
+                className='
+                  text-[#fff]/60 text-sm font-medium cursor-pointer
+                  lg:p-0
+                  hover:underline
+                '
+              >
+                <FaArrowLeftLong className='w-6 h-6 mt-4' />
+              </button>
+            </Link>
+
+            <div className='flex flex-col mr-10 text-[#fff]'>
+              <h1 className='italic font-bold text-[4rem]'>Ala</h1>
+              <div className='flex text-[0.6rem] mt-[-20px]'>
+                <h1>Capture. &nbsp;</h1>
+                <h1>Share. &nbsp;</h1>
+                <h1>Gather.</h1>
+              </div>
             </div>
           </div>
-
           {/* Panels Container */}
           <div
             className='
-              flex flex-col items-center justify-center gap-6
+              flex flex-col items-center justify-center gap-6 text-[#fff]
               lg:flex-row lg:gap-24
             '
           >
             {/* Left Panel */}
-            <div className='flex relative w-[300px] h-[500px] text-[#fff]'>
+            <div className='flex relative w-[300px] h-[500px]'>
               <div className='flex flex-col'>
                 <p>Get</p>
                 <h1 className='text-2xl mt-[-4px]'><span className='font-bold'>Plus</span> Plan</h1>
@@ -312,7 +339,7 @@ export default function Checkout() {
                   <p>
                     <span className='font-bold'>1 GB</span> Photo Storage{' '}
                     <span className='text-[0.6rem]'>
-                      {'(up to 1,000 photos)'}
+                      {'(up to 500 photos)'}
                     </span>
                   </p>
                   <p>
@@ -373,12 +400,7 @@ export default function Checkout() {
             )}
 
             {/* Right Panel */}
-            <div
-              className='
-                flex flex-col relative items-center w-[300px]
-                h-[500px] gap-4 text-[#fff]
-              '
-            >
+            <div className='flex flex-col relative items-center w-[300px] h-[500px] gap-4 text-[#fff]'>
               {/* Codes */}
               <h1 className='text-center text-sm'>
                 Your codes for your event will appear here after the payment has
@@ -392,7 +414,7 @@ export default function Checkout() {
                   hidden
                   className='w-[225px] h-[225px] mt-4 bg-[#fff] rounded-2xl'
                 ></div>
-                <p id='code' hidden className='text-[#fff] p-2'>
+                <p id='code' hidden className='p-2'>
                   123456
                 </p>
               </div>
@@ -431,20 +453,7 @@ export default function Checkout() {
               </Link>
             </div>
           </div>
-          {/* Cancel Button */}
           <br />
-          <Link to='/plans'>
-            <button
-              id='cancelTransaction'
-              className='
-                text-[#fff] text-sm font-medium cursor-pointer p-6
-                lg:p-0
-                hover:underline
-              '
-            >
-              Cancel Transaction
-            </button>
-          </Link>
         </div>
       )}
     </>
