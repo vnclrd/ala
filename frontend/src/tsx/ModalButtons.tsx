@@ -112,7 +112,7 @@ export default function ModalButtons() {
                   rounded-xl cursor-pointer bottom-8 p-2
                   md:p-4 md:rounded-2xl md:bottom-10
                   lg:p-4 lg:rounded-2xl lg:bottom-10
-                  disabled:cursor-not-allowed disabled:bg-gray-400
+                  disabled:cursor-not-allowed disabled:bg-[#808080]
                 '
               >
                 Proceed
@@ -198,7 +198,7 @@ export default function ModalButtons() {
                 className='w-[50%]
                   bg-[#ff6b6b] text-[#fff] text-sm font-medium
                   rounded-[20px]
-                  disabled:cursor-not-allowed disabled:bg-gray-400
+                  disabled:cursor-not-allowed disabled:bg-[#808080]
                 '
               >
                 Proceed

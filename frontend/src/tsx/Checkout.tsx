@@ -1,101 +1,118 @@
-import { useEffect, useState } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 export default function Checkout() {
-  const location = useLocation()
-  const navigate = useNavigate()
-  const { plan } = useParams()
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { plan } = useParams();
 
-  const [paymentComplete, setPaymentComplete] = useState(false)
+  const [paymentComplete, setPaymentComplete] = useState(false);
 
   useEffect(() => {
     if (!location.state?.allowed) {
-      navigate('/plans')
+      navigate('/plans');
     }
-  }, [location.state, navigate])
+  }, [location.state, navigate]);
 
   const handlePay = async () => {
-    const payButton = document.getElementById('payButton') as HTMLInputElement | null
+    const payButton = document.getElementById('payButton') as HTMLInputElement | null;
+    const returnHomeButton = document.getElementById('returnHomeButton') as HTMLInputElement | null
 
     const enablePayButton = () => {
       if (payButton) {
-        payButton.disabled = false
-        payButton.style.backgroundColor = ''
-        payButton.style.cursor = 'pointer'
+        payButton.disabled = false;
+        payButton.style.backgroundColor = '';
+        payButton.style.cursor = 'pointer';
       }
-    }
+    };
 
     const disablePayButton = () => {
       if (payButton) {
-        payButton.disabled = true
-        payButton.style.backgroundColor = 'gray'
-        payButton.style.cursor = 'not-allowed'
+        payButton.disabled = true;
+        payButton.style.backgroundColor = 'gray';
+        payButton.style.cursor = 'not-allowed';
+      }
+    };
+
+    const enableReturnHomeButon = () => {
+      if (returnHomeButton) {
+        returnHomeButton.disabled = false
       }
     }
-    
-    disablePayButton()
+
+    disablePayButton();
 
     try {
       const response = await fetch('http://localhost:4000/create-invoice', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ plan }),
-      })
-      const data = await response.json()
+      });
+      const data = await response.json();
 
-      const checkoutUrl = data.invoice_url || data.checkout_url || null
+      const checkoutUrl = data.invoice_url || data.checkout_url || null;
 
       if (checkoutUrl) {
         // Open checkout page
-        window.open(checkoutUrl, '_blank')
+        window.open(checkoutUrl, '_blank');
 
         // Start polling every 5s
         const poll = setInterval(async () => {
           try {
             const statusRes = await fetch(
               `http://localhost:4000/invoice/${data.id}`
-            )
-            const statusData = await statusRes.json()
-            console.log('Invoice status:', statusData.status)
+            );
+            const statusData = await statusRes.json();
+            console.log('Invoice status:', statusData.status);
 
             if (statusData.status === 'PAID') {
-              clearInterval(poll)
-              setPaymentComplete(true)
-              disablePayButton()
+              clearInterval(poll);
+              setPaymentComplete(true);
+              disablePayButton();
+              enableReturnHomeButon()
             } else if (
               statusData.status === 'EXPIRED' ||
               statusData.status === 'CANCELLED'
             ) {
-              clearInterval(poll)
-              alert('Payment expired or was cancelled.')
-              enablePayButton()
+              clearInterval(poll);
+              alert('Payment expired or was cancelled.');
+              enablePayButton();
             }
           } catch (err) {
-            console.error('Polling error:', err)
-            clearInterval(poll)
-            alert('Something went wrong. Please try again.')
-            enablePayButton()
+            console.error('Polling error:', err);
+            clearInterval(poll);
+            alert('Something went wrong. Please try again.');
+            enablePayButton();
           }
-        }, 5000)
+        }, 5000);
       } else {
-        alert('No checkout link available. Please try again.')
-        enablePayButton()
+        alert('No checkout link available. Please try again.');
+        enablePayButton();
       }
     } catch (err) {
-      console.error('Payment error:', err)
-      alert('Something went wrong while creating invoice.')
-      enablePayButton()
+      console.error('Payment error:', err);
+      alert('Something went wrong while creating invoice.');
+      enablePayButton();
     }
-  }
+  };
 
   return (
     <>
       {plan === 'standard' && (
-        <div className='flex flex-col items-center justify-center w-screen h-screen'>
+        <div className='flex flex-col relative items-center justify-center w-screen h-screen'>
+          {paymentComplete && (
+            <div className='absolute bottom-4 right-4 p-4 bg-green-100 border border-green-400 rounded-lg text-center'>
+              <h2 className='text-lg font-bold text-green-700'>
+                Payment Successful 🎉
+              </h2>
+              <p>Thank you! Your payment has been confirmed.</p>
+            </div>
+          )}
+
           {/* Title and Tagline */}
           <div className='flex flex-col items-center'>
             <h1 className='text-[#000] italic font-bold text-[4rem]'>Ala</h1>
-            <div className='flex text-[0.6rem] text-[#000] mt-[-24px]'>
+            <div className='flex text-[0.6rem] text-[#000] mt-[-20px]'>
               <h1>Capture. &nbsp;</h1>
               <h1>Share. &nbsp;</h1>
               <h1>Gather.</h1>
@@ -104,7 +121,7 @@ export default function Checkout() {
 
           <div className='flex gap-24 mt-12'>
             {/* Standard Plan Contents */}
-            <div className='flex w-[300px]'>
+            <div className='flex relative w-[300px] h-[500px]'>
               <div className='flex flex-col'>
                 <p>Get</p>
                 <h1 className='text-2xl mt-[-4px]'>Standard Plan</h1>
@@ -114,9 +131,11 @@ export default function Checkout() {
                 </h1>
                 <div className='flex flex-col w-[275px] mt-4'>
                   <p>
-                    <span className='font-bold'>500 MB</span> Photo Storage
+                    <span className='font-bold'>500 MB</span> Photo Storage{' '}
+                    <span className='text-[0.6rem]'>
+                      {'(up to 500 photos)'}
+                    </span>
                   </p>
-                  <p className='text-xs'>Up to 500* Photos</p>
                   <p>
                     <span className='font-bold'>Standard Quality</span> Photos
                   </p>
@@ -135,13 +154,12 @@ export default function Checkout() {
                   </span>
                   ✔{' '}
                   <span className='text-sm pl-1'>
-                    Share the codes to your guests <br />
-                    on the day of your event
+                    Share the codes to your guests on the day of your event
                   </span>
                   <br />
                   <br />
                   <span className='font-bold'>Note:</span> <br />
-                  <div className='flex flex-col w-[275px] gap-2'>
+                  <div className='flex flex-col w-[300px] gap-2'>
                     <span className='text-xs'>
                       Photo gallery will expire after 7 days so make sure to
                       download the photos.
@@ -156,30 +174,60 @@ export default function Checkout() {
                 <button
                   onClick={handlePay}
                   id='payButton'
-                  className='p-2 bg-[#ff6b6b] rounded-2xl cursor-pointer text-[#fff] mt-4'
+                  className='absolute bottom-0 w-[300px] p-2 bg-[#ff6b6b] rounded-2xl cursor-pointer text-[#fff] mt-4'
                 >
                   Click to pay
                 </button>
               </div>
             </div>
 
-            <div className='flex flex-col items-center w-[300px]'>
-              <h1 className='text-center text-sm font-bold'>Your codes for your event will appear here after successful payment.</h1>
-              {paymentComplete && (
-                <div className='mt-6 p-4 bg-green-100 border border-green-400 rounded-lg text-center'>
-                  <h2 className='text-lg font-bold text-green-700'>
-                    Payment Successful 🎉
-                  </h2>
-                  <p>Thank you! Your payment has been confirmed.</p>
-                </div>
-              )}
+            <div className='flex flex-col relative items-center w-[300px] h-[500px] gap-4'>
+              {/* Codes */}
+              <h1 className='text-black text-center text-sm'>
+                Your codes for your event will appear here after successful
+                payment.
+              </h1>
+
+              {/* Codes House */}
+              <div className='flex flex-col items-center justify-start w-[250px] h-[275px] border-1 border-black rounded-2xl'>
+                <div className='w-[225px] h-[225px] mt-4 bg-black rounded-2xl'></div>
+                <p className='text-black p-2'>123456</p>
+              </div>
+
+              <div className='flex flex-col items-center justify-center text-center text-xs w-[250px] h-[100px] gap-2 bg-'>
+                Save the codes and share it to your guests on the day of your
+                event.
+                <p>
+                  <button>
+                    <span className='underline cursor-pointer hover:italic'>
+                      Click here
+                    </span>
+                  </button>
+                  &nbsp;to save the QR code
+                </p>
+              </div>
+              <Link
+                to='/'
+                className='absolute bottom-0'
+              >
+                <button
+                  id='returnHomeButton'
+                  disabled
+                  className='
+                  w-[300px] p-2 bg-[#ff6b6b]
+                  rounded-2xl cursor-pointer text-[#fff]
+                  disabled:bg-[#808080] disabled:cursor-not-allowed
+                  '
+                >
+                  Return to Home
+                </button>
+              </Link>
             </div>
-            
           </div>
         </div>
       )}
 
       {plan === 'plus' && <p>You selected the Plus Plan</p>}
     </>
-  )
+  );
 }
