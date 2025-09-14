@@ -134,7 +134,7 @@ export default function Checkout() {
             <div className='flex relative w-[300px] h-[500px]'>
               <div className='flex flex-col'>
                 <p>Get</p>
-                <h1 className='text-2xl mt-[-4px]'>Standard Plan</h1>
+                <h1 className='text-2xl mt-[-4px]'><span className='font-bold'>Standard</span> Plan</h1>
                 <h1 className='text-sm'>
                   <span className='text-4xl font-bold'>₱1,000.00</span> for 1
                   event
@@ -303,7 +303,7 @@ export default function Checkout() {
             <div className='flex relative w-[300px] h-[500px] text-[#fff]'>
               <div className='flex flex-col'>
                 <p>Get</p>
-                <h1 className='text-2xl mt-[-4px]'>Plus Plan</h1>
+                <h1 className='text-2xl mt-[-4px]'><span className='font-bold'>Plus</span> Plan</h1>
                 <h1 className='text-sm'>
                   <span className='text-4xl font-bold'>₱1,500.00</span> for 1
                   event
