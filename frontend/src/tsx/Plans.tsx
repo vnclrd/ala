@@ -11,12 +11,13 @@ export default function Plans() {
   return (
     <div
       className='
-        flex flex-col items-center justify-center w-screen
-        h-screen bg-[#000]/60 gap-6 z-99999 overflow-hidden
+        flex flex-col items-center justify-start w-screen
+        h-screen bg-[#000]/60 z-99999 overflow-auto
+        lg:justify-center lg:overflow-hidden
       '
     >
       {/* Title and Tagline */}
-        <div className='flex flex-col items-center'>
+        <div className='flex flex-col items-center p-4'>
           <h1 className='text-[#fff] italic font-bold text-[4rem]'>Ala</h1>
           <div className='flex text-[0.6rem] text-[#fff] mt-[-20px]'>
             <h1>Capture. &nbsp;</h1>
@@ -145,7 +146,7 @@ export default function Plans() {
       <Link to='/'>
         <button
           className='
-            text-[#fff] text-sm font-medium cursor-pointer
+            text-[#fff] text-sm font-medium cursor-pointer p-6
             hover:underline
           '
         >
