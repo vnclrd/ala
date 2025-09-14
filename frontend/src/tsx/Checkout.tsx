@@ -133,7 +133,12 @@ export default function Checkout() {
                 </button>
               </Link>
             </div>
-            <div className='flex flex-col mr-10'>
+            <div
+              className='
+                flex flex-col mr-8 text-[#fff]
+                lg:mr-10
+              '
+            >
               <h1 className='text-[#000] italic font-bold text-[4rem]'>Ala</h1>
               <div className='flex text-[0.6rem] text-[#000] mt-[-20px]'>
                 <h1>Capture. &nbsp;</h1>
@@ -299,7 +304,7 @@ export default function Checkout() {
           {/* Title and Tagline */}
           <div
             className='
-              flex items-center justify-center m-4 gap-4 w-[300px]
+              flex items-center justify-center m-4 gap-2 w-[300px]
               lg:w-[700px] lg:justify-start
             '
           >
@@ -317,7 +322,12 @@ export default function Checkout() {
                 </button>
               </Link>
             </div>
-            <div className='flex flex-col mr-10 text-[#fff]'>
+            <div
+              className='
+                flex flex-col mr-8 text-[#fff]
+                lg:mr-10
+              '
+            >
               <h1 className='italic font-bold text-[4rem]'>Ala</h1>
               <div className='flex text-[0.6rem] mt-[-20px]'>
                 <h1>Capture. &nbsp;</h1>
