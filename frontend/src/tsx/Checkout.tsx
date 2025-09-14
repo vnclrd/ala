@@ -114,7 +114,7 @@ export default function Checkout() {
             '
           >
           {/* Title and Tagline */}
-          <div className='flex flex-col items-center p-4'>
+          <div className='flex flex-col items-center p-4 mb-1'>
             <h1 className='text-[#000] italic font-bold text-[4rem]'>Ala</h1>
             <div className='flex text-[0.6rem] text-[#000] mt-[-20px]'>
               <h1>Capture. &nbsp;</h1>
@@ -257,22 +257,20 @@ export default function Checkout() {
               </Link>
             </div>
           </div>
+          <br />
           {/* Cancel Button */}
-          <div className='flex items-center justify-center h-[40px] mt-6'>
-            <Link to='/plans'>
-              <button
-                id='cancelTransaction'
-                className='
-                  text-[#000] text-sm font-medium cursor-pointer p-6
-                  lg:p-0
-                  hover:underline
-                '
-              >
-                Cancel Transaction
-              </button>
-            </Link>
-          </div>
-          
+          <Link to='/plans'>
+            <button
+              id='cancelTransaction'
+              className='
+                text-[#000] text-sm font-medium cursor-pointer p-6
+                lg:p-0
+                hover:underline
+              '
+            >
+              Cancel Transaction
+            </button>
+          </Link>
         </div>
       )}
 
@@ -280,6 +278,7 @@ export default function Checkout() {
         <div
           className='
             flex flex-col relative items-center justify-center bg-[#ff6b6b]
+            w-screen min-h-screen
             lg:w-screen lg:h-screen
             '
           >
@@ -433,21 +432,19 @@ export default function Checkout() {
             </div>
           </div>
           {/* Cancel Button */}
-          <div className='flex items-center justify-center h-[40px] mt-6'>
-            <Link to='/plans'>
-              <button
-                id='cancelTransaction'
-                className='
-                  text-[#fff] text-sm font-medium cursor-pointer p-6
-                  lg:p-0
-                  hover:underline
-                '
-              >
-                Cancel Transaction
-              </button>
-            </Link>
-          </div>
-          
+          <br />
+          <Link to='/plans'>
+            <button
+              id='cancelTransaction'
+              className='
+                text-[#fff] text-sm font-medium cursor-pointer p-6
+                lg:p-0
+                hover:underline
+              '
+            >
+              Cancel Transaction
+            </button>
+          </Link>
         </div>
       )}
     </>

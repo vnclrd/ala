@@ -22,7 +22,7 @@ app.post('/create-invoice', async (req, res) => {
         amount,
         description: `${plan} plan purchase`,
         currency: 'PHP',
-        invoice_duration: 60,
+        invoice_duration: 900,
       },
       {
         auth: {
