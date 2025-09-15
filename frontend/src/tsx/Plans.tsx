@@ -13,7 +13,7 @@ export default function Plans() {
     <div
       className='
         flex flex-col items-center justify-start w-screen
-        h-screen bg-[#000]/60 z-99999 overflow-auto
+        h-screen bg-[#1d1d1d] z-99999 overflow-auto
         lg:justify-center lg:overflow-hidden
       '
     >
