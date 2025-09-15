@@ -57,12 +57,12 @@ export default function Header() {
             lg:w-[50%] lg:h-full
           '
         >
-          <Link to='/'>
-            <button className='text-4xl font-bold italic text-[#ff6b6b] cursor-pointer'>
-              Ala
-            </button>
+          <Link
+            to='/'
+            className='text-4xl font-bold italic text-[#ff6b6b] cursor-pointer'  
+          >
+            Ala
           </Link>
-          
         </div>
         {/* Right Part */}
         <div

@@ -56,7 +56,7 @@ export default function Gallery() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#f5f5f5] p-5">
-      <div className="w-full max-w-4xl bg-white rounded-lg shadow-md p-5 mb-5">
+      <div className="relative w-full max-w-4xl bg-white rounded-lg shadow-md p-5 mb-5">
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold mb-2">Ala Photo Gallery</h1>
           {galleryData && (
@@ -103,13 +103,18 @@ export default function Gallery() {
           {/* Photos will be rendered here dynamically */}
         </div>
 
-        <Link
-          to="/"
-          className="mt-8 block text-center text-blue-500 hover:underline transition-colors"
-        >
-          Go Back
-        </Link>
+        
       </div>
-    </div>
+      <Link
+        to="/"
+        className="
+          bg-[#ff6b6b] text-white py-2 px-6 rounded-md cursor-pointer
+          transition-colors absolute bottom-2 left-2
+          hover:bg-[#e55555] 
+        "
+      >
+        Return Home
+      </Link>
+  </div>
   );
 }

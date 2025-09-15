@@ -176,16 +176,13 @@ export default function Checkout() {
         <div className='flex flex-col relative items-center justify-center lg:w-screen lg:h-screen'>
           {/* Title and Tagline */}
           <div className='flex items-center justify-center m-4 gap-2 w-[300px] lg:w-[700px] lg:justify-start'>
-            <div className='w-[25px]'>
-              <Link to='/plans'>
-                <button
-                  id='cancelTransaction'
-                  className='text-[#808080] text-sm font-medium cursor-pointer lg:p-0 hover:underline'
-                >
-                  <FaArrowLeftLong className='w-6 h-6 mt-4' />
-                </button>
-              </Link>
-            </div>
+            <Link
+              to='/plans'
+              id='cancelTransaction'
+              className='text-[#808080] text-sm font-medium cursor-pointer lg:p-0 hover:underline'
+            >
+              <FaArrowLeftLong className='w-6 h-6 mt-4' />
+            </Link>
             <div className='flex flex-col mr-8 text-[#fff] lg:mr-10'>
               <h1 className='text-[#000] italic font-bold text-[4rem]'>Ala</h1>
               <div className='flex text-[0.6rem] text-[#000] mt-[-20px]'>
@@ -195,7 +192,6 @@ export default function Checkout() {
               </div>
             </div>
           </div>
-          
           {/* Panels Container */}
           <div className='flex flex-col items-center justify-center gap-6 lg:flex-row lg:gap-24'>
             {/* Left Panel */}
@@ -252,7 +248,6 @@ export default function Checkout() {
                 </button>
               </div>
             </div>
-            
             {/* Payment Success Popup */}
             {paymentComplete && (
               <div className='w-[350px] p-4 bg-green-100 border border-green-400 rounded-lg text-center lg:absolute lg:bottom-4 lg:right-4'>
@@ -260,13 +255,11 @@ export default function Checkout() {
                 <p>Your payment has been confirmed.</p>
               </div>
             )}
-            
             {/* Right Panel */}
             <div className='flex flex-col relative items-center w-[300px] h-[500px] gap-4'>
               <h1 className='text-black text-center text-sm'>
                 Your codes for your event will appear here after the payment has been successful.
               </h1>
-
               {/* Codes House */}
               <div className='flex flex-col items-center justify-start w-[250px] h-[275px] border-1 border-black rounded-2xl'>
                 <div
@@ -278,7 +271,6 @@ export default function Checkout() {
                   123456
                 </p>
               </div>
-              
               <div
                 id='codesDescription'
                 hidden
@@ -302,15 +294,16 @@ export default function Checkout() {
                   </button>
                 </div>
               </div>
-              
-              <Link to='/' className='absolute bottom-0'>
-                <button
-                  id='returnHomeButton'
-                  hidden
-                  className='w-[300px] p-2 bg-[#ff6b6b] rounded-2xl cursor-pointer text-[#fff]'
-                >
-                  Return to Home
-                </button>
+              <Link
+                to='/'
+                id='returnHomeButton'
+                hidden
+                className='
+                  flex items-center justify-center absolute bottom-0 w-[300px]
+                  p-2 bg-[#ff6b6b] rounded-2xl cursor-pointer text-[#fff]
+                '
+              >
+                Return to Home
               </Link>
             </div>
           </div>
@@ -334,20 +327,13 @@ export default function Checkout() {
               lg:w-[700px] lg:justify-start
             '
           >
-            <div className='w-[25px]'>
-              <Link to='/plans'>
-                <button
-                  id='cancelTransaction'
-                  className='
-                    text-[#fff]/60 text-sm font-medium cursor-pointer
-                    lg:p-0
-                    hover:underline
-                  '
-                >
-                  <FaArrowLeftLong className='w-6 h-6 mt-4' />
-                </button>
-              </Link>
-            </div>
+            <Link
+              to='/plans'
+              id='cancelTransaction'
+              className='text-[#808080] text-sm font-medium cursor-pointer lg:p-0 hover:underline'
+            >
+              <FaArrowLeftLong className='w-6 h-6 mt-4' />
+            </Link>
             <div
               className='
                 flex flex-col mr-8 text-[#fff]
@@ -458,7 +444,6 @@ export default function Checkout() {
                 Your codes for your event will appear here after the payment has
                 been successful.
               </h1>
-
               {/* Codes House */}
               <div
                 className='
@@ -494,15 +479,16 @@ export default function Checkout() {
                   &nbsp;to save the QR code
                 </p>
               </div>
-              <Link to='/' className='absolute bottom-0'>
-                <button
-                  id='returnHomeButton'
-                  hidden
-                  className='
-                    w-[300px] p-2 bg-[#fff] rounded-2xl cursor-pointer text-[#000]'
-                >
-                  Return to Home
-                </button>
+              <Link
+                to='/'
+                id='returnHomeButton'
+                hidden
+                className='
+                  flex items-center justify-center absolute bottom-0 w-[300px]
+                  p-2 bg-[#fff] rounded-2xl cursor-pointer text-[#000]
+                '
+              >
+                Return to Home
               </Link>
             </div>
           </div>

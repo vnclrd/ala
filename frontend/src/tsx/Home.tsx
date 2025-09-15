@@ -76,27 +76,20 @@ export default function Home() {
 
           <Link
             to='/plans'
-            className='z-10'
-          >
-            <button
-              className='
-              bg-[#ff6b6b] text-[#fff] text-lg font-normal p-2
-              rounded-2xl cursor-pointer mt-4 w-[200px]
+            className='
+              z-10 bg-[#ff6b6b] text-[#fff] text-lg font-normal pt-2
+              pb-2 pl-4 pr-4 rounded-2xl cursor-pointer mt-4
               hidden
               lg:block
-              '
-            >
-              See Our Plans
-            </button>
+            '
+          >
+            See Our Plans
           </Link>
-      
           <div className='lg:hidden flex z-10 mt-4 gap-2'>
             <ModalButtons />
           </div>
-          
         </div>
       </div>
-
       {/* Images */}
       <div 
         className='
