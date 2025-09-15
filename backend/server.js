@@ -190,21 +190,34 @@ app.get('/galleries', async (req, res) => {
 
 app.get('/gallery/:galleryId', async (req, res) => {
   try {
-    const { galleryId } = req.params
-    const galleryDoc = await getDoc(doc(db, 'galleries', galleryId))
+    const { galleryId } = req.params;
+    const galleryDoc = await getDoc(doc(db, 'galleries', galleryId));
 
-    if (!galleryDoc.exists()) return res.status(404).send('Gallery not found')
-    const galleryData = galleryDoc.data()
-
-    if (!galleryData.isActive || (galleryData.expirationDate && new Date() > galleryData.expirationDate.toDate())) {
-      return res.status(410).send('Gallery has expired')
+    if (!galleryDoc.exists()) {
+      return res.status(404).json({ error: 'Gallery not found.' });
     }
 
-    res.send(generateGalleryHTML(galleryData))
+    const galleryData = galleryDoc.data();
+
+    // The key change: Check the expiration date on the server
+    if (galleryData.expirationDate && new Date() > galleryData.expirationDate.toDate()) {
+      return res.status(410).json({ error: 'Gallery has expired.' });
+    }
+
+    // Convert Firestore Timestamps to a standard string format before sending
+    const formattedData = {
+      ...galleryData,
+      createdAt: galleryData.createdAt?.toDate().toISOString() || null,
+      eventDate: galleryData.eventDate?.toDate().toISOString() || null,
+      expirationDate: galleryData.expirationDate?.toDate().toISOString() || null,
+    };
+
+    // Send the formatted data
+    res.json(formattedData);
   } catch (err) {
-    res.status(500).send('Error loading gallery')
+    res.status(500).json({ error: 'Error loading gallery.' });
   }
-})
+});
 
 app.get('/gallery/:galleryId/photos', async (req, res) => {
   try {

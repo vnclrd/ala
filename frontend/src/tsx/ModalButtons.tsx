@@ -1,15 +1,17 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function ModalButtons() {
-  const [isOrganizerModalOpen, setIsOrganizerModalOpen] = useState(false)
-  const [isGuestModalOpen, setIsGuestModalOpen] = useState(false)
+  const [isOrganizerModalOpen, setIsOrganizerModalOpen] = useState(false);
+  const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
+  const [guestCode, setGuestCode] = useState('');
+  const navigate = useNavigate();
 
-  const handleOpenOrganizerModal = () => setIsOrganizerModalOpen(true)
-  const handleCloseOrganizerModal = () => setIsOrganizerModalOpen(false)
+  const handleOpenOrganizerModal = () => setIsOrganizerModalOpen(true);
+  const handleCloseOrganizerModal = () => setIsOrganizerModalOpen(false);
 
-  const handleOpenGuestModal = () => setIsGuestModalOpen(true)
-  const handleCloseGuestModal = () => setIsGuestModalOpen(false)
+  const handleOpenGuestModal = () => setIsGuestModalOpen(true);
+  const handleCloseGuestModal = () => setIsGuestModalOpen(false);
 
   const handleEnableOrganizerProceedBtn = () => {
     const organizerInput = document.getElementById('organizerInput') as HTMLInputElement | null
@@ -24,18 +26,36 @@ export default function ModalButtons() {
     }
   }
 
-  const handleEnableGuestProceedBtn = () => {
-    const guestInput = document.getElementById('guestInput') as HTMLInputElement | null
-    const guestProceed = document.getElementById('guestProceed') as HTMLInputElement | null
+  const handleGuestProceed = async () => {
+    // The state variable 'guestCode' now holds the input value.
+    const code = guestCode.trim();
 
-    if (guestInput && guestProceed) {
-      if (guestInput.value.trim() === '') {
-        guestProceed.disabled = true
-      } else {
-        guestProceed.disabled = false
-      }
+    if (!code) {
+      alert('Please enter a code.');
+      return;
     }
-  }
+
+    try {
+      const response = await fetch('http://localhost:4000/verify-code', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ code }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        navigate(data.galleryUrl);
+      } else {
+        alert(data.error || 'Invalid or expired code.');
+      }
+    } catch (error) {
+      console.error('Network or server error:', error);
+      alert('Failed to connect to the server. Please try again.');
+    }
+  };
 
   return (
     <>
@@ -175,13 +195,13 @@ export default function ModalButtons() {
               <span className='font-bold'>organizer.</span>
             </h1>
             <input
-              onInput={handleEnableGuestProceedBtn}
+              // Use React state to manage the input value.
+              onChange={(e) => setGuestCode(e.target.value)}
               id='guestInput'
               type='text'
               placeholder='Enter code here'
               className='w-[275px] h-[40px] rounded-2xl bg-[#e0e0e0] p-4'
             />
-
             <div className='flex w-[275px] gap-4'>
               <button
                 onClick={handleCloseGuestModal}
@@ -193,18 +213,19 @@ export default function ModalButtons() {
                 Cancel
               </button>
               <button
+                onClick={handleGuestProceed}
                 id='guestProceed'
-                disabled
+                // The button is disabled if the guestCode state is empty.
+                disabled={guestCode.trim() === ''}
                 className='w-[50%]
                   bg-[#ff6b6b] text-[#fff] text-sm font-medium
-                  rounded-[20px]
+                  rounded-[20px] cursor-pointer
                   disabled:cursor-not-allowed disabled:bg-[#808080]
                 '
               >
                 Proceed
               </button>
             </div>
-
           </div>
         </div>
       )}
