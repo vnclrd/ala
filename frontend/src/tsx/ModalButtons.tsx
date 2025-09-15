@@ -45,9 +45,9 @@ export default function ModalButtons() {
       });
 
       const data = await response.json();
-
       if (response.ok) {
         navigate(data.galleryUrl);
+        setIsGuestModalOpen(false)
       } else {
         alert(data.error || 'Invalid or expired code.');
       }
@@ -178,6 +178,7 @@ export default function ModalButtons() {
 
       {isGuestModalOpen && (
         <div
+          id='guestModal'
           className='
             bg-[#000]/80 flex items-center justify-center fixed
             top-0 left-0 w-screen h-screen
