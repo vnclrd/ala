@@ -8,8 +8,9 @@ export default function Checkout() {
   const { plan } = useParams()
 
   const [paymentComplete, setPaymentComplete] = useState(false)
-  const [eventDate, setEventDate] = useState<string>("") // store selected date
   const [eventName, setEventName] = useState<string>("")
+  const [eventDate, setEventDate] = useState<string>("")
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true) // New state for button disabled status
 
   interface GalleryData {
     qrCodeDataUrl: string;
@@ -24,34 +25,26 @@ export default function Checkout() {
     }
   }, [location.state, navigate])
 
+  useEffect(() => {
+    // Check if both eventName and eventDate are non-empty
+    if (eventName.trim() !== '' && eventDate.trim() !== '') {
+      setIsButtonDisabled(false) // Enable the button
+    } else {
+      setIsButtonDisabled(true) // Disable the button
+    }
+  }, [eventName, eventDate])
+
   const handlePay = async () => {
-    if (!eventDate || !eventName || eventName === '') {
+    if (!eventName || eventName === '' || !eventDate) {
       alert("Please enter the details above before proceeding.")
       return
     }
 
-    const payButton = document.getElementById('payButton') as HTMLInputElement | null
     const returnHomeButton = document.getElementById('returnHomeButton') as HTMLInputElement | null
     const qrCode = document.getElementById('qrCode') as HTMLInputElement | null
     const code = document.getElementById('code') as HTMLInputElement | null
     const codesDescription = document.getElementById('codesDescription') as HTMLInputElement | null
     const downloadQRButton = document.getElementById('downloadQRButton')
-
-    const enablePayButton = () => {
-      if (payButton) {
-        payButton.disabled = false
-        payButton.style.backgroundColor = ''
-        payButton.style.cursor = 'pointer'
-      }
-    }
-
-    const disablePayButton = () => {
-      if (payButton) {
-        payButton.disabled = true
-        payButton.style.backgroundColor = 'gray'
-        payButton.style.cursor = 'not-allowed'
-      }
-    }
 
     interface GalleryData {
       qrCodeDataUrl: string;
@@ -79,8 +72,6 @@ export default function Checkout() {
         setGalleryData(data)
       }
     }
-
-    disablePayButton()
 
     try {
       const response = await fetch('http://localhost:4000/create-invoice', {
@@ -110,7 +101,6 @@ export default function Checkout() {
             if (statusData.status === 'PAID') {
               clearInterval(poll);
               setPaymentComplete(true);
-              disablePayButton();
               successfulTransaction(statusData);
 
               // The backend now handles saving the event date
@@ -120,23 +110,19 @@ export default function Checkout() {
             ) {
               clearInterval(poll);
               alert('Payment expired or was cancelled.');
-              enablePayButton();
             }
           } catch (err) {
             console.error('Polling error:', err);
             clearInterval(poll);
             alert('Something went wrong. Please try again.');
-            enablePayButton();
           }
         }, 5000);
       } else {
         alert('No checkout link available. Please try again.');
-        enablePayButton();
       }
     } catch (err) {
       console.error('Payment error:', err);
       alert('Something went wrong while creating invoice.');
-      enablePayButton();
     }
   }
 
@@ -227,12 +213,13 @@ export default function Checkout() {
                   </div>
                 </p>
                 <div className='flex flex-col items-center justify-center gap-4'>
-                  <p className='flex text-xs mt-4'>Enter the name and date of your event below.</p>
+                  <p className='flex text-xs mt-4 font-bold'>Enter the name and date of your event below.</p>
                   <input
                     onChange={(e) => setEventName(e.target.value)}
+                    id='eventNameEntered'
                     type="text"
                     placeholder='Enter event name here'
-                    className='w-[250px] h-[30px] bg-[#fff]/60 rounded-2xl p-4'
+                    className='w-[250px] h-[30px] bg-[#000]/20 rounded-2xl p-4'
                   />
                   {/* Date Picker */}
                   <input
@@ -247,12 +234,14 @@ export default function Checkout() {
                 <button
                   onClick={handlePay}
                   id='payButton'
+                  disabled={isButtonDisabled}
                   className='
                     absolute bottom-0 w-[300px] p-2 bg-[#ff6b6b] rounded-2xl
                     cursor-pointer text-[#fff] mt-4
+                    disabled:bg-[#808080] disabled:cursor-not-allowed
                   '
                 >
-                  Click to pay
+                  Click to Pay
                 </button>
               </div>
             </div>
@@ -264,7 +253,7 @@ export default function Checkout() {
               </div>
             )}
             {/* Right Panel */}
-            <div className='flex flex-col relative items-center w-[300px] h-[500px] gap-4'>
+            <div className='flex flex-col relative items-center w-[300px] h-[600px] gap-4'>
               <h1 className='text-black text-center text-sm'>
                 Your codes for your event will appear here after the payment has been successful.
               </h1>
