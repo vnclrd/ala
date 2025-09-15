@@ -94,7 +94,7 @@ export default function Plans() {
             </span>
             ✔{' '}
             <span className='text-sm pl-1'>
-              Up to 500 MB of photo uploads {'(approx. 500* photos)'}
+              Up to 500 MB of photo uploads {'(up to 500 photos)'}
               <br />
             </span>
             ✔{' '}
@@ -147,8 +147,8 @@ export default function Plans() {
             </span>
             ✔{' '}
             <span className='text-sm pl-1'>
-              Up to <span className='font-bold'>1 GB</span> of photo uploads{' '}
-              {'(approx. 1,000* photos)'}
+              Up to <span className='font-bold'>2 GB</span> of photo uploads{' '}
+              {'(up to 1,000 photos)'}
               <br />
             </span>
             ✔{' '}

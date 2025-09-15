@@ -8,6 +8,14 @@ export default function Checkout() {
   const { plan } = useParams()
 
   const [paymentComplete, setPaymentComplete] = useState(false)
+  const [eventDate, setEventDate] = useState<string>("") // store selected date
+
+  interface GalleryData {
+    qrCodeDataUrl: string;
+    sixDigitCode: string;
+    galleryUrl?: string;
+  }
+  const [galleryData, setGalleryData] = useState<GalleryData | null>(null)
 
   useEffect(() => {
     if (!location.state?.allowed) {
@@ -16,11 +24,17 @@ export default function Checkout() {
   }, [location.state, navigate])
 
   const handlePay = async () => {
+    if (!eventDate) {
+      alert("Please select the date of your event before proceeding.")
+      return
+    }
+
     const payButton = document.getElementById('payButton') as HTMLInputElement | null
     const returnHomeButton = document.getElementById('returnHomeButton') as HTMLInputElement | null
     const qrCode = document.getElementById('qrCode') as HTMLInputElement | null
     const code = document.getElementById('code') as HTMLInputElement | null
     const codesDescription = document.getElementById('codesDescription') as HTMLInputElement | null
+    const downloadQRButton = document.getElementById('downloadQRButton')
 
     const enablePayButton = () => {
       if (payButton) {
@@ -38,12 +52,30 @@ export default function Checkout() {
       }
     }
 
-    const successfulTransaction = () => {
-      if (returnHomeButton && qrCode && code && codesDescription) {
+    interface GalleryData {
+      qrCodeDataUrl: string;
+      sixDigitCode: string;
+    }
+
+    const successfulTransaction = (data: GalleryData) => {
+      if (returnHomeButton && qrCode && code && codesDescription && downloadQRButton) {
+        const img = document.createElement('img')
+        img.src = data.qrCodeDataUrl
+        img.style.width = '100%'
+        img.style.height = '100%'
+        img.style.objectFit = 'contain'
+        qrCode.innerHTML = ''
+        qrCode.appendChild(img)
+
+        code.textContent = data.sixDigitCode
+
         returnHomeButton.hidden = false
         qrCode.hidden = false
         code.hidden = false
         codesDescription.hidden = false
+        downloadQRButton.hidden = false
+
+        setGalleryData(data)
       }
     }
 
@@ -53,21 +85,19 @@ export default function Checkout() {
       const response = await fetch('http://localhost:4000/create-invoice', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan }),
+        body: JSON.stringify({ plan, eventDate }), // send eventDate with plan
       })
       const data = await response.json()
 
       const checkoutUrl = data.invoice_url || data.checkout_url || null
 
       if (checkoutUrl) {
-        // Open checkout page
         window.open(checkoutUrl, '_blank')
 
-        // Start polling every 5s
         const poll = setInterval(async () => {
           try {
             const statusRes = await fetch(
-              `http://localhost:4000/invoice/${data.id}`
+              `http://localhost:4000/invoice/${data.id}?plan=${plan}`
             )
             const statusData = await statusRes.json()
             console.log('Invoice status:', statusData.status)
@@ -76,7 +106,15 @@ export default function Checkout() {
               clearInterval(poll)
               setPaymentComplete(true)
               disablePayButton()
-              successfulTransaction()
+              successfulTransaction(statusData)
+
+              if (eventDate && statusData.galleryId) {
+                await fetch(`http://localhost:4000/set-event-date/${statusData.galleryId}`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ eventDate }),
+                })
+              }
             } else if (
               statusData.status === 'EXPIRED' ||
               statusData.status === 'CANCELLED'
@@ -103,42 +141,52 @@ export default function Checkout() {
     }
   }
 
+  const downloadQRCode = () => {
+    if (galleryData && galleryData.qrCodeDataUrl) {
+      const link = document.createElement('a')
+      link.download = `ala-qr-code-${galleryData.sixDigitCode}.png`
+      link.href = galleryData.qrCodeDataUrl
+      link.click()
+    }
+  }
+
+  const copyCodeToClipboard = () => {
+    if (galleryData && galleryData.sixDigitCode) {
+      navigator.clipboard.writeText(galleryData.sixDigitCode).then(() => {
+        alert('Code copied to clipboard!')
+      }).catch(() => {
+        alert('Failed to copy code')
+      })
+    }
+  }
+
+  const copyGalleryLink = () => {
+    if (galleryData && galleryData.galleryUrl) {
+      navigator.clipboard.writeText(galleryData.galleryUrl).then(() => {
+        alert('Gallery link copied to clipboard!')
+      }).catch(() => {
+        alert('Failed to copy link')
+      })
+    }
+  }
+
   return (
     <>
       {plan === 'standard' && (
-        <div
-          className='
-            flex flex-col relative items-center justify-center
-            lg:w-screen lg:h-screen
-          '
-        >
+        <div className='flex flex-col relative items-center justify-center lg:w-screen lg:h-screen'>
           {/* Title and Tagline */}
-          <div
-            className='
-              flex items-center justify-center m-4 gap-2 w-[300px]
-              lg:w-[700px] lg:justify-start
-            '
-          >
+          <div className='flex items-center justify-center m-4 gap-2 w-[300px] lg:w-[700px] lg:justify-start'>
             <div className='w-[25px]'>
               <Link to='/plans'>
                 <button
                   id='cancelTransaction'
-                  className='
-                    text-[#808080] text-sm font-medium cursor-pointer
-                    lg:p-0
-                    hover:underline
-                  '
+                  className='text-[#808080] text-sm font-medium cursor-pointer lg:p-0 hover:underline'
                 >
                   <FaArrowLeftLong className='w-6 h-6 mt-4' />
                 </button>
               </Link>
             </div>
-            <div
-              className='
-                flex flex-col mr-8 text-[#fff]
-                lg:mr-10
-              '
-            >
+            <div className='flex flex-col mr-8 text-[#fff] lg:mr-10'>
               <h1 className='text-[#000] italic font-bold text-[4rem]'>Ala</h1>
               <div className='flex text-[0.6rem] text-[#000] mt-[-20px]'>
                 <h1>Capture. &nbsp;</h1>
@@ -147,28 +195,21 @@ export default function Checkout() {
               </div>
             </div>
           </div>
+          
           {/* Panels Container */}
-          <div
-            className='
-              flex flex-col items-center justify-center gap-6
-              lg:flex-row lg:gap-24
-            '
-          >
+          <div className='flex flex-col items-center justify-center gap-6 lg:flex-row lg:gap-24'>
             {/* Left Panel */}
-            <div className='flex relative w-[300px] h-[500px]'>
+            <div className='flex relative w-[300px] h-[550px]'>
               <div className='flex flex-col'>
                 <p>Get</p>
                 <h1 className='text-2xl mt-[-4px]'><span className='font-bold'>Standard</span> Plan</h1>
                 <h1 className='text-sm'>
-                  <span className='text-4xl font-bold'>₱1,000.00</span> for 1
-                  event
+                  <span className='text-4xl font-bold'>₱1,000.00</span> for 1 event
                 </h1>
                 <div className='flex flex-col w-[275px] mt-4'>
                   <p>
                     <span className='font-bold'>500 MB</span> Photo Storage{' '}
-                    <span className='text-[0.6rem]'>
-                      {'(up to 500 photos)'}
-                    </span>
+                    <span className='text-[0.6rem]'>{'(up to 500 photos)'}</span>
                   </p>
                   <p>
                     <span className='font-bold'>Standard Quality</span> Photos
@@ -176,113 +217,98 @@ export default function Checkout() {
                 </div>
                 <h1 className='mt-4'>What's next after availing?</h1>
                 <p>
-                  ✔{' '}
-                  <span className='text-sm pl-1'>
-                    Get your QR Code
-                    <br />
-                  </span>
-                  ✔{' '}
-                  <span className='text-sm pl-1'>
-                    Get your Photo Gallery Code
-                    <br />
-                  </span>
-                  ✔{' '}
-                  <span className='text-sm pl-1'>
-                    Share the codes to your guests on the day of your event
-                  </span>
+                  ✔ <span className='text-sm pl-1'>Get your QR Code<br /></span>
+                  ✔ <span className='text-sm pl-1'>Get your Photo Gallery Code<br /></span>
+                  ✔ <span className='text-sm pl-1'>Share the codes to your guests on the day of your event</span>
                   <br />
-                  <br />
-                  <span className='font-bold'>Note:</span> <br />
+                  <span className='flex font-bold mt-2'>Note:</span>
                   <div className='flex flex-col w-[300px] gap-2'>
                     <span className='text-xs'>
-                      Photo gallery will expire after 7 days so make sure to
-                      download the photos.
+                      Photo gallery will expire after 7 days so make sure to download the photos.
                     </span>
                     <span className='text-xs'>
-                      Photos will automatically be compressed and sent to your
-                      Google Drive if not downloaded before expiry.
+                      Photos will automatically be compressed and sent to your Google Drive if not downloaded before expiry.
                     </span>
                   </div>
                 </p>
-
+                <div className='flex flex-col items-center justify-center gap-2'>
+                  <p className='flex text-sm mt-4'>Enter the date of your event below.</p>
+                  {/* Date Picker */}
+                  <input
+                    type="date"
+                    name="eventDate"
+                    min={new Date().toISOString().split("T")[0]} // disables past dates
+                    value={eventDate}
+                    onChange={(e) => setEventDate(e.target.value)}
+                    className="border rounded p-2"
+                  />
+                </div>
                 <button
                   onClick={handlePay}
                   id='payButton'
-                  className='
-                    absolute bottom-0 w-[300px] p-2 bg-[#ff6b6b] rounded-2xl
-                    cursor-pointer text-[#fff] mt-4
-                  '
+                  className='absolute bottom-0 w-[300px] p-2 bg-[#ff6b6b] rounded-2xl cursor-pointer text-[#fff] mt-4'
                 >
                   Click to pay
                 </button>
               </div>
             </div>
+            
             {/* Payment Success Popup */}
             {paymentComplete && (
-              <div
-                className='
-                  w-[350px] p-4 bg-green-100 border
-                  border-green-400 rounded-lg text-center
-                  lg:absolute lg:bottom-4 lg:right-4
-                '
-              >
-                <h2 className='text-lg font-bold text-green-700'>
-                  Payment Successful 🎉
-                </h2>
+              <div className='w-[350px] p-4 bg-green-100 border border-green-400 rounded-lg text-center lg:absolute lg:bottom-4 lg:right-4'>
+                <h2 className='text-lg font-bold text-green-700'>Payment Successful 🎉</h2>
                 <p>Your payment has been confirmed.</p>
               </div>
             )}
+            
             {/* Right Panel */}
-            <div 
-              className='
-                flex flex-col relative items-center
-                w-[300px] h-[500px] gap-4
-              '
-            >
-              {/* Codes */}
+            <div className='flex flex-col relative items-center w-[300px] h-[500px] gap-4'>
               <h1 className='text-black text-center text-sm'>
-                Your codes for your event will appear here after the payment has
-                been successful.
+                Your codes for your event will appear here after the payment has been successful.
               </h1>
 
               {/* Codes House */}
-              <div
-                className='
-                  flex flex-col items-center justify-start w-[250px]
-                  h-[275px] border-1 border-black rounded-2xl'>
+              <div className='flex flex-col items-center justify-start w-[250px] h-[275px] border-1 border-black rounded-2xl'>
                 <div
                   id='qrCode'
                   hidden
-                  className='w-[225px] h-[225px] mt-4 bg-black rounded-2xl'
+                  className='w-[225px] h-[225px] mt-4 bg-gray-100 rounded-2xl flex items-center justify-center overflow-hidden'
                 ></div>
-                <p id='code' hidden className='text-black p-2'>
+                <p id='code' hidden className='text-black p-2 font-bold text-lg cursor-pointer hover:bg-gray-100 rounded' onClick={copyCodeToClipboard}>
                   123456
                 </p>
               </div>
+              
               <div
                 id='codesDescription'
                 hidden
-                className='
-                  flex flex-col items-center justify-center text-center
-                  text-xs w-[250px] h-[100px] gap-2
-                '
+                className='flex flex-col items-center justify-center text-center text-xs w-[250px] h-[100px] gap-2'
               >
-                Save the codes and share it to your guests on the day of your
-                event.
-                <p>
-                  <button>
-                    <span className='underline cursor-pointer hover:italic'>
-                      Click here
-                    </span>
+                Save the codes and share them with your guests on the day of your event.
+                <div className='flex flex-col gap-2'>
+                  <button
+                    id='downloadQRButton'
+                    hidden
+                    onClick={downloadQRCode}
+                    className='text-blue-600 underline cursor-pointer hover:italic text-xs'
+                  >
+                    Download QR Code
                   </button>
-                  &nbsp;to save the QR code
-                </p>
+                  <button
+                    onClick={copyGalleryLink}
+                    className='text-blue-600 underline cursor-pointer hover:italic text-xs'
+                  >
+                    Copy Gallery Link
+                  </button>
+                </div>
               </div>
+              
               <Link to='/' className='absolute bottom-0'>
                 <button
                   id='returnHomeButton'
                   hidden
-                  className='w-[300px] p-2 bg-[#ff6b6b] rounded-2xl cursor-pointer text-[#fff]'>
+                  className='w-[300px] p-2 bg-[#ff6b6b] rounded-2xl cursor-pointer text-[#fff]'
+                >
                   Return to Home
                 </button>
               </Link>
@@ -354,9 +380,9 @@ export default function Checkout() {
                 </h1>
                 <div className='flex flex-col w-[275px] mt-4'>
                   <p>
-                    <span className='font-bold'>1 GB</span> Photo Storage{' '}
+                    <span className='font-bold'>2 GB</span> Photo Storage{' '}
                     <span className='text-[0.6rem]'>
-                      {'(up to 500 photos)'}
+                      {'(up to 1,000 photos)'}
                     </span>
                   </p>
                   <p>
