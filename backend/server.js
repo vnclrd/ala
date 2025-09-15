@@ -48,21 +48,28 @@ function generateGalleryId() {
   return Date.now().toString(36) + Math.random().toString(36).substr(2)
 }
 
-async function createGalleryDocument(galleryId, code, plan) {
+async function createGalleryDocument(galleryId, code, plan, eventName, eventDate) {
+  const days = plan === 'standard' ? 7 : 14;
+  const eventDateObj = new Date(eventDate);
+  const expirationDateObj = new Date(eventDateObj);
+  expirationDateObj.setDate(expirationDateObj.getDate() + days);
+
   const galleryData = {
     galleryId,
     code,
     plan,
+    eventName,
     createdAt: new Date(),
-    expirationDate: null,
+    // Use Firestore Timestamp to save date objects
+    eventDate: Timestamp.fromDate(eventDateObj),
+    expirationDate: Timestamp.fromDate(expirationDateObj),
     photos: [],
     isActive: true,
     storage: plan === 'standard' ? '500MB' : '2GB',
     quality: plan === 'standard' ? 'Standard' : 'High',
-    eventDate: null
-  }
-  await setDoc(doc(db, 'galleries', galleryId), galleryData)
-  return galleryData
+  };
+  await setDoc(doc(db, 'galleries', galleryId), galleryData);
+  return galleryData;
 }
 
 function formatDate(date) {
@@ -73,50 +80,10 @@ function formatDate(date) {
   return new Date(date).toLocaleDateString()
 }
 
-function generateGalleryHTML(galleryData) {
-  return `<!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ala Photo Gallery</title>
-    <style>
-      body { font-family: Arial, sans-serif; background-color: #f5f5f5; padding: 20px; }
-      .header { margin-bottom: 30px; }
-      .gallery-info { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
-      .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
-      .photo-item { background: white; border-radius: 10px; padding: 10px; }
-      .upload-area { border: 2px dashed #ccc; border-radius: 10px; padding: 20px; text-align: center; background: white; margin: 20px 0; }
-      .btn { background: #ff6b6b; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
-      .btn:hover { background: #e55555; }
-    </style>
-  </head>
-  <body>
-    <div class="header">
-      <h1>Ala Photo Gallery</h1>
-      <p>Plan: ${galleryData.plan} | Storage: ${galleryData.storage} | Quality: ${galleryData.quality}</p>
-    </div>
-    <div class="gallery-info">
-      <h3>Gallery Code: ${galleryData.code}</h3>
-      ${galleryData.expirationDate
-        ? `<p>⚠️ Expires on ${formatDate(galleryData.expirationDate)}</p>`
-        : `<p>⚠️ Please set your event date to activate expiration.</p>`}
-    </div>
-    <div class="upload-area">
-      <h3>Upload Photos</h3>
-      <input type="file" id="photoInput" multiple accept="image/*" style="display:none;">
-      <button class="btn" onclick="document.getElementById('photoInput').click()">Choose Photos</button>
-      <p>Drag and drop photos here or click to browse</p>
-    </div>
-    <div id="photoGrid" class="photo-grid"></div>
-  </body>
-  </html>`
-}
-
 // ====================== PAYMENT ======================
 app.post('/create-invoice', async (req, res) => {
   try {
-    const { plan } = req.body
+    const { plan, eventDate, eventName } = req.body
     const amount = plan === 'standard' ? 1000 : 1500
 
     const response = await axios.post(
@@ -132,35 +99,46 @@ app.post('/create-invoice', async (req, res) => {
 
 app.get('/invoice/:id', async (req, res) => {
   try {
-    const { id } = req.params
-    const { plan } = req.query
+    const { id } = req.params;
+    // Add eventDate to destructuring
+    const { plan, eventName, eventDate } = req.query;
 
-    const response = await axios.get(`https://api.xendit.co/v2/invoices/${id}`, { auth: { username: XENDIT_API_KEY, password: '' } })
-    const invoiceData = response.data
+    const response = await axios.get(`https://api.xendit.co/v2/invoices/${id}`, { auth: { username: XENDIT_API_KEY, password: '' } });
+    const invoiceData = response.data;
 
-    if (invoiceData.status === 'PAID' && plan) {
-      const existingDoc = await getDoc(doc(db, 'invoices', id))
+    // Check if eventDate is also available
+    if (invoiceData.status === 'PAID' && plan && eventName && eventDate) {
+      const existingDoc = await getDoc(doc(db, 'invoices', id));
       if (!existingDoc.exists()) {
-        const galleryId = generateGalleryId()
-        const sixDigitCode = generateUniqueCode()
-        const galleryUrl = `${req.protocol}://${req.get('host')}/gallery/${galleryId}`
-        const qrCodeDataUrl = await QRCode.toDataURL(galleryUrl)
+        const galleryId = generateGalleryId();
+        const sixDigitCode = generateUniqueCode();
+        const galleryUrl = `${req.protocol}://${req.get('host')}/gallery/${galleryId}`;
+        const qrCodeDataUrl = await QRCode.toDataURL(galleryUrl);
 
-        await createGalleryDocument(galleryId, sixDigitCode, plan)
+        // Pass eventDate to the helper function
+        await createGalleryDocument(galleryId, sixDigitCode, plan, eventName, eventDate);
 
-        await setDoc(doc(db, 'invoices', id), { galleryId, sixDigitCode, qrCodeDataUrl, galleryUrl, plan, createdAt: new Date() })
-
-        res.json({ ...invoiceData, galleryId, sixDigitCode, qrCodeDataUrl, galleryUrl })
+        await setDoc(doc(db, 'invoices', id), {
+          galleryId,
+          sixDigitCode,
+          qrCodeDataUrl,
+          galleryUrl,
+          plan,
+          eventName,
+          createdAt: new Date()
+        });
+        res.json({ ...invoiceData, galleryId, sixDigitCode, qrCodeDataUrl, galleryUrl, eventName });
       } else {
-        res.json({ ...invoiceData, ...existingDoc.data() })
+        res.json({ ...invoiceData, ...existingDoc.data() });
       }
     } else {
-      res.json(invoiceData)
+      res.json(invoiceData);
     }
   } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch invoice' })
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch invoice' });
   }
-})
+});
 
 // ====================== GALLERIES ======================
 app.get('/galleries', async (req, res) => {
@@ -233,7 +211,7 @@ app.get('/gallery/:galleryId/photos', async (req, res) => {
 app.post('/set-event-date/:galleryId', async (req, res) => {
   try {
     const { galleryId } = req.params
-    const { eventDate } = req.body
+    const { eventDate, eventName } = req.body
     const galleryDoc = await getDoc(doc(db, 'galleries', galleryId))
     if (!galleryDoc.exists()) return res.status(404).json({ error: 'Not found' })
 
@@ -248,7 +226,8 @@ app.post('/set-event-date/:galleryId', async (req, res) => {
       ...gallery,
       eventDate: Timestamp.fromDate(eventDateObj),
       expirationDate: Timestamp.fromDate(expirationDateObj),
-    })
+      eventName: eventName || gallery.eventName,
+    }, { merge: true })
 
     res.json({ success: true, expirationDate: expirationDateObj })
   } catch (err) {

@@ -9,6 +9,7 @@ export default function Checkout() {
 
   const [paymentComplete, setPaymentComplete] = useState(false)
   const [eventDate, setEventDate] = useState<string>("") // store selected date
+  const [eventName, setEventName] = useState<string>("")
 
   interface GalleryData {
     qrCodeDataUrl: string;
@@ -24,8 +25,8 @@ export default function Checkout() {
   }, [location.state, navigate])
 
   const handlePay = async () => {
-    if (!eventDate) {
-      alert("Please select the date of your event before proceeding.")
+    if (!eventDate || !eventName || eventName === '') {
+      alert("Please enter the details above before proceeding.")
       return
     }
 
@@ -85,59 +86,57 @@ export default function Checkout() {
       const response = await fetch('http://localhost:4000/create-invoice', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan, eventDate }), // send eventDate with plan
-      })
-      const data = await response.json()
+        body: JSON.stringify({ plan, eventDate, eventName }), // Make sure eventName is a string
+      });
+      const data = await response.json();
 
-      const checkoutUrl = data.invoice_url || data.checkout_url || null
+      const checkoutUrl = data.invoice_url || data.checkout_url || null;
 
       if (checkoutUrl) {
-        window.open(checkoutUrl, '_blank')
+        window.open(checkoutUrl, '_blank');
 
+        const encodedEventName = encodeURIComponent(eventName); // Encode the event name
+        const encodedEventDate = encodeURIComponent(eventDate);
+      
         const poll = setInterval(async () => {
           try {
+            // Update this line to include eventName in the query
             const statusRes = await fetch(
-              `http://localhost:4000/invoice/${data.id}?plan=${plan}`
-            )
-            const statusData = await statusRes.json()
-            console.log('Invoice status:', statusData.status)
+              `http://localhost:4000/invoice/${data.id}?plan=${plan}&eventName=${encodedEventName}&eventDate=${encodedEventDate}`
+            );
+            const statusData = await statusRes.json();
+            console.log('Invoice status:', statusData.status);
 
             if (statusData.status === 'PAID') {
-              clearInterval(poll)
-              setPaymentComplete(true)
-              disablePayButton()
-              successfulTransaction(statusData)
+              clearInterval(poll);
+              setPaymentComplete(true);
+              disablePayButton();
+              successfulTransaction(statusData);
 
-              if (eventDate && statusData.galleryId) {
-                await fetch(`http://localhost:4000/set-event-date/${statusData.galleryId}`, {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ eventDate }),
-                })
-              }
+              // The backend now handles saving the event date
             } else if (
               statusData.status === 'EXPIRED' ||
               statusData.status === 'CANCELLED'
             ) {
-              clearInterval(poll)
-              alert('Payment expired or was cancelled.')
-              enablePayButton()
+              clearInterval(poll);
+              alert('Payment expired or was cancelled.');
+              enablePayButton();
             }
           } catch (err) {
-            console.error('Polling error:', err)
-            clearInterval(poll)
-            alert('Something went wrong. Please try again.')
-            enablePayButton()
+            console.error('Polling error:', err);
+            clearInterval(poll);
+            alert('Something went wrong. Please try again.');
+            enablePayButton();
           }
-        }, 5000)
+        }, 5000);
       } else {
-        alert('No checkout link available. Please try again.')
-        enablePayButton()
+        alert('No checkout link available. Please try again.');
+        enablePayButton();
       }
     } catch (err) {
-      console.error('Payment error:', err)
-      alert('Something went wrong while creating invoice.')
-      enablePayButton()
+      console.error('Payment error:', err);
+      alert('Something went wrong while creating invoice.');
+      enablePayButton();
     }
   }
 
@@ -195,7 +194,7 @@ export default function Checkout() {
           {/* Panels Container */}
           <div className='flex flex-col items-center justify-center gap-6 lg:flex-row lg:gap-24'>
             {/* Left Panel */}
-            <div className='flex relative w-[300px] h-[550px]'>
+            <div className='flex relative w-[300px] h-[600px]'>
               <div className='flex flex-col'>
                 <p>Get</p>
                 <h1 className='text-2xl mt-[-4px]'><span className='font-bold'>Standard</span> Plan</h1>
@@ -227,22 +226,31 @@ export default function Checkout() {
                     </span>
                   </div>
                 </p>
-                <div className='flex flex-col items-center justify-center gap-2'>
-                  <p className='flex text-sm mt-4'>Enter the date of your event below.</p>
+                <div className='flex flex-col items-center justify-center gap-4'>
+                  <p className='flex text-xs mt-4'>Enter the name and date of your event below.</p>
+                  <input
+                    onChange={(e) => setEventName(e.target.value)}
+                    type="text"
+                    placeholder='Enter event name here'
+                    className='w-[250px] h-[30px] bg-[#fff]/60 rounded-2xl p-4'
+                  />
                   {/* Date Picker */}
                   <input
+                    onChange={(e) => setEventDate(e.target.value)}
                     type="date"
                     name="eventDate"
                     min={new Date().toISOString().split("T")[0]} // disables past dates
                     value={eventDate}
-                    onChange={(e) => setEventDate(e.target.value)}
-                    className="border rounded p-2"
+                    className="w-[150px] h-[40px] border rounded p-2"
                   />
                 </div>
                 <button
                   onClick={handlePay}
                   id='payButton'
-                  className='absolute bottom-0 w-[300px] p-2 bg-[#ff6b6b] rounded-2xl cursor-pointer text-[#fff] mt-4'
+                  className='
+                    absolute bottom-0 w-[300px] p-2 bg-[#ff6b6b] rounded-2xl
+                    cursor-pointer text-[#fff] mt-4
+                  '
                 >
                   Click to pay
                 </button>
