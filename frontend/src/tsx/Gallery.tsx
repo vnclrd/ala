@@ -12,6 +12,7 @@ interface GalleryData {
   photos: any[];
   isActive: boolean;
   eventDate: string | null;
+  eventName: string
 }
 
 export default function Gallery() {
@@ -84,7 +85,7 @@ export default function Gallery() {
           Return Home
         </Link>
         <div className='flex flex-col items-center'>
-          <h1 className="text-xl font-bold text-[#fff] italic">Ala Test Gallery</h1>
+          <h1 className="text-xl font-bold text-[#fff] italic">{galleryData?.eventName}</h1>
           <h3 className="text-sm text-[#fff]">Gallery Code: {galleryData?.code}</h3>
           {galleryData && (
             <>
