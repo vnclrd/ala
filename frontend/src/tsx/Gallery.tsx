@@ -55,66 +55,64 @@ export default function Gallery() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#f5f5f5] p-5">
-      <div className="relative w-full max-w-4xl bg-white rounded-lg shadow-md p-5 mb-5">
-        <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold mb-2">Ala Photo Gallery</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#1d1d1d]">
+
+      <div
+        id="photoGrid"
+        className="flex gap-4"
+      >
+        {/* Photos will be rendered here dynamically */}
+        <img src="" alt="" className='w-[200px] h-[300px] bg-[#fff]/40 rounded-2xl' />
+        
+      </div>
+
+      {/* Floating Bar */}
+      <div 
+        className='
+          flex items-center justify-center absolute h-[80px] bottom-2
+          rounded-2xl gap-8 p-4 shadow-xl
+        '
+      >
+        <Link
+          to="/"
+          className="
+            bg-[#fff] text-[#000] py-2 px-6 rounded-md cursor-pointer
+            transition-colors
+            hover:bg-[#fff]/80
+          "
+        >
+          Return Home
+        </Link>
+        <div className='flex flex-col items-center'>
+          <h1 className="text-xl font-bold text-[#fff] italic">Ala Test Gallery</h1>
+          <h3 className="text-sm text-[#fff]">Gallery Code: {galleryData?.code}</h3>
           {galleryData && (
             <>
-              <p className="text-gray-600">
-                Plan: {galleryData.plan} | Storage: {galleryData.storage} | Quality: {galleryData.quality}
-              </p>
-              <div className="mt-4 p-4 bg-gray-100 rounded-md">
-                <h3 className="text-xl font-semibold mb-2">Gallery Code: {galleryData.code}</h3>
-                {galleryData.expirationDate ? (
-                  <p className="text-red-500">
-                    ⚠️ Expires on{' '}
-                    {new Date(galleryData.expirationDate).toLocaleDateString()}
-                  </p>
-                ) : (
-                  <p className="text-yellow-600">
-                    ⚠️ Please set your event date to activate expiration.
-                  </p>
-                )}
-              </div>
+              {galleryData.expirationDate ? (
+                <p className="text-red-500 text-xs">
+                  Expires on{' '}
+                  {new Date(galleryData.expirationDate).toLocaleDateString()}
+                </p>
+              ) : (
+                <p className="text-yellow-600">
+                  Please set your event date to activate expiration.
+                </p>
+              )}
             </>
           )}
         </div>
-
-        <div className="flex flex-col items-center border-2 border-dashed border-gray-400 rounded-lg p-8 bg-white text-center mb-5">
-          <h3 className="text-2xl font-semibold mb-4">Upload Photos</h3>
-          <input
-            type="file"
-            id="photoInput"
-            multiple
-            accept="image/*"
-            className="hidden"
-          />
-          <button
-            className="bg-[#ff6b6b] text-white py-2 px-6 rounded-md cursor-pointer hover:bg-[#e55555] transition-colors"
-            onClick={() => document.getElementById('photoInput')?.click()}
-          >
-            Choose Photos
-          </button>
-          <p className="mt-2 text-gray-500">Drag and drop photos here or click to browse</p>
-        </div>
-
-        <div id="photoGrid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {/* Photos will be rendered here dynamically */}
-        </div>
-
-        
+        <button
+          onClick={() => document.getElementById('photoInput')?.click()}
+          className="
+            bg-[#ff6b6b] text-white py-2 px-6 rounded-md cursor-pointer
+            transition-colors
+            hover:bg-[#e55555]
+          "
+        >
+          Upload Photo
+        </button>
       </div>
-      <Link
-        to="/"
-        className="
-          bg-[#ff6b6b] text-white py-2 px-6 rounded-md cursor-pointer
-          transition-colors absolute bottom-2 left-2
-          hover:bg-[#e55555] 
-        "
-      >
-        Return Home
-      </Link>
+      
   </div>
   );
 }
