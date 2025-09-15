@@ -15,6 +15,7 @@ export default function Header() {
   const isPlansPage = location.pathname === '/plans'
   const isCheckoutStandardPage = location.pathname === '/checkout/standard'
   const isCheckoutPlusPage = location.pathname === '/checkout/plus'
+  const isGallery = location.pathname !== '/' && '/plans' && '/checkout/standard' && '/checkout/plus'
 
   const handleShowDetail = (id: string) => {
     const gmail = document.getElementById('gmail')
@@ -43,6 +44,7 @@ export default function Header() {
         ${isPlansPage ? 'lg:hidden' : 'lg:block'}
         ${isCheckoutStandardPage ? 'lg:hidden' : 'lg:block'}
         ${isCheckoutPlusPage ? 'lg:hidden' : 'lg:block'}
+        ${isGallery ? 'lg:hidden' : 'lg:block'}
       `}
     >
       {/* Header Content */}
