@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { FaArrowLeftLong } from 'react-icons/fa6'
+import { BiCopy } from 'react-icons/bi'
 
 export default function Checkout() {
   const location = useLocation()
@@ -141,23 +142,19 @@ export default function Checkout() {
     }
   }
 
-  const copyCodeToClipboard = () => {
-    if (galleryData && galleryData.sixDigitCode) {
-      navigator.clipboard.writeText(galleryData.sixDigitCode).then(() => {
-        alert('Code copied to clipboard!')
-      }).catch(() => {
-        alert('Failed to copy code')
-      })
-    }
-  }
+  const copy = document.getElementById('copy') as HTMLInputElement | null
+  const copied = document.getElementById('copied') as HTMLInputElement | null
 
-  const copyGalleryLink = () => {
-    if (galleryData && galleryData.galleryUrl) {
-      navigator.clipboard.writeText(galleryData.galleryUrl).then(() => {
-        alert('Gallery link copied to clipboard!')
-      }).catch(() => {
-        alert('Failed to copy link')
-      })
+  const copyCodeToClipboard = () => {
+    if (galleryData && galleryData.sixDigitCode && copy && copied) {
+      navigator.clipboard.writeText(galleryData.sixDigitCode)
+
+      copy.hidden = true
+      copied.hidden = false
+      setTimeout(() => {
+        copy.hidden = false
+        copied.hidden = true
+      }, 2000)
     }
   }
 
@@ -279,9 +276,31 @@ export default function Checkout() {
                   hidden
                   className='w-[225px] h-[225px] bg-gray-100 rounded-2xl flex items-center justify-center overflow-hidden'
                 ></div>
-                <p id='code' hidden className='text-black font-bold text-lg cursor-pointer hover:bg-gray-100 rounded' onClick={copyCodeToClipboard}>
-                  123456
-                </p>
+                <div className='flex flex-col items-center justify-center'>
+                  <p
+                    id='code'
+                    hidden className='flex text-black font-bold text-lg hover:bg-gray-100 rounded'>
+                    123456
+                  </p>
+                  <button
+                    onClick={copyCodeToClipboard}
+                    id='copy'
+                    className='
+                      flex items-center justify-center text-xs cursor-pointer
+                    '
+                  >
+                    <BiCopy />&nbsp;Copy code
+                  </button>
+                  <p
+                    id='copied'
+                    hidden
+                    className='
+                    text-xs
+                    '
+                  >
+                    ✔ Copied
+                  </p>
+                </div>
               </div>
               <div
                 id='codesDescription'
@@ -297,12 +316,6 @@ export default function Checkout() {
                     className='text-blue-600 underline cursor-pointer hover:italic text-xs'
                   >
                     Download QR Code
-                  </button>
-                  <button
-                    onClick={copyGalleryLink}
-                    className='text-blue-600 underline cursor-pointer hover:italic text-xs'
-                  >
-                    Copy Gallery Link
                   </button>
                 </div>
               </div>
