@@ -41,9 +41,25 @@ export default function Checkout() {
 
   const handlePay = async () => {
 
+    const eventNameEntered = document.getElementById('eventNameEntered') as HTMLInputElement | null
+    const eventDateEntered = document.getElementById('eventDateEntered') as HTMLInputElement | null
     const payButton = document.getElementById('payButton') as HTMLInputElement | null
     const payLoading = document.getElementById('payLoading') as HTMLInputElement | null
 
+    function disabledEdit() {
+      if (eventNameEntered && eventDateEntered) {
+        eventNameEntered.disabled = true
+        eventDateEntered.disabled = true
+      }
+    }
+
+    function enableEdit() {
+      if (eventNameEntered && eventDateEntered) {
+        eventNameEntered.disabled = false
+        eventDateEntered.disabled = false
+      }
+    }
+    
     function payButtonLoading() {
       if (payButton && payLoading) {
         payButton.hidden = true
@@ -59,6 +75,7 @@ export default function Checkout() {
       }
     }
 
+    disabledEdit()
     payButtonLoading()
 
     const returnHomeButton = document.getElementById('returnHomeButton') as HTMLInputElement | null
@@ -110,8 +127,6 @@ export default function Checkout() {
 
         const encodedEventName = encodeURIComponent(eventName); // Encode the event name
         const encodedEventDate = encodeURIComponent(eventDate);
-        const eventNameEntered = document.getElementById('eventNameEntered') as HTMLInputElement | null
-        const eventDateEntered = document.getElementById('eventDateEntered') as HTMLInputElement | null
       
         const poll = setInterval(async () => {
           try {
@@ -127,32 +142,33 @@ export default function Checkout() {
               setPaymentComplete(true)
               successfulTransaction(statusData)
               setIsButtonDisabled(true)
-              if (eventNameEntered && eventDateEntered) {
-                eventNameEntered.disabled = true
-                eventDateEntered.disabled = true
-              }
+
               // The backend now handles saving the event date
             } else if (
               statusData.status === 'EXPIRED' ||
               statusData.status === 'CANCELLED'
             ) {
               clearInterval(poll);
+              enableEdit()
               payButtonReturn()
               alert('Payment expired or was cancelled.');
             }
           } catch (err) {
             console.error('Polling error:', err);
             clearInterval(poll);
+            enableEdit()
             payButtonReturn()
             alert('Something went wrong. Please try again.');
           }
         }, 5000);
       } else {
+        enableEdit()
         payButtonReturn()
         alert('No checkout link available. Please try again.');
       }
     } catch (err) {
       console.error('Payment error:', err);
+      enableEdit()
       payButtonReturn()
       alert('Something went wrong while creating invoice.');
     }
