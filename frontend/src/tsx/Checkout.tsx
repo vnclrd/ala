@@ -13,6 +13,9 @@ export default function Checkout() {
   const [eventDate, setEventDate] = useState<string>("")
   const [isButtonDisabled, setIsButtonDisabled] = useState(true) // New state for button disabled status
 
+  const copy = document.getElementById('copy') as HTMLInputElement | null
+  const copied = document.getElementById('copied') as HTMLInputElement | null
+
   interface GalleryData {
     qrCodeDataUrl: string;
     sixDigitCode: string;
@@ -53,7 +56,7 @@ export default function Checkout() {
     }
 
     const successfulTransaction = (data: GalleryData) => {
-      if (returnHomeButton && qrCode && code && codesDescription && downloadQRButton) {
+      if (returnHomeButton && qrCode && code && codesDescription && downloadQRButton && copy) {
         const img = document.createElement('img')
         img.src = data.qrCodeDataUrl
         img.style.width = '100%'
@@ -69,6 +72,7 @@ export default function Checkout() {
         code.hidden = false
         codesDescription.hidden = false
         downloadQRButton.hidden = false
+        copy.hidden = false
 
         setGalleryData(data)
       }
@@ -141,9 +145,6 @@ export default function Checkout() {
       link.click()
     }
   }
-
-  const copy = document.getElementById('copy') as HTMLInputElement | null
-  const copied = document.getElementById('copied') as HTMLInputElement | null
 
   const copyCodeToClipboard = () => {
     if (galleryData && galleryData.sixDigitCode && copy && copied) {
@@ -285,6 +286,7 @@ export default function Checkout() {
                   <button
                     onClick={copyCodeToClipboard}
                     id='copy'
+                    hidden
                     className='
                       flex items-center justify-center text-xs cursor-pointer
                     '
