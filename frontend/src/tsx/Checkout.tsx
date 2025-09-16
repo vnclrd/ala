@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { FaArrowLeftLong } from 'react-icons/fa6'
+import { ImSpinner2 } from 'react-icons/im'
 import { BiCopy } from 'react-icons/bi'
 
 export default function Checkout() {
@@ -39,10 +40,26 @@ export default function Checkout() {
   }, [eventName, eventDate])
 
   const handlePay = async () => {
-    if (!eventName || eventName === '' || !eventDate) {
-      alert("Please enter the details above before proceeding.")
-      return
+
+    const payButton = document.getElementById('payButton') as HTMLInputElement | null
+    const payLoading = document.getElementById('payLoading') as HTMLInputElement | null
+
+    function payButtonLoading() {
+      if (payButton && payLoading) {
+        payButton.hidden = true
+        payLoading.hidden = false
+        payLoading.disabled = true
+      }
     }
+
+    function payButtonReturn() {
+      if (payButton && payLoading) {
+        payButton.hidden = false
+        payLoading.hidden = true
+      }
+    }
+
+    payButtonLoading()
 
     const returnHomeButton = document.getElementById('returnHomeButton') as HTMLInputElement | null
     const qrCode = document.getElementById('qrCode') as HTMLInputElement | null
@@ -120,19 +137,23 @@ export default function Checkout() {
               statusData.status === 'CANCELLED'
             ) {
               clearInterval(poll);
+              payButtonReturn()
               alert('Payment expired or was cancelled.');
             }
           } catch (err) {
             console.error('Polling error:', err);
             clearInterval(poll);
+            payButtonReturn()
             alert('Something went wrong. Please try again.');
           }
         }, 5000);
       } else {
+        payButtonReturn()
         alert('No checkout link available. Please try again.');
       }
     } catch (err) {
       console.error('Payment error:', err);
+      payButtonReturn()
       alert('Something went wrong while creating invoice.');
     }
   }
@@ -247,12 +268,23 @@ export default function Checkout() {
                   id='payButton'
                   disabled={isButtonDisabled}
                   className='
-                    absolute bottom-0 w-[300px] p-2 bg-[#ff6b6b] rounded-2xl
+                    absolute bottom-0 w-[300px] h-[40px] p-2 bg-[#ff6b6b] rounded-2xl
                     cursor-pointer text-[#fff] mt-4
                     disabled:bg-[#808080] disabled:cursor-not-allowed
                   '
                 >
                   Click to Pay
+                </button>
+                <button
+                  id='payLoading'
+                  hidden
+                  className='
+                    flex items-center justify-center absolute bottom-0 w-[300px] h-[40px] p-2 bg-[#ff6b6b] rounded-2xl
+                    cursor-pointer text-[#fff] mt-4
+                    disabled:bg-[#808080] disabled:cursor-not-allowed
+                  '
+                >
+                  <ImSpinner2 className='w-6 h-6 animate-spin' />
                 </button>
               </div>
             </div>
