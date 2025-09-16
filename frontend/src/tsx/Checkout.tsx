@@ -99,9 +99,10 @@ export default function Checkout() {
             console.log('Invoice status:', statusData.status);
 
             if (statusData.status === 'PAID') {
-              clearInterval(poll);
-              setPaymentComplete(true);
-              successfulTransaction(statusData);
+              clearInterval(poll)
+              setPaymentComplete(true)
+              successfulTransaction(statusData)
+              setIsButtonDisabled(true)
 
               // The backend now handles saving the event date
             } else if (
