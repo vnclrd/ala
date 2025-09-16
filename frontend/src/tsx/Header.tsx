@@ -39,7 +39,7 @@ export default function Header() {
     <div
       className={`
         hidden z-9999
-        lg:block lg:absolute lg:bg-[#fff] lg:shadow-lg
+        lg:block lg:absolute lg:bg-[#fff]/50 lg:shadow-lg
         lg:w-full lg:h-20
         ${isPlansPage ? 'lg:hidden' : 'lg:block'}
         ${isCheckoutStandardPage ? 'lg:hidden' : 'lg:block'}
