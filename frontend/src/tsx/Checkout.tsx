@@ -88,6 +88,8 @@ export default function Checkout() {
 
         const encodedEventName = encodeURIComponent(eventName); // Encode the event name
         const encodedEventDate = encodeURIComponent(eventDate);
+        const eventNameEntered = document.getElementById('eventNameEntered') as HTMLInputElement | null
+        const eventDateEntered = document.getElementById('eventDateEntered') as HTMLInputElement | null
       
         const poll = setInterval(async () => {
           try {
@@ -103,7 +105,10 @@ export default function Checkout() {
               setPaymentComplete(true)
               successfulTransaction(statusData)
               setIsButtonDisabled(true)
-
+              if (eventNameEntered && eventDateEntered) {
+                eventNameEntered.disabled = true
+                eventDateEntered.disabled = true
+              }
               // The backend now handles saving the event date
             } else if (
               statusData.status === 'EXPIRED' ||
@@ -220,16 +225,23 @@ export default function Checkout() {
                     id='eventNameEntered'
                     type="text"
                     placeholder='Enter event name here'
-                    className='w-[250px] h-[30px] bg-[#000]/20 rounded-2xl p-4'
+                    className='
+                      w-[250px] h-[30px] bg-[#000]/20 rounded-2xl p-4 text-center
+                      disabled:cursor-not-allowed
+                    '
                   />
                   {/* Date Picker */}
                   <input
                     onChange={(e) => setEventDate(e.target.value)}
+                    id='eventDateEntered'
                     type="date"
                     name="eventDate"
                     min={new Date().toISOString().split("T")[0]} // disables past dates
                     value={eventDate}
-                    className="w-[150px] h-[40px] border rounded p-2"
+                    className="
+                      w-[150px] h-[40px] border rounded p-2
+                      disabled:cursor-not-allowed
+                    "
                   />
                 </div>
                 <button
@@ -248,9 +260,9 @@ export default function Checkout() {
             </div>
             {/* Payment Success Popup */}
             {paymentComplete && (
-              <div className='w-[350px] p-4 bg-green-100 border border-green-400 rounded-lg text-center lg:absolute lg:bottom-4 lg:right-4'>
+              <div className='w-[300px] p-4 bg-green-100 border border-green-400 rounded-lg text-center lg:absolute lg:bottom-4 lg:right-4'>
                 <h2 className='text-lg font-bold text-green-700'>Payment Successful 🎉</h2>
-                <p>Your payment has been confirmed.</p>
+                <p className='text-sm'>Your payment has been confirmed.</p>
               </div>
             )}
             {/* Right Panel */}
@@ -259,13 +271,15 @@ export default function Checkout() {
                 Your codes for your event will appear here after the payment has been successful.
               </h1>
               {/* Codes House */}
-              <div className='flex flex-col items-center justify-start w-[250px] h-[275px] border-1 border-black rounded-2xl'>
+              <div className='flex flex-col items-center justify-start w-[250px] h-[350px] border-1 border-black rounded-2xl p-4 gap-2'>
+                <h1 className='flex text-center justify-center w-[200px] font-bold overflow-hidden'>{eventName}</h1>
+                <h1 className='flex text-center text-xs justify-center w-[200px] mt-[-10px]'>{eventDate}</h1>
                 <div
                   id='qrCode'
                   hidden
-                  className='w-[225px] h-[225px] mt-4 bg-gray-100 rounded-2xl flex items-center justify-center overflow-hidden'
+                  className='w-[225px] h-[225px] bg-gray-100 rounded-2xl flex items-center justify-center overflow-hidden'
                 ></div>
-                <p id='code' hidden className='text-black p-2 font-bold text-lg cursor-pointer hover:bg-gray-100 rounded' onClick={copyCodeToClipboard}>
+                <p id='code' hidden className='text-black font-bold text-lg cursor-pointer hover:bg-gray-100 rounded' onClick={copyCodeToClipboard}>
                   123456
                 </p>
               </div>
