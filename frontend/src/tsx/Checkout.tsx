@@ -362,12 +362,13 @@ export default function Checkout() {
                 </p>
                 <div className='flex flex-col items-center justify-center gap-4 mt-2'>
                   <p className='flex text-xs mt-4 font-bold'>Enter the name and date of your event below.</p>
+                  {/* Enter Event Name */}
                   <input
                     onChange={(e) => setEventName(e.target.value)}
                     type="text"
                     placeholder='Enter event name here'
                     value={eventName}
-                    disabled={isLoading}
+                    disabled={isLoading || isEventNameDateDisabled}
                     className='
                       w-[250px] h-[30px] bg-[#000]/20 rounded-2xl p-4 text-center
                       disabled:cursor-not-allowed
@@ -386,7 +387,7 @@ export default function Checkout() {
                       value={eventDate}
                       onChange={([date]) => setEventDate(date instanceof Date ? date.toISOString().split("T")[0] : "")}
                       placeholder='Select date here'
-                      disabled={isLoading}
+                      disabled={isLoading || isEventNameDateDisabled}
                       className="
                         w-[160px] absolute right-4 cursor-pointer
                         disabled:cursor-not-allowed
@@ -417,12 +418,12 @@ export default function Checkout() {
               </div>
             )}
             {/* Right Panel - Codes House */}
-            <div className='flex flex-col relative items-center w-[300px] h-[525px] gap-4'>
+            <div className='flex flex-col relative items-center w-[300px] h-[525px] gap-6'>
               <h1 className='text-center text-sm'>
                 Your codes for your event will appear here after the payment has been successful.
               </h1>
               {galleryData && (
-                <div className='flex flex-col items-center justify-start w-[250px] h-[350px] border-1 border-[#fff] rounded-2xl p-4 gap-2'>
+                <div className='flex flex-col items-center justify-start w-[250px] h-[325px] border-1 border-[#fff] rounded-2xl p-4 gap-2'>
                   <h1 className='flex text-center justify-center w-[200px] font-bold overflow-hidden'>{eventName}</h1>
                   <h1 className='flex text-center text-xs justify-center w-[200px] mt-[-10px]'>{eventDate}</h1>
                   <div
@@ -449,7 +450,7 @@ export default function Checkout() {
               )}
               {galleryData && (
                 <div
-                  className='flex flex-col items-center justify-center text-center text-xs w-[250px] h-[100px] gap-2'
+                  className='flex flex-col items-center justify-center text-center text-xs w-[250px] gap-2'
                 >
                   Save the codes and share them with your guests on the day of your event.
                   <div className='flex flex-col'>
