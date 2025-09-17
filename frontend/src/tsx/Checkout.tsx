@@ -244,12 +244,12 @@ export default function Checkout() {
               </div>
             )}
             {/* Right Panel - Codes House */}
-            <div className='flex flex-col relative items-center w-[300px] h-[525px] gap-4'>
+            <div className='flex flex-col relative items-center w-[300px] h-[525px] gap-6'>
               <h1 className='text-center text-sm'>
                 Your codes for your event will appear here after the payment has been successful.
               </h1>
               {galleryData && (
-                <div className='flex flex-col items-center justify-start w-[250px] h-[350px] border-1 border-[#000] rounded-2xl p-4 gap-2'>
+                <div className='flex flex-col items-center justify-start w-[250px] h-[325px] border-1 border-[#000] rounded-2xl p-4 gap-2'>
                   <h1 className='flex text-center justify-center w-[200px] font-bold overflow-hidden'>{eventName}</h1>
                   <h1 className='flex text-center text-xs justify-center w-[200px] mt-[-10px]'>{eventDate}</h1>
                   <div
@@ -276,7 +276,7 @@ export default function Checkout() {
               )}
               {galleryData && (
                 <div
-                  className='flex flex-col items-center justify-center text-center text-xs w-[250px] h-[100px] gap-2'
+                  className='flex flex-col items-center justify-center text-center text-xs w-[250px] gap-2'
                 >
                   Save the codes and share them with your guests on the day of your event.
                   <div className='flex flex-col'>
