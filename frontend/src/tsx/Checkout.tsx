@@ -120,9 +120,10 @@ export default function Checkout() {
   return (
     <>
       {plan === 'standard' && (
-        <div className='flex flex-col relative items-center justify-center bg-[#fff] lg:w-screen lg:h-screen'>
+        <div className='flex flex-col items-center justify-center bg-[#fff] lg:w-screen lg:h-screen'>
+
           {/* Title and Tagline */}
-          <div className='flex items-center justify-center m-4 gap-2 w-[300px] lg:w-[700px] lg:justify-start'>
+          <div className='flex items-center justify-center gap-2 w-[300px] lg:w-[700px] lg:justify-start'>
             <Link
               to='/plans'
               id='cancelTransaction'
@@ -131,7 +132,7 @@ export default function Checkout() {
               <FaArrowLeftLong className='w-6 h-6 mt-4' />
             </Link>
             <div className='flex flex-col mr-8 lg:mr-10'>
-              <h1 className='italic font-bold text-[4rem]'>Ala</h1>
+              <h1 className='italic font-bold text-[4rem] lg:mt-[-12px]'>Ala</h1>
               <div className='flex text-[0.6rem] mt-[-20px]'>
                 <h1>Capture. &nbsp;</h1>
                 <h1>Share. &nbsp;</h1>
@@ -139,17 +140,18 @@ export default function Checkout() {
               </div>
             </div>
           </div>
+
           {/* Panels Container */}
-          <div className='flex flex-col items-center justify-center gap-6 lg:flex-row lg:gap-24'>
+          <div className='flex flex-col items-center justify-center gap-6 mt-4 lg:flex-row lg:gap-24'>
             {/* Left Panel */}
-            <div className='flex relative w-[300px] h-[600px]'>
+            <div className='flex w-[300px] h-[525px] relative'>
               <div className='flex flex-col'>
                 <p>Get</p>
-                <h1 className='text-2xl mt-[-4px]'><span className='font-bold'>Standard</span> Plan</h1>
+                <h1 className='text-xl mt-[-4px]'><span className='font-bold'>Standard</span> Plan</h1>
                 <h1 className='text-sm'>
                   <span className='text-4xl font-bold'>₱1,000.00</span> for 1 event
                 </h1>
-                <div className='flex flex-col w-[275px] mt-4'>
+                <div className='flex flex-col w-[275px] mt-2'>
                   <p>
                     <span className='font-bold'>500 MB</span> Photo Storage{' '}
                     <span className='text-[0.6rem]'>{'(up to 500 photos)'}</span>
@@ -158,23 +160,20 @@ export default function Checkout() {
                     <span className='font-bold'>High Quality</span> Photos
                   </p>
                 </div>
-                <h1 className='mt-4'>What's next after availing?</h1>
+                <h1 className='mt-2 text-sm'>What's next after availing?</h1>
                 <p>
-                  ✔ <span className='text-sm pl-1'>Get your QR Code<br /></span>
-                  ✔ <span className='text-sm pl-1'>Get your Photo Gallery Code<br /></span>
-                  ✔ <span className='text-sm pl-1'>Share the codes to your guests on the day of your event</span>
+                  ✔ <span className='text-xs pl-1'>Get your QR Code<br /></span>
+                  ✔ <span className='text-xs pl-1'>Get your Photo Gallery Code<br /></span>
+                  ✔ <span className='text-xs pl-1'>Share the codes to your guests on the day of your event</span>
                   <br />
-                  <span className='flex font-bold mt-2'>Note:</span>
+                  <span className='flex font-bold text-xs mt-2'>Note:</span>
                   <div className='flex flex-col w-[300px] gap-2'>
                     <span className='text-xs'>
                       Photo gallery will expire after 7 days so make sure to download the photos.
                     </span>
-                    <span className='text-xs'>
-                      Photos will automatically be compressed and sent to your Google Drive if not downloaded before expiry.
-                    </span>
                   </div>
                 </p>
-                <div className='flex flex-col items-center justify-center gap-4'>
+                <div className='flex flex-col items-center justify-center gap-4 mt-2'>
                   <p className='flex text-xs mt-4 font-bold'>Enter the name and date of your event below.</p>
                   <input
                     onChange={(e) => setEventName(e.target.value)}
@@ -213,8 +212,8 @@ export default function Checkout() {
                   onClick={handlePay}
                   disabled={isButtonDisabled || isLoading}
                   className='
-                    absolute bottom-0 w-[300px] h-[40px] p-2 bg-[#ff6b6b] rounded-2xl
-                    cursor-pointer text-[#fff] mt-4 items-center justify-center flex
+                    absolute bottom-0 w-[300px] h-[40px] p-2 bg-[#ff6b6b] rounded-2xl mt-4
+                    cursor-pointer text-[#fff] items-center justify-center flex
                     disabled:bg-[#808080] disabled:cursor-not-allowed
                   '
                 >
@@ -222,6 +221,7 @@ export default function Checkout() {
                 </button>
               </div>
             </div>
+
             {/* Payment Success Popup */}
             {paymentComplete && (
               <div className='w-[300px] p-4 bg-green-100 border border-green-400 rounded-lg text-center lg:absolute lg:bottom-4 lg:right-4'>
@@ -230,7 +230,7 @@ export default function Checkout() {
               </div>
             )}
             {/* Right Panel - Codes House */}
-            <div className='flex flex-col relative items-center w-[300px] h-[600px] gap-4'>
+            <div className='flex flex-col relative items-center w-[300px] h-[525px] gap-4'>
               <h1 className='text-center text-sm'>
                 Your codes for your event will appear here after the payment has been successful.
               </h1>
