@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { FaArrowLeftLong } from 'react-icons/fa6'
 import { FaCalendar } from 'react-icons/fa'
 import Flatpickr from 'react-flatpickr'
-import "flatpickr/dist/themes/light.css" // or "dark.css"
+import "flatpickr/dist/themes/light.css"
 import { ImSpinner2 } from 'react-icons/im'
 import { BiCopy } from 'react-icons/bi'
 
