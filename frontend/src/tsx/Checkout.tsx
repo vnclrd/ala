@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { FaArrowLeftLong } from 'react-icons/fa6'
+import { FaCalendar } from 'react-icons/fa'
+import Flatpickr from 'react-flatpickr';
+import "flatpickr/dist/themes/light.css"; // or "dark.css"
 import { ImSpinner2 } from 'react-icons/im'
 import { BiCopy } from 'react-icons/bi'
 
@@ -390,32 +393,17 @@ export default function Checkout() {
       {/* ================================================== */}
 
       {plan === 'plus' && (
-        <div
-          className='
-            flex flex-col relative items-center justify-center bg-[#ff6b6b]
-            lg:w-screen lg:h-screen
-          '
-        >
+        <div className='flex flex-col relative items-center justify-center bg-[#ff6b6b] lg:w-screen lg:h-screen'>
           {/* Title and Tagline */}
-          <div
-            className='
-              flex items-center justify-center m-4 gap-2 w-[300px]
-              lg:w-[700px] lg:justify-start
-            '
-          >
+          <div className='flex items-center justify-center m-4 gap-2 w-[300px] lg:w-[700px] lg:justify-start'>
             <Link
               to='/plans'
               id='cancelTransaction'
-              className='text-[#808080] text-sm font-medium cursor-pointer lg:p-0 hover:underline'
+              className='text-[#fff]/60 text-sm font-medium cursor-pointer lg:p-0 hover:underline'
             >
               <FaArrowLeftLong className='w-6 h-6 mt-4' />
             </Link>
-            <div
-              className='
-                flex flex-col mr-8 text-[#fff]
-                lg:mr-10
-              '
-            >
+            <div className='flex flex-col mr-8 text-[#fff] lg:mr-10'>
               <h1 className='italic font-bold text-[4rem]'>Ala</h1>
               <div className='flex text-[0.6rem] mt-[-20px]'>
                 <h1>Capture. &nbsp;</h1>
@@ -425,27 +413,19 @@ export default function Checkout() {
             </div>
           </div>
           {/* Panels Container */}
-          <div
-            className='
-              flex flex-col items-center justify-center gap-6 text-[#fff]
-              lg:flex-row lg:gap-24
-            '
-          >
+          <div className='flex flex-col items-center justify-center gap-6 lg:flex-row lg:gap-24'>
             {/* Left Panel */}
-            <div className='flex relative w-[300px] h-[500px]'>
+            <div className='flex relative w-[300px] h-[600px] text-[#fff]'>
               <div className='flex flex-col'>
                 <p>Get</p>
                 <h1 className='text-2xl mt-[-4px]'><span className='font-bold'>Plus</span> Plan</h1>
                 <h1 className='text-sm'>
-                  <span className='text-4xl font-bold'>₱1,500.00</span> for 1
-                  event
+                  <span className='text-4xl font-bold'>₱1,500.00</span> for 1 event
                 </h1>
                 <div className='flex flex-col w-[275px] mt-4'>
                   <p>
                     <span className='font-bold'>2 GB</span> Photo Storage{' '}
-                    <span className='text-[0.6rem]'>
-                      {'(up to 1,000 photos)'}
-                    </span>
+                    <span className='text-[0.6rem]'>{'(up to 500 photos)'}</span>
                   </p>
                   <p>
                     <span className='font-bold'>High Quality</span> Photos
@@ -453,107 +433,138 @@ export default function Checkout() {
                 </div>
                 <h1 className='mt-4'>What's next after availing?</h1>
                 <p>
-                  ✔{' '}
-                  <span className='text-sm pl-1'>
-                    Get your QR Code
-                    <br />
-                  </span>
-                  ✔{' '}
-                  <span className='text-sm pl-1'>
-                    Get your Photo Gallery Code
-                    <br />
-                  </span>
-                  ✔{' '}
-                  <span className='text-sm pl-1'>
-                    Share the codes to your guests on the day of your event
-                  </span>
+                  ✔ <span className='text-sm pl-1'>Get your QR Code<br /></span>
+                  ✔ <span className='text-sm pl-1'>Get your Photo Gallery Code<br /></span>
+                  ✔ <span className='text-sm pl-1'>Share the codes to your guests on the day of your event</span>
                   <br />
-                  <br />
-                  <span className='font-bold'>Note:</span> <br />
+                  <span className='flex font-bold mt-2'>Note:</span>
                   <div className='flex flex-col w-[300px] gap-2'>
                     <span className='text-xs'>
-                      Photo gallery will expire after 14 days so make sure to
-                      download the photos.
+                      Photo gallery will expire after 7 days so make sure to download the photos.
                     </span>
                     <span className='text-xs'>
-                      Photos will automatically be compressed and sent to your
-                      Google Drive if not downloaded before expiry.
+                      Photos will automatically be compressed and sent to your Google Drive if not downloaded before expiry.
                     </span>
                   </div>
                 </p>
+                <div className='flex flex-col items-center justify-center gap-4'>
+                  <p className='flex text-xs mt-4 font-bold'>Enter the name and date of your event below.</p>
+                  <input
+                    onChange={(e) => setEventName(e.target.value)}
+                    id='eventNameEntered'
+                    type="text"
+                    placeholder='Enter event name here'
+                    className='
+                      w-[250px] h-[30px] bg-[#000]/20 rounded-2xl p-4 text-center
+                      disabled:cursor-not-allowed
+                    '
+                  />
+                  {/* Date Picker */}
+                  <div className="flex relative items-center justify-start w-[225px] h-[40px] border rounded p-4">
+                    <FaCalendar className="text-white" />
+                    <Flatpickr
+                      options={{
+                        minDate: "today",
+                        dateFormat: "Y-m-d",
+                        // These options help with styling
+                        altInput: true,
+                        altFormat: "F j, Y",
+                      }}
+                      value={eventDate}
+                      onChange={([date]) => setEventDate(date instanceof Date ? date.toISOString().split("T")[0] : "")}
+                      className="w-[160px] absolute right-4 disabled:cursor-not-allowed"
+                    />
+                  </div>
+                </div>
                 <button
                   onClick={handlePay}
                   id='payButton'
+                  disabled={isButtonDisabled}
                   className='
-                    absolute bottom-0 w-[300px] p-2 bg-[#fff]
-                    rounded-2xl cursor-pointer text-[#000] mt-4
+                    absolute bottom-0 w-[300px] h-[40px] p-2 bg-[#fff] rounded-2xl
+                    cursor-pointer text-[#000] mt-4
+                    disabled:bg-[#808080] disabled:cursor-not-allowed
                   '
                 >
-                  Click to pay
+                  Click to Pay
+                </button>
+                <button
+                  id='payLoading'
+                  hidden
+                  className='
+                    flex items-center justify-center absolute bottom-0 w-[300px] h-[40px] p-2 bg-[#ff6b6b] rounded-2xl
+                    cursor-pointer text-[#fff] mt-4
+                    disabled:bg-[#808080] disabled:cursor-not-allowed
+                  '
+                >
+                  <ImSpinner2 className='w-6 h-6 animate-spin' />
                 </button>
               </div>
             </div>
             {/* Payment Success Popup */}
             {paymentComplete && (
-              <div
-                className='
-                  w-[350px] p-4 bg-green-100 border border-green-400
-                  rounded-lg text-center text-[#000]
-                  lg:absolute lg:bottom-4 lg:right-4
-                '
-              >
-                <h2 className='text-lg font-bold text-green-700'>
-                  Payment Successful 🎉
-                </h2>
-                <p>Your payment has been confirmed.</p>
+              <div className='w-[300px] p-4 bg-green-100 border border-green-400 rounded-lg text-center lg:absolute lg:bottom-4 lg:right-4'>
+                <h2 className='text-lg font-bold text-green-700'>Payment Successful 🎉</h2>
+                <p className='text-sm'>Your payment has been confirmed.</p>
               </div>
             )}
             {/* Right Panel */}
-            <div
-              className='
-                flex flex-col relative items-center
-                w-[300px] h-[500px] gap-4 text-[#fff]
-              '
-            >
-              {/* Codes */}
-              <h1 className='text-center text-sm'>
-                Your codes for your event will appear here after the payment has
-                been successful.
+            <div className='flex flex-col relative items-center w-[300px] h-[600px] gap-4'>
+              <h1 className='text-black text-center text-sm'>
+                Your codes for your event will appear here after the payment has been successful.
               </h1>
               {/* Codes House */}
-              <div
-                className='
-                  flex flex-col items-center justify-start w-[250px]
-                  h-[275px] border-1 border-[#fff] rounded-2xl
-                '
-              >
+              <div className='flex flex-col items-center justify-start w-[250px] h-[350px] border-1 border-black rounded-2xl p-4 gap-2'>
+                <h1 className='flex text-center justify-center w-[200px] font-bold overflow-hidden'>{eventName}</h1>
+                <h1 className='flex text-center text-xs justify-center w-[200px] mt-[-10px]'>{eventDate}</h1>
                 <div
                   id='qrCode'
                   hidden
-                  className='w-[225px] h-[225px] mt-4 bg-[#fff] rounded-2xl'
+                  className='w-[225px] h-[225px] bg-gray-100 rounded-2xl flex items-center justify-center overflow-hidden'
                 ></div>
-                <p id='code' hidden className='p-2'>
-                  123456
-                </p>
+                <div className='flex flex-col items-center justify-center'>
+                  <p
+                    id='code'
+                    hidden className='flex text-black font-bold text-lg hover:bg-gray-100 rounded'>
+                    123456
+                  </p>
+                  <button
+                    onClick={copyCodeToClipboard}
+                    id='copy'
+                    hidden
+                    className='
+                      flex items-center justify-center text-xs cursor-pointer
+                    '
+                  >
+                    <BiCopy />&nbsp;Copy code
+                  </button>
+                  <p
+                    id='copied'
+                    hidden
+                    className='
+                    text-xs
+                    '
+                  >
+                    ✔ Copied
+                  </p>
+                </div>
               </div>
               <div
                 id='codesDescription'
                 hidden
-                className='
-                  flex flex-col items-center justify-center text-center
-                  text-xs w-[250px] h-[100px] gap-2
-                '
+                className='flex flex-col items-center justify-center text-center text-xs w-[250px] h-[100px] gap-2'
               >
-                Save the codes and share it to your guests on the day of your
-                event.
-                <p>
-                  <button>
-                    <span className='underline cursor-pointer hover:italic'>
-                      Click here
-                    </span>
+                Save the codes and share them with your guests on the day of your event.
+                <div className='flex flex-col'>
+                  <button
+                    id='downloadQRButton'
+                    hidden
+                    onClick={downloadQRCode}
+                    className='text-blue-600 underline cursor-pointer hover:italic text-xs'
+                  >
+                    Download QR Code
                   </button>
-                  &nbsp;to save the QR code
-                </p>
+                </div>
               </div>
               <Link
                 to='/'
@@ -561,7 +572,7 @@ export default function Checkout() {
                 hidden
                 className='
                   flex items-center justify-center absolute bottom-0 w-[300px]
-                  p-2 bg-[#fff] rounded-2xl cursor-pointer text-[#000]
+                  p-2 bg-[#ff6b6b] rounded-2xl cursor-pointer text-[#fff]
                 '
               >
                 Return to Home

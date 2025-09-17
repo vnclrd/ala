@@ -8,3 +8,7 @@ body {
 .source-sans-text {
   font-family: 'Source Sans Pro', sans-serif;
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
