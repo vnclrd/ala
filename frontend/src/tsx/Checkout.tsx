@@ -121,6 +121,179 @@ export default function Checkout() {
     <>
       {plan === 'standard' && (
         <div className='flex flex-col items-center justify-center bg-[#fff] lg:w-screen lg:h-screen'>
+          {/* Title and Tagline */}
+          <div className='flex items-center justify-center gap-2 m-4 w-[300px] lg:w-[700px] lg:justify-start'>
+            <Link
+              to='/plans'
+              id='cancelTransaction'
+              className='text-[#000]/60 text-sm font-medium cursor-pointer lg:p-0 hover:underline'
+            >
+              <FaArrowLeftLong className='w-6 h-6 mt-4' />
+            </Link>
+            <div className='flex flex-col mr-8 lg:mr-10'>
+              <h1 className='italic font-bold text-[4rem] lg:mt-[-12px]'>Ala</h1>
+              <div className='flex text-[0.6rem] mt-[-20px]'>
+                <h1>Capture. &nbsp;</h1>
+                <h1>Share. &nbsp;</h1>
+                <h1>Gather.</h1>
+              </div>
+            </div>
+          </div>
+          {/* Panels Container */}
+          <div className='flex flex-col items-center justify-center gap-6 lg:flex-row lg:gap-24'>
+            {/* Left Panel */}
+            <div className='flex w-[300px] h-[525px] relative'>
+              <div className='flex flex-col'>
+                <p>Get</p>
+                <h1 className='text-xl mt-[-4px]'><span className='font-bold'>Standard</span> Plan</h1>
+                <h1 className='text-sm'>
+                  <span className='text-4xl font-bold'>₱1,000.00</span> for 1 event
+                </h1>
+                <div className='flex flex-col w-[275px] mt-2'>
+                  <p>
+                    <span className='font-bold'>500 MB</span> Photo Storage{' '}
+                    <span className='text-[0.6rem]'>{'(up to 500 photos)'}</span>
+                  </p>
+                  <p>
+                    <span className='font-bold'>High Quality</span> Photos
+                  </p>
+                </div>
+                <h1 className='mt-2 text-sm'>What's next after availing?</h1>
+                <p>
+                  ✔ <span className='text-xs pl-1'>Get your QR Code<br /></span>
+                  ✔ <span className='text-xs pl-1'>Get your Photo Gallery Code<br /></span>
+                  ✔ <span className='text-xs pl-1'>Share the codes to your guests on the day of your event</span>
+                  <br />
+                  <span className='flex font-bold text-xs mt-2'>Note:</span>
+                  <div className='flex flex-col w-[300px] gap-2'>
+                    <span className='text-xs'>
+                      Photo gallery will expire after 7 days so make sure to download the photos.
+                    </span>
+                  </div>
+                </p>
+                <div className='flex flex-col items-center justify-center gap-4 mt-2'>
+                  <p className='flex text-xs mt-4 font-bold'>Enter the name and date of your event below.</p>
+                  <input
+                    onChange={(e) => setEventName(e.target.value)}
+                    type="text"
+                    placeholder='Enter event name here'
+                    value={eventName}
+                    disabled={isLoading}
+                    className='
+                      w-[250px] h-[30px] bg-[#000]/20 rounded-2xl p-4 text-center
+                      disabled:cursor-not-allowed
+                    '
+                  />
+                  {/* Date Picker */}
+                  <div className="flex relative items-center justify-start w-[225px] h-[40px] border rounded p-4">
+                    <FaCalendar className="text-[#000]" />
+                    <Flatpickr
+                      options={{
+                        minDate: "today",
+                        dateFormat: "Y-m-d",
+                        altInput: true,
+                        altFormat: "F j, Y",
+                      }}
+                      value={eventDate}
+                      onChange={([date]) => setEventDate(date instanceof Date ? date.toISOString().split("T")[0] : "")}
+                      placeholder='Select date here'
+                      disabled={isLoading}
+                      className="
+                        w-[160px] absolute right-4 cursor-pointer
+                        disabled:cursor-not-allowed
+                      "
+                    />
+                  </div>
+                </div>
+                {/* Pay Button */}
+                <button
+                  onClick={handlePay}
+                  disabled={isButtonDisabled || isLoading}
+                  className='
+                    absolute bottom-0 w-[300px] h-[40px] p-2 bg-[#ff6b6b] rounded-2xl mt-4
+                    cursor-pointer text-[#fff] items-center justify-center flex
+                    disabled:bg-[#808080] disabled:cursor-not-allowed
+                  '
+                >
+                  {isLoading ? <ImSpinner2 className='items-center w-6 h-6 animate-spin' /> : 'Click to Pay'}
+                </button>
+              </div>
+            </div>
+
+            {/* Payment Success Popup */}
+            {paymentComplete && (
+              <div className='w-[300px] p-4 bg-green-100 border border-green-400 rounded-lg text-center lg:absolute lg:bottom-4 lg:right-4'>
+                <h2 className='text-lg font-bold text-green-700'>Payment Successful 🎉</h2>
+                <p className='text-sm'>Your payment has been confirmed.</p>
+              </div>
+            )}
+            {/* Right Panel - Codes House */}
+            <div className='flex flex-col relative items-center w-[300px] h-[525px] gap-4'>
+              <h1 className='text-center text-sm'>
+                Your codes for your event will appear here after the payment has been successful.
+              </h1>
+              {galleryData && (
+                <div className='flex flex-col items-center justify-start w-[250px] h-[350px] border-1 border-[#000] rounded-2xl p-4 gap-2'>
+                  <h1 className='flex text-center justify-center w-[200px] font-bold overflow-hidden'>{eventName}</h1>
+                  <h1 className='flex text-center text-xs justify-center w-[200px] mt-[-10px]'>{eventDate}</h1>
+                  <div
+                    className='w-[225px] h-[225px] rounded-2xl flex items-center justify-center overflow-hidden'
+                  >
+                    <img src={galleryData.qrCodeDataUrl} style={{ width: '100%', height: '100%', objectFit: 'contain' }} alt="QR Code" />
+                  </div>
+                  <div className='flex flex-col items-center justify-center'>
+                    <p className='flex font-bold text-lg rounded'>
+                      {galleryData.sixDigitCode}
+                    </p>
+                    {isCopied ? (
+                      <p className='text-xs'>✔ Copied</p>
+                    ) : (
+                      <button
+                        onClick={copyCodeToClipboard}
+                        className='flex items-center justify-center text-xs cursor-pointer'
+                      >
+                        <BiCopy />&nbsp;Copy code
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
+              {galleryData && (
+                <div
+                  className='flex flex-col items-center justify-center text-center text-xs w-[250px] h-[100px] gap-2'
+                >
+                  Save the codes and share them with your guests on the day of your event.
+                  <div className='flex flex-col'>
+                    <button
+                      onClick={downloadQRCode}
+                      className='text-blue-600 underline cursor-pointer hover:italic text-xs'
+                    >
+                      Download QR Code
+                    </button>
+                  </div>
+                </div>
+              )}
+              {galleryData && (
+                <Link
+                  to='/'
+                  className='
+                    flex items-center justify-center absolute bottom-0 w-[300px]
+                    p-2 bg-[#ff6b6b] rounded-2xl cursor-pointer text-[#fff]
+                  '
+                >
+                  Return to Home
+                </Link>
+              )}
+            </div>
+          </div>
+          <br />
+        </div>
+      )}
+      
+      {/* ================================================== */}
+
+      {plan === 'plus' && (
+        <div className='flex flex-col items-center justify-center bg-[#fff] lg:w-screen lg:h-screen'>
 
           {/* Title and Tagline */}
           <div className='flex items-center justify-center gap-2 w-[300px] lg:w-[700px] lg:justify-start'>
@@ -281,181 +454,6 @@ export default function Checkout() {
                   className='
                     flex items-center justify-center absolute bottom-0 w-[300px]
                     p-2 bg-[#ff6b6b] rounded-2xl cursor-pointer text-[#fff]
-                  '
-                >
-                  Return to Home
-                </Link>
-              )}
-            </div>
-          </div>
-          <br />
-        </div>
-      )}
-      
-      {/* ================================================== */}
-
-      {plan === 'plus' && (
-        <div className='flex flex-col relative items-center justify-center bg-[#ff6b6b] lg:w-screen lg:h-screen'>
-          {/* Title and Tagline */}
-          <div className='flex items-center justify-center m-4 gap-2 w-[300px] lg:w-[700px] lg:justify-start'>
-            <Link
-              to='/plans'
-              id='cancelTransaction'
-              className='text-[#fff]/60 text-sm font-medium cursor-pointer lg:p-0 hover:underline'
-            >
-              <FaArrowLeftLong className='w-6 h-6 mt-4' />
-            </Link>
-            <div className='flex flex-col mr-8 text-[#fff] lg:mr-10'>
-              <h1 className='italic font-bold text-[4rem]'>Ala</h1>
-              <div className='flex text-[0.6rem] mt-[-20px]'>
-                <h1>Capture. &nbsp;</h1>
-                <h1>Share. &nbsp;</h1>
-                <h1>Gather.</h1>
-              </div>
-            </div>
-          </div>
-          {/* Panels Container */}
-          <div className='flex flex-col items-center justify-center gap-6 lg:flex-row lg:gap-24'>
-            {/* Left Panel */}
-            <div className='flex relative w-[300px] h-[600px] text-[#fff]'>
-              <div className='flex flex-col'>
-                <p>Get</p>
-                <h1 className='text-2xl mt-[-4px]'><span className='font-bold'>Plus</span> Plan</h1>
-                <h1 className='text-sm'>
-                  <span className='text-4xl font-bold'>₱1,500.00</span> for 1 event
-                </h1>
-                <div className='flex flex-col w-[275px] mt-4'>
-                  <p>
-                    <span className='font-bold'>2 GB</span> Photo Storage{' '}
-                    <span className='text-[0.6rem]'>{'(up to 1,000 photos)'}</span>
-                  </p>
-                  <p>
-                    <span className='font-bold'>High Quality</span> Photos
-                  </p>
-                </div>
-                <h1 className='mt-4'>What's next after availing?</h1>
-                <p>
-                  ✔ <span className='text-sm pl-1'>Get your QR Code<br /></span>
-                  ✔ <span className='text-sm pl-1'>Get your Photo Gallery Code<br /></span>
-                  ✔ <span className='text-sm pl-1'>Share the codes to your guests on the day of your event</span>
-                  <br />
-                  <span className='flex font-bold mt-2'>Note:</span>
-                  <div className='flex flex-col w-[300px] gap-2'>
-                    <span className='text-xs'>
-                      Photo gallery will expire after 14 days so make sure to download the photos.
-                    </span>
-                    <span className='text-xs'>
-                      Photos will automatically be compressed and sent to your Google Drive if not downloaded before expiry.
-                    </span>
-                  </div>
-                </p>
-                <div className='flex flex-col items-center justify-center gap-4'>
-                  <p className='flex text-xs mt-4 font-bold'>Enter the name and date of your event below.</p>
-                  <input
-                    onChange={(e) => setEventName(e.target.value)}
-                    type="text"
-                    placeholder='Enter event name here'
-                    value={eventName}
-                    disabled={isLoading}
-                    className='
-                      w-[250px] h-[30px] bg-[#000]/20 rounded-2xl p-4 text-center
-                      disabled:cursor-not-allowed
-                    '
-                  />
-                  {/* Date Picker */}
-                  <div className="flex relative items-center justify-start w-[225px] h-[40px] border rounded p-4">
-                    <FaCalendar className="text-white" />
-                    <Flatpickr
-                      options={{
-                        minDate: "today",
-                        dateFormat: "Y-m-d",
-                        altInput: true,
-                        altFormat: "F j, Y",
-                      }}
-                      value={eventDate}
-                      onChange={([date]) => setEventDate(date instanceof Date ? date.toISOString().split("T")[0] : "")}
-                      placeholder='Select date here'
-                      disabled={isLoading}
-                      className="
-                        w-[160px] absolute right-4 cursor-pointer
-                        disabled:cursor-not-allowed
-                      "
-                    />
-                  </div>
-                </div>
-                {/* Pay Button */}
-                <button
-                  onClick={handlePay}
-                  disabled={isButtonDisabled || isLoading}
-                  className='
-                    absolute bottom-0 w-[300px] h-[40px] p-2 bg-[#ff6b6b] rounded-2xl
-                    cursor-pointer text-[#fff] mt-4 items-center justify-center flex
-                    disabled:bg-[#808080] disabled:cursor-not-allowed
-                  '
-                >
-                  {isLoading ? <ImSpinner2 className='w-6 h-6 animate-spin' /> : 'Click to Pay'}
-                </button>
-              </div>
-            </div>
-            {/* Payment Success Popup */}
-            {paymentComplete && (
-              <div className='w-[300px] p-4 bg-green-100 border border-green-400 rounded-lg text-center lg:absolute lg:bottom-4 lg:right-4'>
-                <h2 className='text-lg font-bold text-green-700'>Payment Successful 🎉</h2>
-                <p className='text-sm'>Your payment has been confirmed.</p>
-              </div>
-            )}
-            {/* Right Panel - Codes House */}
-            <div className='flex flex-col relative items-center w-[300px] h-[600px] gap-4 text-[#fff]'>
-              <h1 className='text-center text-sm'>
-                Your codes for your event will appear here after the payment has been successful.
-              </h1>
-              {galleryData && (
-                <div className='flex flex-col items-center justify-start w-[250px] h-[350px] border-1 border-[#fff] rounded-2xl p-4 gap-2'>
-                  <h1 className='flex text-center justify-center w-[200px] font-bold overflow-hidden'>{eventName}</h1>
-                  <h1 className='flex text-center text-xs justify-center w-[200px] mt-[-10px]'>{eventDate}</h1>
-                  <div
-                    className='w-[225px] h-[225px] rounded-2xl flex items-center justify-center overflow-hidden'
-                  >
-                    <img src={galleryData.qrCodeDataUrl} style={{ width: '100%', height: '100%', objectFit: 'contain' }} alt="QR Code" />
-                  </div>
-                  <div className='flex flex-col items-center justify-center'>
-                    <p className='flex font-bold text-lg rounded'>
-                      {galleryData.sixDigitCode}
-                    </p>
-                    {isCopied ? (
-                      <p className='text-xs'>✔ Copied</p>
-                    ) : (
-                      <button
-                        onClick={copyCodeToClipboard}
-                        className='flex items-center justify-center text-xs cursor-pointer'
-                      >
-                        <BiCopy />&nbsp;Copy code
-                      </button>
-                    )}
-                  </div>
-                </div>
-              )}
-              {galleryData && (
-                <div
-                  className='flex flex-col items-center justify-center text-center text-xs w-[250px] h-[100px] gap-2'
-                >
-                  Save the codes and share them with your guests on the day of your event.
-                  <div className='flex flex-col'>
-                    <button
-                      onClick={downloadQRCode}
-                      className='text-blue-600 underline cursor-pointer hover:italic text-xs'
-                    >
-                      Download QR Code
-                    </button>
-                  </div>
-                </div>
-              )}
-              {galleryData && (
-                <Link
-                  to='/'
-                  className='
-                    flex items-center justify-center absolute bottom-0 w-[300px]
-                    p-2 bg-[#fff] rounded-2xl cursor-pointer text-[#000]
                   '
                 >
                   Return to Home
