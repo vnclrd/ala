@@ -109,6 +109,7 @@ export default function Checkout() {
         copy.hidden = false
 
         setGalleryData(data)
+        payButtonReturn()
       }
     }
 
@@ -358,7 +359,7 @@ export default function Checkout() {
                 className='flex flex-col items-center justify-center text-center text-xs w-[250px] h-[100px] gap-2'
               >
                 Save the codes and share them with your guests on the day of your event.
-                <div className='flex flex-col gap-2'>
+                <div className='flex flex-col'>
                   <button
                     id='downloadQRButton'
                     hidden
