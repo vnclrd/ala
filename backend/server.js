@@ -177,7 +177,7 @@ app.get('/gallery/:galleryId', async (req, res) => {
 
     const galleryData = galleryDoc.data();
 
-    // The key change: Check the expiration date on the server
+    // Check the expiration date on the server
     if (galleryData.expirationDate && new Date() > galleryData.expirationDate.toDate()) {
       return res.status(410).json({ error: 'Gallery has expired.' });
     }
