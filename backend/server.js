@@ -274,6 +274,7 @@ app.post('/upload/:galleryId', upload.single('photo'), async (req, res) => {
   }
 })
 
+// Delete photo gallery
 app.delete('/delete-photo/:galleryId/:photoIndex', async (req, res) => {
   try {
     const { galleryId, photoIndex } = req.params
