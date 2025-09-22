@@ -235,7 +235,6 @@ export default function Checkout() {
                 </button>
               </div>
             </div>
-
             {/* Payment Success Popup */}
             {paymentComplete && (
               <div className='w-[300px] p-4 bg-green-100 border border-green-400 rounded-lg text-center lg:absolute lg:bottom-4 lg:right-4'>
@@ -409,7 +408,6 @@ export default function Checkout() {
                 </button>
               </div>
             </div>
-
             {/* Payment Success Popup */}
             {paymentComplete && (
               <div className='w-[300px] p-4 bg-green-100 border border-green-400 rounded-lg text-center lg:absolute lg:bottom-4 lg:right-4'>
