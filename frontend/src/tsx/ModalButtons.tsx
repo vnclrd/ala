@@ -175,7 +175,6 @@ export default function ModalButtons() {
           </div>
         </div>
       )}
-
       {isGuestModalOpen && (
         <div
           id='guestModal'
