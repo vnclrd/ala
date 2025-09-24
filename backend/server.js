@@ -44,6 +44,7 @@ function generateUniqueCode() {
   return Math.floor(100000 + Math.random() * 900000).toString()
 }
 
+// Generate Gallery ID
 function generateGalleryId() {
   return Date.now().toString(36) + Math.random().toString(36).substr(2)
 }
