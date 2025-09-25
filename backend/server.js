@@ -73,6 +73,7 @@ async function createGalleryDocument(galleryId, code, plan, eventName, eventDate
   return galleryData;
 }
 
+// Format Date
 function formatDate(date) {
   if (!date) return null
   if (typeof date.toDate === 'function') {
